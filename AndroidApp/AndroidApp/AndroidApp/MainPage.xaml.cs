@@ -14,5 +14,13 @@ namespace AndroidApp
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.Properties["Name"] = "FERNANDO";
+            Navigation.PushAsync(new ClientM());
+
+        }
+
     }
 }

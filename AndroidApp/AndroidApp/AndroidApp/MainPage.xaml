@@ -27,10 +27,10 @@
 
         <Entry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="Password"/>
 
-        <Button Grid.Row="3" Grid.Column="2" Text="Login" BackgroundColor="Gray"/>
+        <Button Grid.Row="3" Grid.Column="2" Text="Login" BackgroundColor="Gray" Clicked="Button_Clicked"/>
        
 
-        <!--<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="Getting there!!" FontSize="Large" />-->
+        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="Getting there!!" FontSize="Large" x:Name="label123"/>
 
 
     </Grid>
