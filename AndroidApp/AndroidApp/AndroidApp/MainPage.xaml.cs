@@ -17,8 +17,8 @@ namespace AndroidApp
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.Properties["Name"] = "FERNANDO";
-            Navigation.PushAsync(new ClientM());
+            //Application.Current.Properties["Name"] = "FERNANDO";
+            Navigation.PushAsync(new Menu());
 
         }
 

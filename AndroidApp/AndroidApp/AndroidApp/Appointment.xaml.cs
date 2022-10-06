@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace AndroidApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ClientM : ContentPage
+    public partial class Appointment : ContentPage
     {
-        public ClientM()
+        public Appointment()
         {
             InitializeComponent();
-            
         }
     }
 }

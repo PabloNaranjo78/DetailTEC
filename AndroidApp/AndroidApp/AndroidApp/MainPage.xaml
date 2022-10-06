@@ -5,11 +5,14 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"/>
-            <RowDefinition Height=".2*"/>
-            <RowDefinition Height=".2*"/>
-            <RowDefinition Height=".15*"/>
-            <RowDefinition Height="*"/>
+<RowDefinition Height="*"/> <!--0-->
+            <RowDefinition Height=".5*"/> <!--1-->
+            <RowDefinition Height=".6*"/> <!--2-->
+            <RowDefinition Height=".6*"/> <!--3-->
+            <RowDefinition Height=".5*"/> <!--4-->
+            <RowDefinition Height=".5*"/> <!--5-->
+            <RowDefinition Height="*"/> <!--6-->
+            <RowDefinition Height="1.1*"/> <!--7-->
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -23,14 +26,14 @@
         <Image Source="logo" BackgroundColor="Gray"
                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5"/>
 
-        <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="User"/>
+        <Entry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="User"/>
 
-        <Entry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="Password"/>
+        <Entry Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="Password"/>
 
-        <Button Grid.Row="3" Grid.Column="2" Text="Login" BackgroundColor="Gray" Clicked="Button_Clicked"/>
+        <Button Grid.Row="5" Grid.Column="2" Text="Login" BackgroundColor="Gray" Clicked="Button_Clicked"/>
        
 
-        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="Getting there!!" FontSize="Large" x:Name="label123"/>
+        <!--<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="Getting there!!" FontSize="Large" x:Name="label123"/>-->
 
 
     </Grid>
