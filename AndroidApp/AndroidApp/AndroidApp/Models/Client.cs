@@ -5,7 +5,7 @@ using SQLite;
 
 namespace AndroidApp.Models
 {
-    public class Note
+    public class Client
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
