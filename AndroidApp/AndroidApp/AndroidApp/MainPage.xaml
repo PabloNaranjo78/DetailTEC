@@ -5,7 +5,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-<RowDefinition Height="*"/> <!--0-->
+            <RowDefinition Height="*"/> <!--0-->
             <RowDefinition Height=".5*"/> <!--1-->
             <RowDefinition Height=".6*"/> <!--2-->
             <RowDefinition Height=".6*"/> <!--3-->
@@ -26,9 +26,9 @@
         <Image Source="logo" BackgroundColor="Gray"
                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5"/>
 
-        <Entry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="User"/>
+        <Entry x:Name="UserEntry" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="User"/>
 
-        <Entry Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="Password"/>
+        <Entry x:Name="UserPass" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Placeholder="Password"/>
 
         <Button Grid.Row="5" Grid.Column="2" Text="Login" BackgroundColor="Gray" Clicked="Button_Clicked"/>
        
