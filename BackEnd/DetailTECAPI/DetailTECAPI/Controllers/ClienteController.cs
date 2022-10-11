@@ -61,14 +61,16 @@ namespace DetailTECAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Cliente>>> Post(Cliente cliente)
         {
-            SqlCommand cmd = new SqlCommand($"INSERT INTO CLIENTE VALUES ({cliente.IDcliente},'{cliente.Usuario}'," +
+            SqlCommand cmd = new SqlCommand($"INSERT INTO CLIENTE VALUES ({cliente.IDCliente},'{cliente.Usuario}'," +
                 $"'{cliente.Contraseña}','{cliente.InfoContacto}','{cliente.Nombre}','{cliente.email}'," +
                 $"{cliente.PuntosDispo})", connection);
+
+            List<Cliente> clienteList = new List<Cliente>();
             try
             {
                 connection.Open();
                 cmd.ExecuteNonQuery();
-                return Ok("Añadido");
+                return Ok(clienteList);
             }
             catch (Exception)
             {
@@ -85,29 +87,32 @@ namespace DetailTECAPI.Controllers
             SqlCommand cmd = new SqlCommand($"Update CLIENTE " +
                 $"Set Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
                 $"InfoContacto = '{cliente.InfoContacto}',Nombre = '{cliente.Nombre}'," +
-                $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo} Where IDcliente = {cliente.IDcliente}",
+                $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo} Where IDcliente = {cliente.IDCliente}",
                 connection);
+                List<Cliente> clienteList = new List<Cliente>();
 
-          
+
+
                 connection.Open();
                 cmd.ExecuteNonQuery();
-                return Ok("Modificado");
+                return Ok(clienteList);
            
         }
 
         // DELETE api/<ClienteController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<Cliente>> Delete(int id)
         {
             SqlCommand cmd = new SqlCommand($"Delete from Cliente where IDcliente = {id}", connection);
-            
+            List<Cliente> clienteList = new List<Cliente>();
+
             try
             {
                 connection.Open();
                 cmd.ExecuteNonQuery();
 
                 SqlDataReader dr = cmd.ExecuteReader();
-                return Ok("Eliminado");
+                return Ok(clienteList);
             }
             catch (Exception)
             {

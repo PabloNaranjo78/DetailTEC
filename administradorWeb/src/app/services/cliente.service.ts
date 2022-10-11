@@ -7,29 +7,29 @@ import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
   providedIn: 'root'
 })
 export class ClienteService {
-  RUTA_API = "https://127.0.0.1:5001/api/BaseDatosAdmin"
+  RUTA_API = "https://127.0.0.1:7035/api"
   listaClientes!: Cliente[];
   constructor(private httpClient:HttpClient) {
   }
 
   getAllClientes(){
-    return this.httpClient.get<Cliente[]>(this.RUTA_API +'/all-cliente');
+    return this.httpClient.get<Cliente[]>(this.RUTA_API +'/Cliente');
   }
 
   getCliente(idCliente:number) {
-    return this.httpClient.get<Cliente[]>(this.RUTA_API + '/cliente/' + idCliente);
+    return this.httpClient.get<Cliente[]>(this.RUTA_API + '/Cliente/' + idCliente);
   }
 
   guardarCliente(cliente:Cliente): Observable<Cliente>{
-    return this.httpClient.post<Cliente>(this.RUTA_API+'/cliente',cliente);
+    return this.httpClient.post<Cliente>(this.RUTA_API+'/Cliente',cliente);
   }
 
   actualizarCliente(cliente:Cliente): Observable<Cliente>{
-    return this.httpClient.put<Cliente>(this.RUTA_API+'/cliente',cliente);
+    return this.httpClient.put<Cliente>(this.RUTA_API+'/Cliente',cliente);
   }
 
-  eliminarCliente(cliente_id:string){
-    return this.httpClient.delete<string>(this.RUTA_API+"/ciente/" + cliente_id);
+  eliminarCliente(cliente_id:number){
+    return this.httpClient.delete<string>(this.RUTA_API+"/Cliente/" + cliente_id);
   }
 
   getTelefonos(id:number): Observable<Telefono[]>{

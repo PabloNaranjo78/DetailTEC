@@ -87,9 +87,10 @@ export class NuevoClienteComponent implements OnInit {
         Swal.fire({
         icon: 'success',
         title: '¡Has agregado a ' + this.cliente.nombre + ' como Cliente'})
-      this.route.navigate(['clientes'])},
+      this.route.navigate(['gestion-clientes'])},
       /*Mensaje emergente de error*/
       error: (err) =>{
+        console.log(err);
         Swal.fire({
         icon: 'error',
         title: '¡Algo ha salido mal!',

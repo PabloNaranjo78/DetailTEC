@@ -7,7 +7,7 @@ namespace DetailTECAPI.Tables
     {
 
         [Key]
-        public int IDcliente { get; set; }
+        public int IDCliente { get; set; }
         [Key]
         public string? Usuario { get; set; }
         public string? Contraseña { get; set; }
@@ -31,7 +31,7 @@ namespace DetailTECAPI.Tables
         {
             Cliente cliente = new Cliente
             {
-                IDcliente = Convert.ToInt32(dr["IDcliente"]),
+                IDCliente = Convert.ToInt32(dr["IDcliente"]),
                 Usuario = dr["Usuario"].ToString(),
                 Contraseña = dr["Contraseña"].ToString(),
                 InfoContacto = dr["InfoContacto"].ToString(),

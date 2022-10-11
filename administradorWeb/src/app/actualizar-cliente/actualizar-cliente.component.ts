@@ -99,7 +99,7 @@ onActualizar(): void{
     Swal.fire({
     icon: 'success',
     title: '¡Has actualizado a ' + this.cliente.nombre + ' como Cliente'})
-  this.rou.navigate(['clientes'])},
+  this.rou.navigate(['gestion-clientes'])},
   /*Mensaje emergente de error*/
   error: (err) =>{
     Swal.fire({
@@ -108,4 +108,22 @@ onActualizar(): void{
     text: err.error})}
 })
   }
+
+  onEliminar(): void{ 
+    this.clienteService.eliminarCliente(this.cliente.idCliente).subscribe({
+    /*Mensaje emergente de exito*/
+    
+    next: (data) => {
+      Swal.fire({
+      icon: 'success',
+      title: '¡Has eliminado a ' + this.cliente.nombre + ' como Cliente'})
+    this.rou.navigate(['gestion-clientes'])},
+    /*Mensaje emergente de error*/
+    error: (err) =>{
+      Swal.fire({
+      icon: 'error',
+      title: '¡Algo ha salido mal!',
+      text: err.error})}
+  })
+    }
 }

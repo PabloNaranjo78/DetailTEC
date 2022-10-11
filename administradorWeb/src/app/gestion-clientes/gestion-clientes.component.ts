@@ -56,6 +56,8 @@ export class GestionClientesComponent implements OnInit {
   constructor(clienteService:ClienteService) {
     clienteService.getAllClientes().subscribe((data) =>{
       this.listaClientes = data
+      console.log(data[1].idCliente)
+      console.log(this.listaClientes[1].idCliente)
     })
   }
 
