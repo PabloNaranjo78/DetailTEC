@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, html {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #c0d2d2;
+    opacity: 1;
+    background-image: radial-gradient(circle at center center, #ffffff, #c0d2d2), repeating-radial-gradient(circle at center center, #ffffff, #ffffff, 14px, transparent 28px, transparent 14px);
+    background-blend-mode: multiply;
+  }
+* {
+    font-family: 'Montserrat';
+}
+
