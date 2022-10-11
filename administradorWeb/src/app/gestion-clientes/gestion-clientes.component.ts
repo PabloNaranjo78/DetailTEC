@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../interfaces/cliente';
+import { ClienteService } from '../services/cliente.service';
 
 @Component({
   selector: 'app-gestion-clientes',
@@ -50,34 +51,13 @@ export class GestionClientesComponent implements OnInit {
     }
     return true;
   }
-/*Constructor de la clase, servicio de citas inyectado 
+  /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
-  /*constructor(clienteService:ClienteService) {
+  constructor(clienteService:ClienteService) {
     clienteService.getAllClientes().subscribe((data) =>{
       this.listaClientes = data
     })
-   }*/
-
-   constructor(){
-    this.listaClientes=[
-      {
-          idCliente:2345,
-          usuario:"andy",
-          contraseña:"asdfasd",
-          infoContacto:"asdasdf",
-          nombre:"asdf",
-          email:"asdf"
-      },
-      {
-        idCliente:867786,
-        usuario:"andy",
-        contraseña:"asdfasd",
-        infoContacto:"asdasdf",
-        nombre:"asdf",
-        email:"asdf"
-    }
-    ]
-   }
+  }
 
   ngOnInit(): void {
   }

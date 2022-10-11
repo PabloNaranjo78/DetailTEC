@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
+import { ClienteService } from '../services/cliente.service';
 
 @Component({
   selector: 'app-actualizar-cliente',
@@ -41,11 +42,23 @@ export class ActualizarClienteComponent implements OnInit {
 
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
-  constructor(private route:ActivatedRoute, private rou:Router) {
+  constructor(private clienteService:ClienteService, private route:ActivatedRoute, private rou:Router, ) {
   }
 
   ngOnInit(): void {
-    this.cliente.idCliente = this.route.snapshot.params['id'];
+    this.clienteService.getCliente(this.route.snapshot.params['id']).subscribe({
+      /*Mensaje emergente de exito*/
+      next: (data) => {
+        this.cliente = data[0];
+      },
+      /*Mensaje emergente de error*/
+      error: (err) =>{
+        Swal.fire({
+        icon: 'error',
+        title: '¡No se ha encontrado el usuario!',
+        text: err.error})}
+    });
+
     this.direccionNueva.idCliente = this.route.snapshot.params['id'];
     this.telefonoNuevo.idCliente = this.route.snapshot.params["id"];
   }
@@ -78,10 +91,21 @@ export class ActualizarClienteComponent implements OnInit {
   }
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
-  onSubmit(): void{
+onActualizar(): void{ 
+  this.clienteService.actualizarCliente(this.cliente).subscribe({
+  /*Mensaje emergente de exito*/
+  
+  next: (data) => {
     Swal.fire({
-      icon: 'success',
-      title: '¡Has agregado a ' + this.cliente.nombre + ' como Cliente'})
-      this.rou.navigate(['gestion-clientes'])
+    icon: 'success',
+    title: '¡Has actualizado a ' + this.cliente.nombre + ' como Cliente'})
+  this.rou.navigate(['clientes'])},
+  /*Mensaje emergente de error*/
+  error: (err) =>{
+    Swal.fire({
+    icon: 'error',
+    title: '¡Algo ha salido mal!',
+    text: err.error})}
+})
   }
 }
