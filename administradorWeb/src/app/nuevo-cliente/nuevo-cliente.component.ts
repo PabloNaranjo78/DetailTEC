@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
+import { ClienteService } from '../services/cliente.service';
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -41,7 +42,10 @@ export class NuevoClienteComponent implements OnInit {
 
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
-  constructor(private route:Router) {
+  constructor(private route:Router, private clienteService:ClienteService) {
+    clienteService.getAllClientes().subscribe((data) =>{
+      this.listaClientes = data
+    })
   }
 
   ngOnInit(): void {
@@ -76,10 +80,21 @@ export class NuevoClienteComponent implements OnInit {
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
   onSubmit(): void{
-    Swal.fire({
-      icon: 'success',
-      title: '¡Has agregado a ' + this.cliente.nombre + ' como Cliente'})
-    this.route.navigate(['gestion-clientes'])
+    this.clienteService.guardarCliente(this.cliente).subscribe({
+      /*Mensaje emergente de exito*/
+      
+      next: (data) => {
+        Swal.fire({
+        icon: 'success',
+        title: '¡Has agregado a ' + this.cliente.nombre + ' como Cliente'})
+      this.route.navigate(['clientes'])},
+      /*Mensaje emergente de error*/
+      error: (err) =>{
+        Swal.fire({
+        icon: 'error',
+        title: '¡Algo ha salido mal!',
+        text: err.error})}
+    })
   }
 }
 
