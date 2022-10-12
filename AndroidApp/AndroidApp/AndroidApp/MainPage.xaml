@@ -35,6 +35,35 @@
 
         <!--<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="Getting there!!" FontSize="Large" x:Name="label123"/>-->
 
+        <ListView x:Name="lstClient" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                
+                                <RowDefinition Height = "Auto"/> 
+                                
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Id}" Grid.Row="0" Grid.Column="0" TextColor="Blue"/>
+                            <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Green"/>
+                        </Grid>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            
+        </ListView>
+
 
     </Grid>
 

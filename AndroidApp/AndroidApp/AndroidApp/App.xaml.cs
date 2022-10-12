@@ -9,6 +9,7 @@ namespace AndroidApp
     public partial class App : Application
     {
         static SQLiteHelper db;
+        
 
         public App()
         {

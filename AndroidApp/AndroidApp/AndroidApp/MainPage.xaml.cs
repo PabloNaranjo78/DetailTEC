@@ -1,4 +1,5 @@
 ﻿using AndroidApp.Models;
+using AndroidApp.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +12,12 @@ namespace AndroidApp
 {
     public partial class MainPage : ContentPage
     {
+        
         public MainPage()
         {
             InitializeComponent();
+            showClient2();
+
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -22,22 +26,15 @@ namespace AndroidApp
             //Navigation.PushAsync(new Menu());
 
             if (!string.IsNullOrEmpty(UserEntry.Text) & !string.IsNullOrEmpty(UserPass.Text))
-            {
-                
-                Client client = new Client
-                {
-                    Id = int.Parse(UserEntry.Text),
-                    Name = UserPass.Text   
-                }; 
-                await App.SQLiteDB.SaveClientAsync(client); 
-                UserEntry.Text = "";
-                UserPass.Text = "";
-                await DisplayAlert("Regist", "User have been saved", "Ok");
+            {                
+                //Client client = new Client
+                //{
+                //    Id = int.Parse(UserEntry.Text),
+                //    Name = UserPass.Text   
+                //}; 
+                //await App.SQLiteDB.SaveClientAsync(client); 
 
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                Console.WriteLine(await App.SQLiteDB.GetClientByIdAsync(1238));
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
+                await DisplayAlert("Regist", "User have been saved", "Ok"); 
             }
             else
             {
@@ -46,5 +43,26 @@ namespace AndroidApp
 
         }
 
+        public async void showClient()
+        {
+            var clientList = await App.SQLiteDB.GetClientById(999);
+
+            Client clientaux = new Client()
+            {
+                Id = clientList.Id,
+                Name = "FERNADO MONGE",
+            };
+
+            await App.SQLiteDB.UpdateClient(clientaux);  
+
+            var clientList2 = await App.SQLiteDB.GetClients();
+            lstClient.ItemsSource = clientList2;
+        }
+        public async void showClient2()
+        {
+            var clientList2 = await App.SQLiteDB.GetClients();
+            lstClient.ItemsSource = clientList2;
+        }
+ 
     }
 }

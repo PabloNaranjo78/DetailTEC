@@ -35,7 +35,7 @@ namespace AndroidApp.Data
         /// Returns all the clients saved 
         /// </summary>
         /// <returns></returns>
-        public Task<List<Client>> GetClientAsync()
+        public Task<List<Client>> GetClients()
         {
             return db.Table<Client>().ToListAsync();
         }
@@ -45,11 +45,24 @@ namespace AndroidApp.Data
         /// </summary>
         /// <param name="idClient">id of the client</param>
         /// <returns></returns>
-        public Task<Client> GetClientByIdAsync(int idClient)
+        public Task<Client> GetClientById(int idClient)
         {
             return db.Table<Client>().Where(a => a.Id == idClient).FirstOrDefaultAsync();
 
         }
+
+
+        public Task<int> UpdateClient(Client client)
+        {
+            return db.UpdateAsync(client);
+            
+        }
+
+        public Task<int> DeleteClient(Client client) 
+        {
+            return db.DeleteAsync(client);
+        }
+
 
     }
 }
