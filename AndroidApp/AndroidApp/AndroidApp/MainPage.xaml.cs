@@ -16,7 +16,7 @@ namespace AndroidApp
         public MainPage()
         {
             InitializeComponent();
-            showClient2();
+            RefreshClient();
 
         }
 
@@ -27,13 +27,7 @@ namespace AndroidApp
 
             if (!string.IsNullOrEmpty(UserEntry.Text) & !string.IsNullOrEmpty(UserPass.Text))
             {                
-                //Client client = new Client
-                //{
-                //    Id = int.Parse(UserEntry.Text),
-                //    Name = UserPass.Text   
-                //}; 
-                //await App.SQLiteDB.SaveClientAsync(client); 
-
+                
                 await DisplayAlert("Regist", "User have been saved", "Ok"); 
             }
             else
@@ -43,25 +37,10 @@ namespace AndroidApp
 
         }
 
-        public async void showClient()
+       
+        public async void RefreshClient()
         {
-            var clientList = await App.SQLiteDB.GetClientById(999);
-
-            Client clientaux = new Client()
-            {
-                Id = clientList.Id,
-                Name = "FERNADO MONGE",
-            };
-
-            await App.SQLiteDB.UpdateClient(clientaux);  
-
-            var clientList2 = await App.SQLiteDB.GetClients();
-            lstClient.ItemsSource = clientList2;
-        }
-        public async void showClient2()
-        {
-            var clientList2 = await App.SQLiteDB.GetClients();
-            lstClient.ItemsSource = clientList2;
+            lstClient.ItemsSource = await App.SQLiteDB.GetClients();
         }
  
     }

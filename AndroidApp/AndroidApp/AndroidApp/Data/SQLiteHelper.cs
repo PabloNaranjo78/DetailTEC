@@ -18,12 +18,11 @@ namespace AndroidApp.Data
             db.CreateTableAsync<Client>().Wait();
         }
 
-        public Task<int> SaveClientAsync(Client client)
+        public Task<int> InsertClient(Client client)
         {
             if (client.Id != 0)
             {
                 return db.InsertAsync(client);
-
             }
             else
             {
