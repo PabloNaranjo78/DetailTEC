@@ -9,8 +9,12 @@ namespace AndroidApp.Models
     {
         [PrimaryKey]
         //[PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int IDCliente { get; set; }
+        public string Usuario { get; set; }
+        public string Contra { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public int PuntosDispo { get; set; }
 
     }
 }

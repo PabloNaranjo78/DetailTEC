@@ -15,26 +15,26 @@ namespace AndroidApp
         public Menu()
         {
             InitializeComponent();
-            //Apellido.Text = Application.Current.Properties["Name"].ToString();
+            //Apellido.Text = Application.Current.Properties["Nombre"].ToString();
 
         }
 
         private void Button_Client(object sender, EventArgs e)
         {
-            //Application.Current.Properties["Name"] = "FERNANDO";
+            //Application.Current.Properties["Nombre"] = "FERNANDO";
             Navigation.PushAsync(new ClientM());
 
         }
 
         private void Button_Appointment(object sender, EventArgs e)
         {
-            //Application.Current.Properties["Name"] = "FERNANDO";
+            //Application.Current.Properties["Nombre"] = "FERNANDO";
             Navigation.PushAsync(new Appointment());
 
         }
         private void Button_Points(object sender, EventArgs e)
         {
-            //Application.Current.Properties["Name"] = "FERNANDO";
+            //Application.Current.Properties["Nombre"] = "FERNANDO";
             Navigation.PushAsync(new Points());
 
         }

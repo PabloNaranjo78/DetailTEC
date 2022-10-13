@@ -17,17 +17,14 @@ namespace AndroidApp.Data
             db = new SQLiteAsyncConnection(dbPath);
             db.CreateTableAsync<Client>().Wait();
         }
-
+        /// <summary>
+        /// Inserts a new client
+        /// </summary>
+        /// <param name="client">Client to be added</param>
+        /// <returns></returns>
         public Task<int> InsertClient(Client client)
         {
-            if (client.Id != 0)
-            {
-                return db.InsertAsync(client);
-            }
-            else
-            {
-                return null;
-            }
+            return db.InsertAsync(client);
         }
 
         /// <summary>
@@ -46,17 +43,26 @@ namespace AndroidApp.Data
         /// <returns></returns>
         public Task<Client> GetClientById(int idClient)
         {
-            return db.Table<Client>().Where(a => a.Id == idClient).FirstOrDefaultAsync();
+            return db.Table<Client>().Where(a => a.IDCliente == idClient).FirstOrDefaultAsync();
 
         }
 
-
+        /// <summary>
+        /// Updates a client
+        /// </summary>
+        /// <param name="client">Client to be updated</param>
+        /// <returns></returns>
         public Task<int> UpdateClient(Client client)
         {
             return db.UpdateAsync(client);
             
         }
 
+        /// <summary>
+        /// Deletes a client
+        /// </summary>
+        /// <param name="client">Client to be deleted</param>
+        /// <returns></returns>
         public Task<int> DeleteClient(Client client) 
         {
             return db.DeleteAsync(client);

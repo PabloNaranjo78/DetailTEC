@@ -22,7 +22,7 @@ namespace AndroidApp
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            //Application.Current.Properties["Name"] = "FERNANDO";
+            //Application.Current.Properties["Nombre"] = "FERNANDO";
             //Navigation.PushAsync(new Menu());
 
             if (!string.IsNullOrEmpty(UserEntry.Text) & !string.IsNullOrEmpty(UserPass.Text))
