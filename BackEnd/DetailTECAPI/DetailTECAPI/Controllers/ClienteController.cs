@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using DetailTECAPI.Connection;
 using DetailTECAPI.Tables;
+using Microsoft.OpenApi.Extensions;
 
 namespace DetailTECAPI.Controllers
 {
@@ -10,20 +11,15 @@ namespace DetailTECAPI.Controllers
     public class ClienteController : ControllerBase
     {
         private SqlConnection connection = new SqlConnection(Connection.Connection.ConnectionString);
+        private Cliente cliente = new Cliente();
         // GET: api/<ClienteController>
         [HttpGet]
         public async Task<ActionResult<List<Cliente>>> Get()
         {
-            SqlCommand cmd = new SqlCommand("Select IDcliente,Usuario,Contraseña," +
-                "InfoContacto,Nombre,email,PuntosDispo from CLIENTE", connection);
-            List<Cliente> clienteList = new List<Cliente>();
             try
             {
-                connection.Open();
-                cmd.ExecuteNonQuery();
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                clienteList = Cliente.createClienteList(dr);
+                var clienteList = cliente.get("IDcliente,Usuario,Contraseña," +
+                    "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
                 return Ok(clienteList);
             }
             catch (Exception)
@@ -37,21 +33,15 @@ namespace DetailTECAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Cliente>>> Get(int id)
         {
-            SqlCommand cmd = new SqlCommand("Select IDcliente,Usuario,Contraseña," +
-                $"InfoContacto,Nombre,email,PuntosDispo from CLIENTE where IDcliente = {id}", connection);
-            List<Cliente> clienteList = new List<Cliente>();
             try
             {
-                connection.Open();
-                cmd.ExecuteNonQuery();
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                clienteList = Cliente.createClienteList(dr);
+                var clienteList = cliente.get(id, "IDcliente", "IDcliente,Usuario,Contraseña," +
+                    "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
                 return Ok(clienteList);
             }
             catch (Exception)
             {
-                return BadRequest("No se logró conectar con la DB");
+                return BadRequest("Error durante la consulta");
 
             }
 
@@ -61,22 +51,14 @@ namespace DetailTECAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Cliente>>> Post(Cliente cliente)
         {
-            SqlCommand cmd = new SqlCommand($"INSERT INTO CLIENTE VALUES ({cliente.IDCliente},'{cliente.Usuario}'," +
+            List<Cliente> entityList = new List<Cliente>();
+            entityList.Add(cliente);
+
+            var result = cliente.post("CLIENTE", $"{cliente.IDCliente},'{cliente.Usuario}'," +
                 $"'{cliente.Contraseña}','{cliente.InfoContacto}','{cliente.Nombre}','{cliente.email}'," +
-                $"{cliente.PuntosDispo})", connection);
+                $"{cliente.PuntosDispo}");
 
-            List<Cliente> clienteList = new List<Cliente>();
-            try
-            {
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                return Ok(clienteList);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Ya existe el usuario");
-
-            }
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
 
         }
 
@@ -84,41 +66,40 @@ namespace DetailTECAPI.Controllers
         [HttpPut]
         public async Task<ActionResult<Cliente>> Put(Cliente cliente)
         {
-            SqlCommand cmd = new SqlCommand($"Update CLIENTE " +
-                $"Set Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
+
+            List<Cliente> entityList = new List<Cliente>();
+            entityList.Add(cliente);
+
+            var result = cliente.put("CLIENTE", $"Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
                 $"InfoContacto = '{cliente.InfoContacto}',Nombre = '{cliente.Nombre}'," +
-                $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo} Where IDcliente = {cliente.IDCliente}",
-                connection);
-                List<Cliente> clienteList = new List<Cliente>();
+                $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo}", $"IDcliente = {cliente.IDCliente}");
 
-
-
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                return Ok(clienteList);
-           
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {cliente.IDCliente}");
         }
 
         // DELETE api/<ClienteController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cliente>> Delete(int id)
         {
-            SqlCommand cmd = new SqlCommand($"Delete from Cliente where IDcliente = {id}", connection);
-            List<Cliente> clienteList = new List<Cliente>();
+            //SqlCommand cmd = new SqlCommand($"Delete from Cliente where IDcliente = {id}", connection);
+            //List<Cliente> clienteList = new List<Cliente>();
 
-            try
-            {
-                connection.Open();
-                cmd.ExecuteNonQuery();
+            //try
+            //{
+            //    connection.Open();
+            //    cmd.ExecuteNonQuery();
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                return Ok(clienteList);
-            }
-            catch (Exception)
-            {
-                return BadRequest("No se logró conectar con la DB");
+            //    SqlDataReader dr = cmd.ExecuteReader();
+            //    return Ok(clienteList);
+            //}
+            //catch (Exception)
+            //{
+            //    return BadRequest("No se logró conectar con la DB");
 
-            }
+            //}
+            List<Cliente> entityList = new List<Cliente>();
+            var result = cliente.delete("CLIENTE", $"IDcliente = {id}");
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
         }
     }
 }

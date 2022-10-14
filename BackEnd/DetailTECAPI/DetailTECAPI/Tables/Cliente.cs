@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
+using DetailTECAPI.Connection;
 
 namespace DetailTECAPI.Tables
 {
-    public class Cliente
+    public class Cliente : Entity<Cliente>
     {
 
         [Key]
@@ -16,18 +18,8 @@ namespace DetailTECAPI.Tables
         public string? email { get; set; }
         public int PuntosDispo { get; set; }
 
-        public static List<Cliente> createClienteList(SqlDataReader dr)
-        {
-            List<Cliente> clienteList = new List<Cliente>();
-            while (dr.Read())
-            {
-                clienteList.Add(Cliente.createCliente(dr));
-            };
 
-            return clienteList;
-        }
-
-        public static Cliente createCliente(SqlDataReader dr)
+        public override Cliente createCliente(SqlDataReader dr)
         {
             Cliente cliente = new Cliente
             {
