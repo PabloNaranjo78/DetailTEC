@@ -1,0 +1,15 @@
+﻿using SQLite;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AndroidApp.Models
+{
+    public class Snaks
+    {
+        [PrimaryKey]
+        public string Nombre { get; set; }
+        public int Disponibles { get; set; }
+        public int Costo { get; set; }
+    }
+}
