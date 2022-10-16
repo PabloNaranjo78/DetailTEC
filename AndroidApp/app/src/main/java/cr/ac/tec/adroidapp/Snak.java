@@ -9,4 +9,10 @@ public class Snak {
     public String NombreS;
     public int Cantidad;
     public int Costo;
+
+    public Snak(String nombreS, int cantidad, int costo) {
+        this.NombreS = nombreS;
+        this.Cantidad = cantidad;
+        this.Costo = costo;
+    }
 }

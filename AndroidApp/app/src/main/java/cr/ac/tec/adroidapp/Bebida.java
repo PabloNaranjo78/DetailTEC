@@ -7,4 +7,10 @@ public class Bebida {
     public String NombreB;
     public int Cantidad;
     public int Costo;
+
+    public Bebida(String nombreB, int cantidad, int costo) {
+        this.NombreB = nombreB;
+        this.Cantidad = cantidad;
+        this.Costo = costo;
+    }
 }

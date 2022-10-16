@@ -10,4 +10,9 @@ public class Factura {
     public int NumFactura;
     public int Monto;
 
+    public Factura(int placa, int numFactura, int monto) {
+        this.Placa = placa;
+        this.NumFactura = numFactura;
+        this.Monto = monto;
+    }
 }

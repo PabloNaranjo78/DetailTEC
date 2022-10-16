@@ -11,5 +11,13 @@ public class Lavado {
     public int Precio;
     public int Costo;
     public int Puntos;
-//    public String Perosnal; Sepa judas porque personal
+//    public String Personal; Sepa judas porque personal
+
+    public Lavado(String nombreLav, float duracion, int precio, int costo, int puntos) {
+        this.NombreLav = nombreLav;
+        this.Duracion = duracion;
+        this.Precio = precio;
+        this.Costo = costo;
+        this.Puntos = puntos;
+    }
 }

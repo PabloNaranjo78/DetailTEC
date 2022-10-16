@@ -13,4 +13,14 @@ public class Sucursal {
     public String Canton;
     public String Distrito;
     public float TiempoDispo;
+
+    public Sucursal(String nombreSuc, String fechaApert, int telefono, String provincia, String canton, String distrito, float tiempoDispo) {
+        this.NombreSuc = nombreSuc;
+        this.FechaApert = fechaApert;
+        this.Telefono = telefono;
+        this.Provincia = provincia;
+        this.Canton = canton;
+        this.Distrito = distrito;
+        this.TiempoDispo = tiempoDispo;
+    }
 }

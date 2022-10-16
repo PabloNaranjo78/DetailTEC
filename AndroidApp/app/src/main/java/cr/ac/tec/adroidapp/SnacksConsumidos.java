@@ -10,4 +10,10 @@ public class SnacksConsumidos {
     public int Factura;
     public int Cantidad;
     public int NombreS;
+
+    public SnacksConsumidos(int factura, int cantidad, int nombreS) {
+        this.Factura = factura;
+        this.Cantidad = cantidad;
+        this.NombreS = nombreS;
+    }
 }

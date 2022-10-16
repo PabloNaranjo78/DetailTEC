@@ -4,10 +4,16 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Factura.class, parentColumns = "NumFactura", childColumns = "Factura"),
-        @ForeignKey(entity = Bebida.class, parentColumns = "NombreB", childColumns = "NombreB")},
+                        @ForeignKey(entity = Bebida.class, parentColumns = "NombreB", childColumns = "NombreB")},
         primaryKeys = {"Factura", "NombreB"})
 public class BebidasConsumidas {
     public int Factura;
     public int Cantidad;
     public int NombreB;
+
+    public BebidasConsumidas(int factura, int cantidad, int nombreB) {
+        this.Factura = factura;
+        this.Cantidad = cantidad;
+        this.NombreB = nombreB;
+    }
 }
