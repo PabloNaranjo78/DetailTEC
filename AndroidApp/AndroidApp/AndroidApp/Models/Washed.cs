@@ -9,7 +9,7 @@ namespace AndroidApp.Models
     {
         [PrimaryKey]
         public string NombreLavado { get; set; }
-        public string Duracion { get; set; } // Ask for data type 
+        public double Duracion { get; set; }
         public int Precio { get; set; }
         public int Costo { get; set; }
         public int Puntos { get; set; }

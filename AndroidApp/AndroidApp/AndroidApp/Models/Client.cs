@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using SQLite;
 
@@ -11,6 +12,7 @@ namespace AndroidApp.Models
         //[PrimaryKey, AutoIncrement]
         [PrimaryKey]
         public int IDCliente { get; set; }
+
         public string Usuario { get; set; }
         public string Contra { get; set; }
         //public string InfoContact { get; set; }
@@ -18,6 +20,8 @@ namespace AndroidApp.Models
         public string Email { get; set; }
         public int PuntosDispo { get; set; }
         //public string Direccion { get; set; }
+        [ForeignKeyConstraint]
+
 
     }
 }

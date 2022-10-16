@@ -10,8 +10,7 @@ namespace AndroidApp.Models
         [PrimaryKey]
         public int Placa { get; set; }
         public string FechaCita { get; set; }
-
-        //public int IDEmpleado { get; set; } -> Ask if its needed
+        private int IDEmpleado { get; set; } 
         public string Sucursal { get; set; } // FK
         public string Lavado { get; set; } // FK
         public int IDClient { get; set; } //FK

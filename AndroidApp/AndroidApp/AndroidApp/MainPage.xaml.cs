@@ -36,7 +36,6 @@ namespace AndroidApp
             }
 
         }
-
        
         public async void RefreshClient()
         {
