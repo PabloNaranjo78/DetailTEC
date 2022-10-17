@@ -1,5 +1,6 @@
 package cr.ac.tec.adroidapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
@@ -7,15 +8,22 @@ import androidx.room.ForeignKey;
         primaryKeys = {"IDCliente", "Provincia", "Canton", "Distrito"})
 
 public class ClienteDirecciones {
+    @NonNull
     public int IDCliente;
+    @NonNull
     public String Provincia;
+    @NonNull
     public String Canton;
+    @NonNull
     public String Distrito;
 
-    public ClienteDirecciones(int IDCliente, String provincia, String canton, String distrito) {
+    public ClienteDirecciones(@NonNull int IDCliente,@NonNull String provincia,@NonNull String canton,@NonNull String distrito) {
         this.IDCliente = IDCliente;
         this.Provincia = provincia;
         this.Canton = canton;
         this.Distrito = distrito;
+    }
+
+    public ClienteDirecciones() {
     }
 }

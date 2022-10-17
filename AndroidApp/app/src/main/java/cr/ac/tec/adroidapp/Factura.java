@@ -1,18 +1,23 @@
 package cr.ac.tec.adroidapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Cita.class, parentColumns = "Placa", childColumns = "Placa")},
-        primaryKeys = {"Placa", "NumFactura"})
+        primaryKeys = { "NumFactura"})
 public class Factura {
     public int Placa;
+    @NonNull
     public int NumFactura;
     public int Monto;
 
-    public Factura(int placa, int numFactura, int monto) {
+    public Factura(@NonNull int placa, @NonNull int numFactura, int monto) {
         this.Placa = placa;
         this.NumFactura = numFactura;
         this.Monto = monto;
+    }
+
+    public Factura() {
     }
 }
