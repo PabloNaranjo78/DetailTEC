@@ -18,8 +18,8 @@ namespace DetailTECAPI.Tables
         public string? email { get; set; }
         public int PuntosDispo { get; set; }
 
-
-        public override Cliente createCliente(SqlDataReader dr)
+        
+        public override Cliente createEntity(SqlDataReader dr)
         {
             Cliente cliente = new Cliente
             {

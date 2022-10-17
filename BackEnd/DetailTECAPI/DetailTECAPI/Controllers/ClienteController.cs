@@ -10,7 +10,6 @@ namespace DetailTECAPI.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        private SqlConnection connection = new SqlConnection(Connection.Connection.ConnectionString);
         private Cliente cliente = new Cliente();
         // GET: api/<ClienteController>
         [HttpGet]
@@ -35,7 +34,7 @@ namespace DetailTECAPI.Controllers
         {
             try
             {
-                var clienteList = cliente.get(id, "IDcliente", "IDcliente,Usuario,Contraseña," +
+                var clienteList = cliente.get(id.ToString(), "IDcliente", "IDcliente,Usuario,Contraseña," +
                     "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
                 return Ok(clienteList);
             }
@@ -81,25 +80,9 @@ namespace DetailTECAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cliente>> Delete(int id)
         {
-            //SqlCommand cmd = new SqlCommand($"Delete from Cliente where IDcliente = {id}", connection);
-            //List<Cliente> clienteList = new List<Cliente>();
-
-            //try
-            //{
-            //    connection.Open();
-            //    cmd.ExecuteNonQuery();
-
-            //    SqlDataReader dr = cmd.ExecuteReader();
-            //    return Ok(clienteList);
-            //}
-            //catch (Exception)
-            //{
-            //    return BadRequest("No se logró conectar con la DB");
-
-            //}
             List<Cliente> entityList = new List<Cliente>();
             var result = cliente.delete("CLIENTE", $"IDcliente = {id}");
-            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
+            return result ? Ok(entityList) : BadRequest($"No se logró eliminar a {id}");
         }
     }
 }

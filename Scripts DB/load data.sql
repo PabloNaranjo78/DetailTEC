@@ -6,6 +6,8 @@ INSERT INTO CLIENTE VALUES (1235,'FMonge','999999999','Casa','Fernando Monge','f
 Update CLIENTE set Usuario = 'Juan' where IDcliente = 1234
 
 select * from Cliente
+select * from Lavado
 Select IDcliente,Usuario,Contraseña,InfoContacto,Nombre,email,PuntosDispo from CLIENTE where IDcliente = 1234
 Delete from Cliente where IDcliente = 11111
 Delete from Cliente
+delete from Lavado
