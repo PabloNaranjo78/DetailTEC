@@ -17,9 +17,9 @@ namespace DetailTECAPI.Controllers
         {
             try
             {
-                var clienteList = cliente.get("IDcliente,Usuario,Contraseña," +
+                var entityList = cliente.get("IDcliente,Usuario,Contraseña," +
                     "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
-                return Ok(clienteList);
+                return Ok(entityList);
             }
             catch (Exception)
             {
@@ -68,6 +68,7 @@ namespace DetailTECAPI.Controllers
 
             List<Cliente> entityList = new List<Cliente>();
             entityList.Add(cliente);
+           
 
             var result = cliente.put("CLIENTE", $"Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
                 $"InfoContacto = '{cliente.InfoContacto}',Nombre = '{cliente.Nombre}'," +

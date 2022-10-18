@@ -59,18 +59,18 @@ namespace DetailTECAPI.Tables
         public bool post(string entity, string values)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {entity} VALUES ({values})", connection);
-            //try
-            //{
+            try
+            {
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.ToString);
-            //    return false;
-            //    throw;
-            //}
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString);
+                return false;
+                throw;
+            }
         }
 
         /// <summary>

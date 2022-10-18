@@ -12,7 +12,7 @@ namespace DetailTECAPI.Controllers
     [ApiController]
     public class LavadoController : ControllerBase
     {
-        Lavado lavado = new Lavado();
+        private Lavado lavado = new Lavado();
 
         // GET: api/<LavadoController>
         [HttpGet]
@@ -31,18 +31,18 @@ namespace DetailTECAPI.Controllers
         }
 
         // GET api/<LavadoController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<Lavado>>> Get(string id)
+        [HttpGet("{nombreLav}")]
+        public async Task<ActionResult<List<Lavado>>> Get(string nombreLav)
         {
             try
             {
-                var lavadoList = lavado.get(id, "NombreLav", "NombreLav,Duracion," +
-                    "Precio,Costo,Puntos", "LAVADO");
+                var lavadoList = lavado.get($"'{nombreLav}'", "NombreLav", "NombreLav,Duracion," +
+                "Precio,Costo,Puntos", "LAVADO");
                 return Ok(lavadoList);
             }
             catch (Exception)
             {
-                return BadRequest("Error durante la consulta");
+                return BadRequest("No se encontró");
 
             }
 

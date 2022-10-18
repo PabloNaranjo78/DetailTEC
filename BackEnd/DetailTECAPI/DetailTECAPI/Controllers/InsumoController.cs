@@ -9,7 +9,7 @@ namespace DetailTECAPI.Controllers
     [ApiController]
     public class InsumoController : ControllerBase
     {
-        Insumo insumo = new Insumo();
+        private Insumo insumo = new Insumo();
         // GET: api/<InsumoController>
         [HttpGet]
         public async Task<ActionResult<List<Insumo>>> Get()
@@ -32,7 +32,7 @@ namespace DetailTECAPI.Controllers
         {
             try
             {
-                var insumoList = insumo.get(marca + $"AND MarcaPro = {nombre}", "NombrePro", "NombrePro, MarcaPro", "INSUMO");
+                var insumoList = insumo.get($"'{marca}' AND NombrePro = '{nombre}'", "MarcaPro", "NombrePro, MarcaPro,Costo", "INSUMO");
                 return Ok(insumoList);
             }
             catch (Exception)
@@ -74,7 +74,7 @@ namespace DetailTECAPI.Controllers
         public async Task<ActionResult<Insumo>> Delete(string marca, string nombre)
         {
             List<Insumo> entityList = new List<Insumo>();
-            var result = insumo.delete("INSUMO", $"NombrePro = '{nombre}' AND MarcaPro = '");
+            var result = insumo.delete("INSUMO", $"NombrePro = '{nombre}' AND MarcaPro = '{marca}'");
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {nombre}, {marca}");
         }
     }

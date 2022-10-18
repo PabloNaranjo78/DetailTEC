@@ -9,5 +9,8 @@ select * from Cliente
 select * from Lavado
 Select IDcliente,Usuario,Contraseña,InfoContacto,Nombre,email,PuntosDispo from CLIENTE where IDcliente = 1234
 Delete from Cliente where IDcliente = 11111
+Select * from Insumo
 Delete from Cliente
 delete from Lavado
+select * from lavado
+INSERT INTO LAVADO VALUES ('string',0,0,0,0)
