@@ -7,17 +7,17 @@ namespace DetailTECAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SucursalController : ControllerBase
+    public class TrabajadorController : ControllerBase
     {
-        Sucursal sucursal = new Sucursal();
-
-        // GET: api/<SucursalController>
+        private Trabajador trabajador = new Trabajador();
+        // GET: api/<TrabajadorController>
         [HttpGet]
-        public async Task<ActionResult<List<Sucursal>>> Get()
+        public async Task<ActionResult<List<Trabajador>>> Get()
         {
             try
             {
-                var entityList = sucursal.get("*", "Sucursal");
+                var entityList = trabajador.get("IDTrabajador,Nacimiento,Contraseña,Rol," +
+                    "Nombre,Apellidos,FechaIngreso,TipoPago", "TRABAJADOR");
                 return Ok(entityList);
             }
             catch (Exception)
@@ -25,40 +25,39 @@ namespace DetailTECAPI.Controllers
                 return BadRequest("No se logró conectar con la DB");
 
             }
-
         }
 
-        // GET api/<SucursalController>/5
-        [HttpGet("{nombreSuc}")]
-        public async Task<ActionResult<List<Sucursal>>> Get(string nombreSuc)
+        // GET api/<TrabajadorController>/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Trabajador>>> Get(int id)
         {
             try
             {
-                var entityList = sucursal.get($"'{nombreSuc}'", "NombreSuc", "NombreSuc, FechaApert, Telefono, " +
-                    "Provincia, Canton, Distrito, TiempoDispo", "Sucursal");
+                var entityList = trabajador.get(id.ToString(), "IDTrabajador", "IDTrabajador,Nacimiento,Contraseña,Rol," +
+                    "Nombre,Apellidos,FechaIngreso,TipoPago", "TRABAJADOR");
                 return Ok(entityList);
             }
             catch (Exception)
             {
-                return BadRequest("Error durante la consulta");
+                return BadRequest("No se encontró");
 
             }
 
         }
 
-        // POST api/<SucursalController>
+        // POST api/<TrabajadorController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<SucursalController>/5
+        // PUT api/<TrabajadorController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<SucursalController>/5
+        // DELETE api/<TrabajadorController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

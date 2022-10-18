@@ -152,5 +152,14 @@ namespace DetailTECAPI.Tables
 
             return entityList;
         }
+
+        protected DateTime dateFormat(SqlDataReader dr, string param)
+        {
+
+            DateTime dateOnly;
+            DateTime.TryParse(dr[param].ToString(), out dateOnly);
+
+            return dateOnly;
+        }
     }
 }

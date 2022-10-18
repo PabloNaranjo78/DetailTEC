@@ -60,6 +60,7 @@ namespace DetailTECAPI.Controllers
         }
 
         // PUT api/<ProveedorController>/5
+        [HttpPut]
         public async Task<ActionResult<Proveedor>> Put(Proveedor proveedor)
         {
 
@@ -71,7 +72,7 @@ namespace DetailTECAPI.Controllers
                 $"Contacto = '{proveedor.Contacto}', Provincia = '{proveedor.Provincia}', Canton = '{proveedor.Canton}', " +
                 $"Distrito = '{proveedor.Distrito}'", $"CedulaJur = {proveedor.CedulaJur}");
 
-            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {proveedor.Nombre}");
+            return true ? Ok(entityList) : BadRequest($"No se logró modificar a {proveedor.Nombre}");
         }
 
         // DELETE api/<ProveedorController>/5
