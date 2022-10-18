@@ -9,13 +9,19 @@
               <div class="row mt-4">
                   <ng-template ngFor let-cliente [ngForOf] = "subLista(i)">
                       <div class="col">
-                          <div class="container gy-1" *ngIf="esValido(cliente)">
+                          <div class="container gy-1">
                               Cliente
                               <div class="row mt-1"><h2>{{cliente.nombre}}</h2></div>
                               <button [routerLink]="['/actualizar-cliente',cliente.idCliente]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
                           </div>
                       </div>
                   </ng-template>
+                  <ng-template ngFor let-cliente [ngForOf] = "completar(i)">
+                    <div class="col">
+                        <div class="container gy-1" style="visibility: hidden;">
+                        </div>
+                    </div>
+                </ng-template>
               </div>
           </div>
       </div>

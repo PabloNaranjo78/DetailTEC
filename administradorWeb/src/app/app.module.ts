@@ -9,6 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GestionCitasComponent } from './gestion-citas/gestion-citas.component';
+import { GestionTrabajadoresComponent } from './gestion-trabajadores/gestion-trabajadores.component';
+import { GestionSucursalesComponent } from './gestion-sucursales/gestion-sucursales.component';
+import { GestionInsumosComponent } from './gestion-insumos/gestion-insumos.component';
+import { GestionLavadosComponent } from './gestion-lavados/gestion-lavados.component';
+import { GestionProveedoresComponent } from './gestion-proveedores/gestion-proveedores.component';
 
 @NgModule({
   declarations: [
@@ -16,15 +22,26 @@ import { HttpClientModule } from '@angular/common/http';
     GestionClientesComponent,
     NuevoClienteComponent,
     ActualizarClienteComponent,
-    HeaderComponent
+    HeaderComponent,
+    GestionCitasComponent,
+    GestionTrabajadoresComponent,
+    GestionSucursalesComponent,
+    GestionInsumosComponent,
+    GestionLavadosComponent,
+    GestionProveedoresComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path:"", component:GestionClientesComponent},
       {path:"gestion-clientes", component:GestionClientesComponent},
       {path:"nuevo-cliente", component:NuevoClienteComponent},
       {path:"actualizar-cliente/:id", component:ActualizarClienteComponent},
+      {path:"gestion-citas", component:GestionCitasComponent},
+      {path:"gestion-lavados", component:GestionLavadosComponent},
+      {path:"gestion-proveedores", component:GestionProveedoresComponent},
+      {path:"gestion-sucursales", component:GestionSucursalesComponent},
+      {path:"gestion-trabajadores", component:GestionTrabajadoresComponent},
+      {path:"gestion-insumos", component:GestionInsumosComponent},
     ]),
     FormsModule,
     HttpClientModule

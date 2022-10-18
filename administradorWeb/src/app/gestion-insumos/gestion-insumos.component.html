@@ -1,0 +1,31 @@
+
+<div class="row">
+    <div class="col-1"> </div>
+    <div class="col">
+      <div class="row mt-3">
+          <a class="btn btn-primary" style= "width: 100%; font-size:x-large;" href="/nuevo-insumo" role="button">Añadir Nuevo Insumo</a>
+      </div>
+        <div *ngFor="let n of listaInsumos; let i=index">
+            <div *ngIf="crearFila(i)">
+                <div class="row mt-4">
+                    <ng-template ngFor let-insumo [ngForOf] = "subLista(i)">
+                        <div class="col">
+                            <div class="container gy-1">
+                                Cliente
+                                <div class="row mt-1"><h2>{{insumo.nombre}}</h2></div>
+                                <button [routerLink]="['/actualizar-insumo',insumo.nombre]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template ngFor let-cliente [ngForOf] = "completar(i)">
+                      <div class="col">
+                          <div class="container gy-1" style="visibility: hidden;">
+                          </div>
+                      </div>
+                  </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1"> </div>
+  </div>

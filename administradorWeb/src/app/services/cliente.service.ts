@@ -7,11 +7,16 @@ import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
   providedIn: 'root'
 })
 export class ClienteService {
+   /**Ruta a conectarse con el API REST */
   RUTA_API = "https://127.0.0.1:7035/api"
   listaClientes!: Cliente[];
+  /**Conexión Http */
   constructor(private httpClient:HttpClient) {
   }
-
+  
+  /***Solicita al API todos los lavados existentes, recibiendo como respuesta una lista de objetos 
+   * Return: Cliente[]
+  */
   getAllClientes(){
     return this.httpClient.get<Cliente[]>(this.RUTA_API +'/Cliente');
   }

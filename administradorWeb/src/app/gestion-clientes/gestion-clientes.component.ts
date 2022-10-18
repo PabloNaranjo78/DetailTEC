@@ -26,38 +26,27 @@ export class GestionClientesComponent implements OnInit {
     var sub=[];
     if(valor+5 > this.listaClientes.length){
       sub = this.listaClientes.slice(valor)
-      while(sub.length!= 5){
-        sub.push({
-          idCliente:0,
-          usuario:"",
-          contraseña:"",
-          infoContacto:"",
-          nombre:"",
-          email:""
-      });
-      }
     } else {
       sub = this.listaClientes.slice(valor, valor+5);
     }
     return sub;
   }
 
-  /*Valida si el objeto tiene un idCliente Valido 
-  objeto: Cliente[]
-  return: boolean*/
-  esValido(object:any){
-    if (object.nombre==""){
-      return false;
+  completar(valor:number){
+    var sub=[1,2,3,4,5];
+    console.log(valor);
+    if(valor+5 > this.listaClientes.length){
+       return sub.slice(0,valor+5-this.listaClientes.length)
+    } else {
+      return []
     }
-    return true;
   }
+
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
   constructor(clienteService:ClienteService) {
     clienteService.getAllClientes().subscribe((data) =>{
       this.listaClientes = data
-      console.log(data[1].idCliente)
-      console.log(this.listaClientes[1].idCliente)
     })
   }
 
