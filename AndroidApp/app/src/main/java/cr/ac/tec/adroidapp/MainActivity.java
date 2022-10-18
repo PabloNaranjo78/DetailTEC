@@ -18,19 +18,18 @@ import java.util.Objects;
 import cr.ac.tec.adroidapp.gui.Menu;
 
 public class MainActivity extends AppCompatActivity {
+    int userID;
 
     TextView userText;
     TextView passwordText;
     Button loginButton;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue_gray)));
-
-        DataBase auxdb = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
 
         userText = findViewById(R.id.pt_Usuario);
         passwordText = findViewById(R.id.pt_Contraseña);
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
                     Intent intent = new Intent(getApplicationContext(), Menu.class);
+                    intent.putExtra("ID", userID);
                     startActivity(intent);
                 }
                 else{
@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         //Mongeauxdb.daoProject().insertCliente(new Cliente(123, "Monge", "fff", "SepaDios", "Fernando", "monge@123", 5));
         //auxdb.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 50025063) );
 //        auxdb.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 89215510) );
@@ -80,20 +78,17 @@ public class MainActivity extends AppCompatActivity {
 //
 //        System.out.println(texux);
 
-
-
     }
+
     public boolean userValidation(String user, String pass){
         DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
         List<Cliente> clientList = dataBase.daoProject().getClientes();
             for (int i = 0; i < clientList.size(); i++){
                 if (Objects.equals(clientList.get(i).Usuario, user) & Objects.equals(clientList.get(i).Contraseña, pass)){
+                    userID = clientList.get(i).IDCliente;
                     return true;
                 }
             }
             return false;
     }
-
-
-
 }

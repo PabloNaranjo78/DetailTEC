@@ -67,8 +67,8 @@ public interface DaoProject {
     @Query("SELECT * FROM Cliente")
     List<Cliente> getClientes();
 
-    @Query("SELECT * FROM Cliente WHERE IDCliente= :idcliente and Usuario= :usuario")
-    Cliente getClienteById(int idcliente, String usuario);
+    @Query("SELECT * FROM Cliente WHERE IDCliente= :idcliente")
+    Cliente getClienteById(int idcliente);
 
     @Query("UPDATE Cliente SET IDCliente= :idcliente, Usuario= :usuario, Contraseña= :contraseña," +
             " InfoContacto= :infocontacto, Nombre= :nombre, Email= :email, PuntosDispo= :puntosdispo" +
