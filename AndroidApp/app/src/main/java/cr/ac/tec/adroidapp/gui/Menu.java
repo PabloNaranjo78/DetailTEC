@@ -22,13 +22,13 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        clienteButton = findViewById(R.id.btn_Cliente);
-        citasButton = findViewById(R.id.btn_Citas);
-        puntosButton = findViewById(R.id.btn_Puntos);
-
         Intent userIntent = getIntent();
         Bundle bundle = userIntent.getExtras();
         userID = (int) bundle.get("ID");
+
+        clienteButton = findViewById(R.id.btn_Cliente);
+        citasButton = findViewById(R.id.btn_Citas);
+        puntosButton = findViewById(R.id.btn_Puntos);
 
         clienteButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -99,6 +99,9 @@ public class GestionCliente extends AppCompatActivity {
         misDireccionesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MisDirecciones.class);
+                intent.putExtra("ID", userID);
+                startActivity(intent);
 
             }
         });
@@ -106,6 +109,9 @@ public class GestionCliente extends AppCompatActivity {
         misTelefonosButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MIsTelefonos.class);
+                intent.putExtra("ID", userID);
+                startActivity(intent);
 
             }
         });
