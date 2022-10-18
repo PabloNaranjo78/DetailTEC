@@ -14,17 +14,17 @@ namespace DetailTECAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Proveedor>>> Get()
         {
-            try
-            {
+            //try
+            //{
                 var proveedorList = proveedor.get("CedulaJur,Nombre,Email," +
-                    "Contacto,Provincia,Canton,Distrito", "PROVEEDOR");
+                    "Contacto,Direccion", "PROVEEDOR");
                 return Ok(proveedorList);
-            }
-            catch (Exception)
-            {
-                return BadRequest("No se logró conectar con la DB");
+            //}
+            //catch (Exception)
+            //{
+            //    return BadRequest("No se logró conectar con la DB");
 
-            }
+            //}
         }
 
         // GET api/<ProveedorController>/5
@@ -34,7 +34,7 @@ namespace DetailTECAPI.Controllers
             try
             {
                 var entityList = proveedor.get($"'{cedulaJur}'", "CedulaJur", "CedulaJur,Nombre,Email," +
-                    "Contacto,Provincia,Canton,Distrito", "PROVEEDOR");
+                    "Contacto,Direccion", "PROVEEDOR");
                 return Ok(entityList);
             }
             catch (Exception)
@@ -53,7 +53,7 @@ namespace DetailTECAPI.Controllers
             entityList.Add(proveedor);
 
             var result = proveedor.post("Proveedor", $"{proveedor.CedulaJur},'{proveedor.Nombre}','{proveedor.Email}','{proveedor.Contacto}'," +
-                $"'{proveedor.Provincia}', '{proveedor.Canton}','{proveedor.Distrito}'");
+                $"'{proveedor.Direccion}'");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {proveedor.Nombre}");
 
@@ -69,8 +69,7 @@ namespace DetailTECAPI.Controllers
 
 
             var result = proveedor.put("PROVEEDOR", $"Nombre = '{proveedor.Nombre}',Email = '{proveedor.Email}', " +
-                $"Contacto = '{proveedor.Contacto}', Provincia = '{proveedor.Provincia}', Canton = '{proveedor.Canton}', " +
-                $"Distrito = '{proveedor.Distrito}'", $"CedulaJur = {proveedor.CedulaJur}");
+                $"Contacto = '{proveedor.Contacto}', Direccion = '{proveedor.Direccion}'", $"CedulaJur = {proveedor.CedulaJur}");
 
             return true ? Ok(entityList) : BadRequest($"No se logró modificar a {proveedor.Nombre}");
         }

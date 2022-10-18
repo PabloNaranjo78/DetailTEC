@@ -6,9 +6,9 @@ Insert into Sucursal Values ('Papa','12-12-1999',99999,'San Jose','Canton','Dist
 Insert into TRABAJADOR values (99999,'12-12-99','12121ds2','Arr','Jesus','Opol','9-9-2001','Efectivo');
 
 Update CLIENTE set Usuario = 'Juan' where IDcliente = 1234
-
 select * from Cliente
 select * from Lavado
+select * from proveedor
 select * from trabajador
 Select IDcliente,Usuario,Contraseña,InfoContacto,Nombre,email,PuntosDispo from CLIENTE where IDcliente = 1234
 Delete from Cliente where IDcliente = 11111
