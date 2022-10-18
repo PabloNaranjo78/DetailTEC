@@ -15,6 +15,7 @@ import { GestionSucursalesComponent } from './gestion-sucursales/gestion-sucursa
 import { GestionInsumosComponent } from './gestion-insumos/gestion-insumos.component';
 import { GestionLavadosComponent } from './gestion-lavados/gestion-lavados.component';
 import { GestionProveedoresComponent } from './gestion-proveedores/gestion-proveedores.component';
+import { NuevoProveedorComponent } from './nuevo-proveedor/nuevo-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -28,20 +29,25 @@ import { GestionProveedoresComponent } from './gestion-proveedores/gestion-prove
     GestionSucursalesComponent,
     GestionInsumosComponent,
     GestionLavadosComponent,
-    GestionProveedoresComponent
+    GestionProveedoresComponent,
+    NuevoProveedorComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path:"gestion-clientes", component:GestionClientesComponent},
-      {path:"nuevo-cliente", component:NuevoClienteComponent},
-      {path:"actualizar-cliente/:id", component:ActualizarClienteComponent},
       {path:"gestion-citas", component:GestionCitasComponent},
       {path:"gestion-lavados", component:GestionLavadosComponent},
       {path:"gestion-proveedores", component:GestionProveedoresComponent},
       {path:"gestion-sucursales", component:GestionSucursalesComponent},
       {path:"gestion-trabajadores", component:GestionTrabajadoresComponent},
       {path:"gestion-insumos", component:GestionInsumosComponent},
+
+      {path:"nuevo-proveedor", component:NuevoProveedorComponent},
+      {path:"nuevo-cliente", component:NuevoClienteComponent},
+      
+      {path:"actualizar-cliente/:id", component:ActualizarClienteComponent},
+      {path:"actualizar-proveedor/:id", component:NuevoProveedorComponent},
     ]),
     FormsModule,
     HttpClientModule

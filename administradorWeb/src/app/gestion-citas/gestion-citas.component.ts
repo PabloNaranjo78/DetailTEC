@@ -34,7 +34,6 @@ export class GestionCitasComponent implements OnInit {
 
   completar(valor:number){
     var sub=[1,2,3,4,5];
-    console.log(valor);
     if(valor+5 > this.listaCitas.length){
        return sub.slice(0,valor+5-this.listaCitas.length)
     } else {

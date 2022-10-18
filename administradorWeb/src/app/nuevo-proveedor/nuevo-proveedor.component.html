@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row my-3">
+      
+      <div class="col-1">
+      </div>
+      <div class="col"> 
+        <div class="row my-3">  
+          <h2 class = "fw-bold offset-md-1">Información de Proveedor</h2>
+        </div>
+        <form #form="ngForm" (ngSubmit)="onGuardar()">
+            <div class="row">
+
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "fullname" class="form-label">Nombre Completo</label></div>
+                <div class="row mt-4 right"><label for = "cedula" class="form-label">Cédula Juridica</label></div>
+                <div class="row mt-4 right"><label for = "direccion" class="form-label">Dirección</label></div>
+              </div>
+              <div class="col">  
+                <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "proveedor.nombre"></div>
+                <div class="row mt-4"><input type = "number" class="form-control" name = "cedula" [(ngModel)] = "proveedor.cedulaJur"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "direccion" [(ngModel)] = "proveedor.direccion"></div>
+              </div>
+              <div class="col-1"></div>
+              
+              <div class="col text-center">
+                <div class="row mt-4 right gy-4"><label for = "contacto" class="form-label">Correo Electrónico</label></div>
+                <div class="row mt-4 right"><label for = "dirección" class="form-label">Contacto</label></div>
+              </div>
+              <div class="col">
+                <div class="row mt-4 gy-4"><input type = "email" placeholder="example@email.com" class="form-control" name = "email" [(ngModel)] = "proveedor.email"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "contacto" [(ngModel)] = "proveedor.contacto"></div>
+              </div>
+  
+            </div>
+            <div *ngIf="editMode; else newMode">
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+              <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-proveedores" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>                                                                      
+            </div>
+            
+            <ng-template #newMode>
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-proveedores" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>
+            </ng-template>
+            
+          </form>
+      </div>
+      <div class="col-2">
+      </div>
+    </div>
+  </div>
+
