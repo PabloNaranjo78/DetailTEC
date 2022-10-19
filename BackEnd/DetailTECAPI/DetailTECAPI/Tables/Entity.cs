@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DetailTECAPI.Tables
 {
@@ -59,18 +61,18 @@ namespace DetailTECAPI.Tables
         public bool post(string entity, string values)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {entity} VALUES ({values})", connection);
-            //try
-            //{
+            try
+            {
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.ToString);
-            //    return false;
-            //    throw;
-            //}
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString);
+                return false;
+                throw;
+            }
         }
 
         /// <summary>
@@ -142,7 +144,7 @@ namespace DetailTECAPI.Tables
         /// </summary>
         /// <param name="dr">Reader de sql que contiene la respuesta de una consulta realizada</param>
         /// <returns>Retorna una lista de </returns>
-        private List<T> createEntityList(SqlDataReader dr)
+        public List<T> createEntityList(SqlDataReader dr)
         {
             List<T> entityList = new List<T>();
             while (dr.Read())
@@ -158,6 +160,20 @@ namespace DetailTECAPI.Tables
             string result = dr[param].ToString().Split(' ')[0];
 
             return result;
+        }
+
+        public string toSha256(string contraseña) {
+
+            SHA256 sha256Hash = SHA256.Create();
+
+            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
+            StringBuilder stringbuilder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                stringbuilder.Append(bytes[i].ToString("x2"));
+            }
+
+            return stringbuilder.ToString();
         }
     }
 }

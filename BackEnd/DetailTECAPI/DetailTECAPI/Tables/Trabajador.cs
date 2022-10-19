@@ -8,7 +8,8 @@ namespace DetailTECAPI.Tables
         [Key]
         public int IDTrabajador { get; set; }
         public string? Nacimiento { get; set; }
-        public string? Contraseña { get; set; }
+        private string? ContraseñaHash { get; set; }
+        public string? Contraseña { get { return ContraseñaHash; } set { ContraseñaHash = toSha256(value); } }
         public string? Rol { get; set; }
         public string? Nombre { get; set; }
         public string? Apellidos { get; set; }
@@ -18,6 +19,7 @@ namespace DetailTECAPI.Tables
 
         public override Trabajador createEntity(SqlDataReader dr)
         {
+            
             Trabajador entity = new Trabajador()
             {
                 IDTrabajador = Convert.ToInt32(dr["IDTrabajador"]),

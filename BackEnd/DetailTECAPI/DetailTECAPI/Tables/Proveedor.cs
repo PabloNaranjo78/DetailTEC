@@ -14,7 +14,7 @@ namespace DetailTECAPI.Tables
 
         public override Proveedor createEntity(SqlDataReader dr)
         {
-            Proveedor proveedor = new Proveedor
+            return new Proveedor()
             {
                 CedulaJur = Convert.ToInt32(dr["CedulaJur"]),
                 Nombre = dr["Nombre"].ToString(),
@@ -22,7 +22,6 @@ namespace DetailTECAPI.Tables
                 Contacto = dr["Contacto"].ToString(),
                 Direccion = dr["Direccion"].ToString()
             };
-            return proveedor;
         }
     }
 

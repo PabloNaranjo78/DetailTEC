@@ -14,17 +14,17 @@ namespace DetailTECAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Proveedor>>> Get()
         {
-            //try
-            //{
+            try
+            {
                 var proveedorList = proveedor.get("CedulaJur,Nombre,Email," +
                     "Contacto,Direccion", "PROVEEDOR");
                 return Ok(proveedorList);
-            //}
-            //catch (Exception)
-            //{
-            //    return BadRequest("No se logró conectar con la DB");
+            }
+            catch (Exception)
+            {
+                return BadRequest("No se logró conectar con la DB");
 
-            //}
+            }
         }
 
         // GET api/<ProveedorController>/5

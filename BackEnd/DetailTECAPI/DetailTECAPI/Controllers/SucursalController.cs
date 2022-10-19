@@ -55,7 +55,7 @@ namespace DetailTECAPI.Controllers
             entityList.Add(sucursal);
 
             var result = sucursal.post("SUCURSAL", $"'{sucursal.NombreSuc}','{sucursal.FechaApert}',{sucursal.Telefono}," +
-                $"'{sucursal.Pronvincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo}");
+                $"'{sucursal.Provincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo}");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {sucursal.NombreSuc}");
 
@@ -70,7 +70,7 @@ namespace DetailTECAPI.Controllers
             entityList.Add(sucursal);
 
             var result = sucursal.put("SUCURSAL", $"FechaApert = '{sucursal.FechaApert}', Telefono = {sucursal.Telefono}, " +
-                    $"Provincia = '{sucursal.Pronvincia}', Canton = '{sucursal.Canton}', Distrito = '{sucursal.Distrito}', " +
+                    $"Provincia = '{sucursal.Provincia}', Canton = '{sucursal.Canton}', Distrito = '{sucursal.Distrito}', " +
                     $"TiempoDispo = {sucursal.TiempoDispo}", $"NombreSuc = '{sucursal.NombreSuc}'");
 
             return result ? Ok(entityList) : BadRequest($"No se logró modificar a {sucursal.NombreSuc}");

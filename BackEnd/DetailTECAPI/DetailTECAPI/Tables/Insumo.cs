@@ -13,13 +13,12 @@ namespace DetailTECAPI.Tables
 
         public override Insumo createEntity(SqlDataReader dr)
         {
-            Insumo insumo = new Insumo
+            return new Insumo()
             {
                 NombrePro = dr["NombrePro"].ToString(),
                 MarcaPro = dr["MarcaPro"].ToString(),
                 Costo = Convert.ToInt32(dr["Costo"])
             };
-            return insumo;
         }
 
         

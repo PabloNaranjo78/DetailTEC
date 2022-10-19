@@ -58,7 +58,6 @@ namespace DetailTECAPI.Controllers
                 $"{cliente.PuntosDispo}");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
-
         }
 
         // PUT api/<ClienteController>/5

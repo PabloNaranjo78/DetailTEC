@@ -12,7 +12,8 @@ namespace DetailTECAPI.Tables
         public int IDCliente { get; set; }
         [Key]
         public string? Usuario { get; set; }
-        public string? Contraseña { get; set; }
+        private string? ContraseñaHash { get; set; }
+        public string? Contraseña { get { return ContraseñaHash; } set { ContraseñaHash = toSha256(value); } }
         public string? InfoContacto { get; set; }
         public string? Nombre { get; set; }
         public string? email { get; set; }
@@ -21,7 +22,7 @@ namespace DetailTECAPI.Tables
         
         public override Cliente createEntity(SqlDataReader dr)
         {
-            Cliente cliente = new Cliente
+            return new Cliente()
             {
                 IDCliente = Convert.ToInt32(dr["IDcliente"]),
                 Usuario = dr["Usuario"].ToString(),
@@ -30,8 +31,7 @@ namespace DetailTECAPI.Tables
                 Nombre = dr["Nombre"].ToString(),
                 email = dr["email"].ToString(),
                 PuntosDispo = Convert.ToInt32(dr["PuntosDispo"])
-            };
-            return cliente;
+            }; 
         }
 
     }

@@ -14,7 +14,7 @@ namespace DetailTECAPI.Tables
 
         public override Lavado createEntity(SqlDataReader dr)
         {
-            Lavado lavado = new Lavado
+            return new Lavado()
             {
                 NombreLav = dr["NombreLav"].ToString(),
                 Duracion = Convert.ToInt32(dr["Duracion"]),
@@ -22,8 +22,7 @@ namespace DetailTECAPI.Tables
                 Costo = Convert.ToInt32(dr["Costo"]),
                 Puntos = Convert.ToInt32(dr["Puntos"]),
 
-            };
-            return lavado;
+            }; ;
         }
     }
 }
