@@ -47,20 +47,41 @@ namespace DetailTECAPI.Controllers
 
         // POST api/<TrabajadorController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<List<Trabajador>>> Post(Trabajador trabajador)
         {
+            List<Trabajador> entityList = new List<Trabajador>();
+            entityList.Add(trabajador);
+
+            var result = trabajador.post("TRABAJADOR", $"{trabajador.IDTrabajador},'{trabajador.Nacimiento}','{trabajador.Contraseña}'," +
+                $"'{trabajador.Rol}','{trabajador.Nombre}','{trabajador.Apellidos}','{trabajador.FechaIngreso}','{trabajador.TipoPago}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {trabajador.IDTrabajador}");
+
         }
 
         // PUT api/<TrabajadorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult<Trabajador>> Put(Trabajador trabajador)
         {
+
+            List<Trabajador> entityList = new List<Trabajador>();
+            entityList.Add(trabajador);
+
+            var result = trabajador.put("TRABAJADOR", $"Nacimiento = '{trabajador.Nacimiento}',Contraseña = '{trabajador.Contraseña}',Rol = '{trabajador.Rol}'," +
+                    $"Nombre = '{trabajador.Nombre}', Apellidos = '{trabajador.Apellidos}'," +
+                    $"FechaIngreso = '{trabajador.FechaIngreso}',TipoPago = '{trabajador.TipoPago}'", 
+                    $"IDTrabajador = '{trabajador.IDTrabajador}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {trabajador.IDTrabajador}");
         }
 
         // DELETE api/<TrabajadorController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<Trabajador>> Delete(int id)
         {
+            List<Trabajador> entityList = new List<Trabajador>();
+            var result = trabajador.delete("TRABAJADOR", $"IDTrabajador = {id}");
+            return result ? Ok(entityList) : BadRequest($"No se logró eliminar a {id}");
         }
     }
 }
