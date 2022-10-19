@@ -29,6 +29,7 @@ public class GestionCliente extends AppCompatActivity {
     TextView nuevaInfoText;
     TextView nuevoEmailText;
     TextView infoPuntosText;
+    public static MIsTelefonos mIsTelefonos = new MIsTelefonos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,8 @@ public class GestionCliente extends AppCompatActivity {
                 intent.putExtra("ID", userID);
                 startActivity(intent);
 
+
+
             }
         });
     }
@@ -123,4 +126,6 @@ public class GestionCliente extends AppCompatActivity {
         }
         return false;
     }
+
+
 }

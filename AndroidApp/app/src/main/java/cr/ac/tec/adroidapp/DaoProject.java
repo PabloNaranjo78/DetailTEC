@@ -131,7 +131,7 @@ public interface DaoProject {
     void updateFactura(int placa, int numfactura, int monto);
 
     @Query("DELETE FROM Factura WHERE NumFactura= :numfactura")
-    void deleteClienteTelefonos(int numfactura);
+    void deleteFactura(int numfactura);
 
     //Lavado
     @Insert

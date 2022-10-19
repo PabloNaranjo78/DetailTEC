@@ -60,23 +60,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
 
-        //Mongeauxdb.daoProject().insertCliente(new Cliente(123, "Monge", "fff", "SepaDios", "Fernando", "monge@123", 5));
+//        dataBase.daoProject().insertCliente(new Cliente(123, "Monge", "f", "SepaDios", "Fernando", "monge@123", 5));
         //auxdb.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 50025063) );
-//        auxdb.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 89215510) );
 
+//        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 89215510));
+//        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 74856932));
+//        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 65241238));
+//        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 12345678));
+//        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 96850312));
 
-
-//        List<ClienteTelefonos> listaux = auxdb.daoProject().getClienteTelefonos();
-//        String texux = "";
-//
-//        for (int i =0; i < listaux.size(); i++){
-//            texux = texux + "ID: " + listaux.get(i).IDCliente + " Telefono: " + listaux.get(i).Telefono + "\n";
-//
-//        }
-//
-//
-//        System.out.println(texux);
 
     }
 
