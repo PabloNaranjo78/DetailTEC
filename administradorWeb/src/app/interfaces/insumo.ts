@@ -1,5 +1,5 @@
 export interface Insumo {
-    nombre:string,
-    marca:string,
+    nombrePro:string,
+    marcaPro:string,
     costo:number,
 }

@@ -1,9 +1,15 @@
 export interface Sucursal {
-    nombre:string,
-    fechaApertura:Date,
+    nombreSuc:string,
+    fechaApert:string,
     telefono:number,
-    provincia:string,
+    pronvincia:string,
     canton:string,
     distrito:string,
-    tiempoDisponible:number
+    tiempoDispo:number
+}
+
+export interface adminSucursal{
+    sucursal:string
+    fechaGerente:string,
+    gerente:number,
 }

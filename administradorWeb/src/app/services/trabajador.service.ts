@@ -17,11 +17,9 @@ export class TrabajadorService {
   /***Solicita al API todos los lavados existentes, recibiendo como respuesta una lista de objetos 
    * Return: Lavado[]
   */
-  getAllSucursal(){
+  getAllTrabajador(){
     return this.httpClient.get<Trabajador[]>(this.RUTA_API +'/Trabajador');
   }
-
-  
 
   /***Solicita al API un Trabajador específico, recibiendo como respuesta un objeto 
    * Return: Trabajador

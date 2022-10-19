@@ -8,7 +8,7 @@ import { Sucursal } from '../interfaces/sucursal';
 })
 export class SucursalService {
   /**Ruta a conectarse con el API REST */
-  RUTA_API = "https://127.0.0.1:7035/api"
+  RUTA_API = "https://127.0.0.1:7035/api/Sucursal"
   listaSucursales!: Sucursal[];
   /**Conexión Http */
   constructor(private httpClient:HttpClient) {
@@ -18,7 +18,7 @@ export class SucursalService {
    * Return: Lavado[]
   */
   getAllSucursal(){
-    return this.httpClient.get<Sucursal[]>(this.RUTA_API +'/Sucursal');
+    return this.httpClient.get<Sucursal[]>(this.RUTA_API);
   }
 
   /***Solicita al API un Sucursal específico, recibiendo como respuesta un objeto 
@@ -45,7 +45,7 @@ export class SucursalService {
   /***Solicita al API eliminar a un Sucursal existente, recibiendo como respuesta el Sucursal eliminado
    * Return: Sucursal
   */
-  eliminarSucursal(sucursal_id:number){
+  eliminarSucursal(sucursal_id:string){
     return this.httpClient.delete<string>(this.RUTA_API+"/" + sucursal_id);
   }
 

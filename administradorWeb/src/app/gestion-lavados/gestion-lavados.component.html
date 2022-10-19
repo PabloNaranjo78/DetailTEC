@@ -11,7 +11,7 @@
                     <ng-template ngFor let-lavado [ngForOf] = "subLista(i)">
                         <div class="col">
                             <div class="container gy-1">
-                                Cliente
+                                Lavado
                                 <div class="row mt-1"><h2>{{lavado.nombre}}</h2></div>
                                 <button [routerLink]="['/actualizar-lavado',lavado.nombre]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
                             </div>

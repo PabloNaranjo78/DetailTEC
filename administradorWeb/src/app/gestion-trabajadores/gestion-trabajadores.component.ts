@@ -44,7 +44,7 @@ export class GestionTrabajadoresComponent implements OnInit {
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
   constructor(trabajadorService:TrabajadorService) {
-    trabajadorService.getAllSucursal().subscribe((data) =>{
+    trabajadorService.getAllTrabajador().subscribe((data) =>{
       this.listaTrabajadores = data
     })
   }

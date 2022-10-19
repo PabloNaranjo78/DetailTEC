@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row my-3">
+      
+      <div class="col-1">
+      </div>
+      <div class="col"> 
+        <div class="row my-3">  
+          <h2 class = "fw-bold offset-md-1">Información de Proveedor</h2>
+        </div>
+        <form #form="ngForm" (ngSubmit)="onGuardar()">
+            <div class="row">
+
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "fullname" class="form-label">Nombre</label></div>
+                <div class="row mt-4 right"><label for = "provincia" class="form-label">Provincia</label></div>
+                <div class="row mt-4 right"><label for = "canton" class="form-label">Cantón</label></div>
+                <div class="row mt-4 right"><label for = "distrito" class="form-label">Distrito</label></div>
+              </div>
+              <div class="col">  
+                <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "sucursal.nombreSuc" [(ngModel)] = "admin.sucursal"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "provincia" [(ngModel)] = "sucursal.pronvincia"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "canton" [(ngModel)] = "sucursal.canton"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "distrito" [(ngModel)] = "sucursal.distrito"></div>
+              </div>
+              <div class="col-1"></div>
+              
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "telefono" class="form-label">Teléfono</label></div>
+                <div class="row mt-4 right"><label for = "fechaApertura" class="form-label">Fecha de Apertura</label></div>
+                <div class="row mt-4 right"><label for = "gerente" class="form-label">Gerente</label></div>
+                <div class="row mt-4 right"><label for = "fechaGerente" class="form-label">Fecha de inicio de gerente</label></div>
+              </div>
+              <div class="col">
+                <div class="row mt-4"><input type = "number" class="form-control" name = "telefono" [(ngModel)] = "sucursal.telefono"></div>
+                <div class="row mt-4"><input type = "date" class="form-control" name = "fechaApertura" [(ngModel)] = "sucursal.fechaApert"></div>
+                <div class="row mt-4">
+                    <select class="form-select" name = "gerente" [(ngModel)] = "admin.gerente" aria-label="Default select example">
+                      <option selected>Seleccione un Empleado</option>
+                    <ng-template ngFor let-trabajador [ngForOf] = "listaTrabajadores"; let-i="index">
+                      <option [value] ="trabajador.idTrabajador">{{trabajador.nombre}} ({{trabajador.idTrabajador}})</option>
+                    </ng-template>
+                  </select></div>
+                <div class="row mt-4"><input type = "date" class="form-control" name = "fechaGerente" [(ngModel)] = "admin.fechaGerente"></div>
+              </div>
+  
+            </div>
+            <div *ngIf="editMode; else newMode">
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+              <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-sucursales" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>                                                                      
+            </div>
+            
+            <ng-template #newMode>
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-sucursales" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>
+            </ng-template>
+            
+          </form>
+      </div>
+      <div class="col-2">
+      </div>
+    </div>
+  </div>
+

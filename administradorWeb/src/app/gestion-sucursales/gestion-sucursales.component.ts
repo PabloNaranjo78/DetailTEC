@@ -46,6 +46,7 @@ export class GestionSucursalesComponent implements OnInit {
   constructor(sucursalService:SucursalService) {
     sucursalService.getAllSucursal().subscribe((data) =>{
       this.listaSucursales = data
+      console.log(data)
     })
   }
 

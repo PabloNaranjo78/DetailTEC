@@ -11,7 +11,7 @@
                     <ng-template ngFor let-proveedor [ngForOf] = "subLista(i)">
                         <div class="col">
                             <div class="container gy-1">
-                                Cliente
+                                Proveedor
                                 <div class="row mt-1"><h2>{{proveedor.nombre}}</h2></div>
                                 <button [routerLink]="['/actualizar-proveedor',proveedor.cedulaJur]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
                             </div>

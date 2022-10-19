@@ -11,9 +11,9 @@
                     <ng-template ngFor let-insumo [ngForOf] = "subLista(i)">
                         <div class="col">
                             <div class="container gy-1">
-                                Cliente
-                                <div class="row mt-1"><h2>{{insumo.nombre}}</h2></div>
-                                <button [routerLink]="['/actualizar-insumo',insumo.nombre]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
+                                Insumo
+                                <div class="row mt-1"><h2>{{insumo.nombrePro}}</h2></div>
+                                <button [routerLink]="['/actualizar-insumo',insumo.marcaPro,insumo.nombrePro]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
                             </div>
                         </div>
                     </ng-template>
