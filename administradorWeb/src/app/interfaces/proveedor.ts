@@ -1,9 +1,7 @@
 export interface Proveedor {
-    cedulaJuridica:number,
+    cedulaJur:number,
     nombre:string,
     email:string,
     contacto:string,
-    provincia:string,
-    canton:string,
-    distrito:string,
+    direccion:string
 }
