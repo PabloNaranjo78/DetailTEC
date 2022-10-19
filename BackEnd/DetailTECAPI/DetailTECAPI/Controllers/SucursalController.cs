@@ -17,7 +17,8 @@ namespace DetailTECAPI.Controllers
         {
             try
             {
-                var entityList = sucursal.get("*", "Sucursal");
+                var entityList = sucursal.get("NombreSuc,FechaApert,Telefono," +
+                    "Provincia,Canton,Distrito,TiempoDispo", "Sucursal");
                 return Ok(entityList);
             }
             catch (Exception)
@@ -48,20 +49,40 @@ namespace DetailTECAPI.Controllers
 
         // POST api/<SucursalController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<List<Sucursal>>> Post(Sucursal sucursal)
         {
+            List<Sucursal> entityList = new List<Sucursal>();
+            entityList.Add(sucursal);
+
+            var result = sucursal.post("SUCURSAL", $"'{sucursal.NombreSuc}','{sucursal.FechaApert}',{sucursal.Telefono}," +
+                $"'{sucursal.Pronvincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo}");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {sucursal.NombreSuc}");
+
         }
 
         // PUT api/<SucursalController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult<Sucursal>> Put(Sucursal sucursal)
         {
+
+            List<Sucursal> entityList = new List<Sucursal>();
+            entityList.Add(sucursal);
+
+            var result = sucursal.put("SUCURSAL", $"FechaApert = '{sucursal.FechaApert}', Telefono = {sucursal.Telefono}, " +
+                    $"Provincia = '{sucursal.Pronvincia}', Canton = '{sucursal.Canton}', Distrito = '{sucursal.Distrito}', " +
+                    $"TiempoDispo = {sucursal.TiempoDispo}", $"NombreSuc = '{sucursal.NombreSuc}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {sucursal.NombreSuc}");
         }
 
         // DELETE api/<SucursalController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{nombreSuc}")]
+        public async Task<ActionResult<Sucursal>> Delete(string nombreSuc)
         {
+            List<Sucursal> entityList = new List<Sucursal>();
+            var result = sucursal.delete("SUCURSAL", $"NombreSuc = '{nombreSuc}'");
+            return result ? Ok(entityList) : BadRequest($"No se logró eliminar a {nombreSuc}");
         }
     }
 }

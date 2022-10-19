@@ -59,18 +59,18 @@ namespace DetailTECAPI.Tables
         public bool post(string entity, string values)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {entity} VALUES ({values})", connection);
-            try
-            {
+            //try
+            //{
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString);
-                return false;
-                throw;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.ToString);
+            //    return false;
+            //    throw;
+            //}
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace DetailTECAPI.Tables
         /// </summary>
         /// <param name="dr">Reader de sql que contiene la respuesta de una consulta realizada</param>
         /// <returns>Retorna una lista de </returns>
-        public List<T> createEntityList(SqlDataReader dr)
+        private List<T> createEntityList(SqlDataReader dr)
         {
             List<T> entityList = new List<T>();
             while (dr.Read())
@@ -153,13 +153,11 @@ namespace DetailTECAPI.Tables
             return entityList;
         }
 
-        protected DateTime dateFormat(SqlDataReader dr, string param)
+        protected string dateFormat(SqlDataReader dr, string param)
         {
+            string result = dr[param].ToString().Split(' ')[0];
 
-            DateTime dateOnly;
-            DateTime.TryParse(dr[param].ToString(), out dateOnly);
-
-            return dateOnly;
+            return result;
         }
     }
 }

@@ -5,7 +5,7 @@ namespace DetailTECAPI.Tables
     public class Sucursal : Entity<Sucursal>
     {
         public string? NombreSuc { get; set; }
-        public DateTime? FechaApert { get; set; }
+        public string? FechaApert { get; set; }
         public int Telefono { set; get; }
         public string? Pronvincia { set; get; }
         public string? Canton { set; get; }

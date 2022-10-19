@@ -7,12 +7,12 @@ namespace DetailTECAPI.Tables
     {
         [Key]
         public int IDTrabajador { get; set; }
-        public DateTime? Nacimiento { get; set; }
+        public string? Nacimiento { get; set; }
         public string? Contraseña { get; set; }
         public string? Rol { get; set; }
         public string? Nombre { get; set; }
         public string? Apellidos { get; set; }
-        public DateTime FechaIngreso { get; set; }
+        public string? FechaIngreso { get; set; }
         public string? TipoPago { get; set; }
 
 
