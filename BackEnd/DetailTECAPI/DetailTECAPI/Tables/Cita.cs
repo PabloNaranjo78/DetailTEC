@@ -15,9 +15,10 @@ namespace DetailTECAPI.Tables
         {
             return new Cita { 
                 Placa = dr["Placa"].ToString(),
-                FechaCita= dateFormat(dr,"Placa"),
-                IDEmpleado = Convert.ToInt32(dr["IDEempleado"]),
+                FechaCita= dateFormat(dr, "FechaCita"),
+                IDEmpleado = Convert.ToInt32(dr["IDEmpleado"]),
                 Sucursal = dr["Sucursal"].ToString(),
+                Lavado = dr["Lavado"].ToString(),
                 IDCliente = Convert.ToInt32(dr["IDCliente"])
             };
         }
