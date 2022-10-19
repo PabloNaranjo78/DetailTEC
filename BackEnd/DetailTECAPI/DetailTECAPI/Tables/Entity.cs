@@ -69,9 +69,7 @@ namespace DetailTECAPI.Tables
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString);
                 return false;
-                throw;
             }
         }
 
@@ -112,19 +110,19 @@ namespace DetailTECAPI.Tables
             SqlCommand cmd = new SqlCommand($"Delete from {entity} where {condition}", connection);
             List<Cliente> clienteList = new List<Cliente>();
 
-            try
-            {
+            //try
+            //{
                 connection.Open();
                 cmd.ExecuteNonQuery();
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 return true;
-            }
-            catch (Exception)
-            {
-                return false;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
 
-            }
+            //}
         }
 
         /// <summary>
