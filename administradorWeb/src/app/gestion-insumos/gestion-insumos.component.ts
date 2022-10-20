@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Insumo } from '../interfaces/insumo';
-import { InsumoService } from '../services/insumo.service';
+import { InsumoService} from '../services/insumo.service';
 
 @Component({
   selector: 'app-gestion-insumos',
@@ -45,9 +45,9 @@ export class GestionInsumosComponent implements OnInit {
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los insumos disponibles a la base de datos*/
   constructor(insumoService:InsumoService) {
-    insumoService.getAllInsumos().subscribe((data) =>{
-      this.listaInsumos = data
-    })
+    insumoService.getList().subscribe((data) => {
+      this.listaInsumos = data;
+    }) 
   }
 
   ngOnInit(): void {

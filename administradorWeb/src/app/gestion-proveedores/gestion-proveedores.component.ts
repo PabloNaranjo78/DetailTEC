@@ -44,7 +44,7 @@ export class GestionProveedoresComponent implements OnInit {
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
   constructor(proveedorService:ProveedorService) {
-    proveedorService.getAllProveedor().subscribe((data) =>{
+    proveedorService.getList().subscribe((data) =>{
       this.listaProveedores = data
     })
   }

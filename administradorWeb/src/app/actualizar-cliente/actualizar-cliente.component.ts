@@ -46,7 +46,7 @@ export class ActualizarClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clienteService.getCliente(this.route.snapshot.params['id']).subscribe({
+    this.clienteService.get(this.route.snapshot.params['id']).subscribe({
       /*Mensaje emergente de exito*/
       next: (data) => {
         this.cliente = data[0];
@@ -92,7 +92,7 @@ export class ActualizarClienteComponent implements OnInit {
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
 onActualizar(): void{ 
-  this.clienteService.actualizarCliente(this.cliente).subscribe({
+  this.clienteService.update(this.cliente).subscribe({
   /*Mensaje emergente de exito*/
   
   next: (data) => {
@@ -110,7 +110,7 @@ onActualizar(): void{
   }
 
   onEliminar(): void{ 
-    this.clienteService.eliminarCliente(this.cliente.idCliente).subscribe({
+    this.clienteService.delete(this.cliente.idCliente).subscribe({
     /*Mensaje emergente de exito*/
     
     next: (data) => {

@@ -4,14 +4,14 @@
     <div class="row mt-3">
         <a class="btn btn-primary" style= "width: 100%; font-size:x-large;" href="/nuevo-cliente" role="button">Añadir Nuevo Cliente</a>
     </div>
-      <div *ngFor="let n of listaClientes; let i=index">
+      <div *ngFor="let n of lista; let i=index">
           <div *ngIf="crearFila(i)">
               <div class="row mt-4">
                   <ng-template ngFor let-cliente [ngForOf] = "subLista(i)">
                       <div class="col">
                           <div class="container gy-1">
                               Cliente
-                              <div class="row mt-1"><h2>{{cliente.nombre}}</h2></div>
+                              <div class="row m t-1"><h2>{{cliente.nombre}}</h2></div>
                               <button [routerLink]="['/actualizar-cliente',cliente.idCliente]" type="submit" class="btn btn-outline-primary"> EDITAR </button>
                           </div>
                       </div>
