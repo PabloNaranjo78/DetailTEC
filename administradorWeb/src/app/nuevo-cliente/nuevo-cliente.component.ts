@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
 import { ClienteService } from '../services/cliente.service';
 
@@ -12,7 +11,7 @@ import { ClienteService } from '../services/cliente.service';
 export class NuevoClienteComponent implements OnInit {
   /*Cita temporal que alberga las modificaciones en el formulario
    object: Cliente*/
-  cliente:Cliente={
+  objeto:Cliente={
     idCliente:0,
     usuario:"",
     contraseña:"1234",
@@ -42,8 +41,8 @@ export class NuevoClienteComponent implements OnInit {
 
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
-  constructor(private route:Router, private clienteService:ClienteService) {
-    clienteService.getAllClientes().subscribe((data) =>{
+  constructor(private route:Router, private service:ClienteService) {
+    service.getList().subscribe((data) =>{
       this.listaClientes = data
     })
   }
@@ -66,35 +65,27 @@ export class NuevoClienteComponent implements OnInit {
 
   /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
   onAddTelefono():void{
-    Swal.fire({
-      icon: 'success',
-      title: '¡Has agregado una nuevo Teléfono a ' + this.cliente.nombre})
+    this.service.avisoSuccess("agregado un numero de teléfono", this.objeto.nombre);
   }
 
   /*Llamada desde el botón "Añadir Direccion" envía un POST request al server */
   onAddDireccion():void{
-    Swal.fire({
-      icon: 'success',
-      title: '¡Has agregado una nueva Dirección a ' + this.cliente.nombre})
-  }
+    this.service.avisoSuccess("agregado una dirección", this.objeto.nombre);
+    }
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
   onSubmit(): void{
-    this.clienteService.guardarCliente(this.cliente).subscribe({
+    this.service.add(this.objeto).subscribe({
       /*Mensaje emergente de exito*/
       
       next: (data) => {
-        Swal.fire({
-        icon: 'success',
-        title: '¡Has agregado a ' + this.cliente.nombre + ' como Cliente'})
-      this.route.navigate(['gestion-clientes'])},
+        this.service.avisoSuccess("agregado", this.objeto.nombre);
+        this.route.navigate(['gestion-clientes'])},
       /*Mensaje emergente de error*/
       error: (err) =>{
         console.log(err);
-        Swal.fire({
-        icon: 'error',
-        title: '¡Algo ha salido mal!',
-        text: err.error})}
+        this.service.avisoError(err.error)
+        }
     })
   }
 }

@@ -14,12 +14,12 @@
                 <div class="row mt-4 right"><label for = "fullname" class="form-label">Nombre</label></div>
                 <div class="row mt-4 right"><label for = "marca" class="form-label">Marca</label></div>
                 <div class="row mt-4 right"><label for = "costo" class="form-label">Costo</label></div>
-                <div class="row mt-4 right"><label for = "proveedores" class="form-label">Proveedores</label></div>
+                <div class="row mt-4 right"><label for = "objetos" class="form-label">Proveedores</label></div>
               </div>
               <div class="col">  
-                <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "insumo.nombrePro"></div>
-                <div class="row mt-4"><input type = "text" class="form-control" name = "marca" [(ngModel)] = "insumo.marcaPro"></div>
-                <div class="row mt-4"><input type = "number" class="form-control" name = "costo" [(ngModel)] = "insumo.costo"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "objeto.nombrePro"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "marca" [(ngModel)] = "objeto.marcaPro"></div>
+                <div class="row mt-4"><input type = "number" class="form-control" name = "costo" [(ngModel)] = "objeto.costo"></div>
                 <div class="row mt-4"><a class="btn btn-primary" (click) = onProveedores() style= "width: 100%"  style= "width: 100%" data-bs-toggle="modal" data-bs-target="#editarDirecciones">Añadir Proveedores</a></div>
               
               </div>
@@ -32,7 +32,7 @@
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
               <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-insumos" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-objetos" class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>                                                                      
             </div>
@@ -41,7 +41,7 @@
               <div class="row my-5">
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-insumos" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-objetos" class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>
             </ng-template>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { Insumo } from '../interfaces/insumo';
 import { InsumoService } from '../services/insumo.service';
 
@@ -13,7 +12,7 @@ export class NuevoInsumoComponent implements OnInit {
   /**Insumo temporal para enviar a ser verificado
    * input: Insumo Interface
    */
-  insumo:Insumo={
+  objeto:Insumo={
     nombrePro:"",
     marcaPro:"",
     costo:0,
@@ -21,91 +20,71 @@ export class NuevoInsumoComponent implements OnInit {
 
   editMode = true;
 
-  constructor(private insumoService:InsumoService, private route:Router, private rou:ActivatedRoute) { }
+  constructor(private service:InsumoService, private route:Router, private rou:ActivatedRoute) { }
 
   onGuardar(): void{
     if (this.editMode){
       /**Solicitud HTTP para el PUT en el API */
-    this.insumoService.actualizarInsumo(this.insumo).subscribe({
+    this.service.update(this.objeto).subscribe({
       /*Mensaje emergente de exito*/
       
       next: (data) => {
-        Swal.fire({
-        icon: 'success',
-        title: '¡Has actualizado a ' + this.insumo.nombrePro + ' como Insumo'})
-      this.route.navigate(['gestion-insumos'])},
-      /*Mensaje emergente de error*/
+        this.service.avisoSuccess("actualizado", this.objeto.nombrePro);
+        this.route.navigate(['gestion-insumos'])
+      },
+        
+      
+        /*Mensaje emergente de error*/
       error: (err) =>{
-        console.log(err);
-        Swal.fire({
-        icon: 'error',
-        title: '¡Algo ha salido mal!',
-        text: err.error})}
+        this.service.avisoError(err.error)
+        }
     })
     } else {
       /**Solicitud HTTP para el POST en el API */
-    this.insumoService.guardarInsumo(this.insumo).subscribe({
+    this.service.add(this.objeto).subscribe({
       /*Mensaje emergente de exito*/
       
       next: (data) => {
-        Swal.fire({
-        icon: 'success',
-        title: '¡Has agregado a ' + this.insumo.nombrePro + ' como Insumo'})
-      this.route.navigate(['gestion-insumos'])},
+        this.service.avisoSuccess("actualizado", this.objeto.nombrePro)
+        this.route.navigate(['gestion-insumos'])},
       /*Mensaje emergente de error*/
       error: (err) =>{
-        console.log(err);
-        Swal.fire({
-        icon: 'error',
-        title: '¡Algo ha salido mal!',
-        text: err.error})}
+        this.service.avisoError(err.error)}
     })
     }
     
   }
 
   onProveedores(){
-
+    this.service.addProveedor().subscribe({next: (data) =>console.log(data) });
   }
 
   onEliminar(): void{ 
-    this.insumoService.eliminarInsumo(this.insumo.marcaPro,this.insumo.nombrePro).subscribe({
+    this.service.delete(this.objeto.marcaPro,this.objeto.nombrePro).subscribe({
     /*Mensaje emergente de exito*/
     
     next: (data) => {
-      Swal.fire({
-      icon: 'success',
-      title: '¡Has eliminado a ' + this.insumo.nombrePro + ' como Insumo'})
-    this.route.navigate(['gestion-insumos'])},
+      this.service.avisoSuccess("eliminado", this.objeto.nombrePro);
+      this.route.navigate(['gestion-insumos'])},
     /*Mensaje emergente de error*/
     error: (err) =>{
-      Swal.fire({
-      icon: 'error',
-      title: '¡Algo ha salido mal!',
-      text: err.error})}
-  })
-    }
+    this.service.avisoSuccess("eliminado", this.objeto.nombrePro);
+    }}
+  )}
 
   ngOnInit(): void {
-    console.log(this.rou.snapshot.params['marca']);
-    console.log(this.rou.snapshot.params['nombre']);
     if(this.rou.snapshot.params['marca']==undefined){
       this.editMode = false;
     } else {
-      this.insumoService.getInsumo(this.rou.snapshot.params['marca'],this.rou.snapshot.params['nombre']).subscribe({
+      this.service.get(this.rou.snapshot.params['marca'],this.rou.snapshot.params['nombre']).subscribe({
         /*Mensaje emergente de exito*/
         next: (data) => {
-          this.insumo = data[0];
-          console.log(data)
+          this.objeto = data[0];
         },
         /*Mensaje emergente de error*/
         error: (err) =>{
-          Swal.fire({
-          icon: 'error',
-          title: '¡No se ha encontrado el insumo!',
-          text: err.error})}
+          this.service.avisoError(err.error)}
       });
     }
   }
-
 }

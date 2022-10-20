@@ -2,7 +2,7 @@ export interface Sucursal {
     nombreSuc:string,
     fechaApert:string,
     telefono:number,
-    pronvincia:string,
+    provincia:string,
     canton:string,
     distrito:string,
     tiempoDispo:number

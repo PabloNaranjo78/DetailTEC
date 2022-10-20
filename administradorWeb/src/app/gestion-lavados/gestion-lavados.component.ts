@@ -44,7 +44,7 @@ export class GestionLavadosComponent implements OnInit {
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
   constructor(lavadoService:LavadoService) {
-    lavadoService.getAllLavados().subscribe((data) =>{
+    lavadoService.getList().subscribe((data) =>{
       this.listaLavados = data
     })
   }

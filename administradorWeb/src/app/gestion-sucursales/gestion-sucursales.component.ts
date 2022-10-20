@@ -44,7 +44,7 @@ export class GestionSucursalesComponent implements OnInit {
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
   constructor(sucursalService:SucursalService) {
-    sucursalService.getAllSucursal().subscribe((data) =>{
+    sucursalService.getList().subscribe((data) =>{
       this.listaSucursales = data
       console.log(data)
     })
