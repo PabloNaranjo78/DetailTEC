@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleViewTelefonos"
         android:layout_width="410dp"
         android:layout_height="235dp"
         android:layout_marginTop="64dp"

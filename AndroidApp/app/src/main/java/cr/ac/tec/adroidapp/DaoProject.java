@@ -97,6 +97,9 @@ public interface DaoProject {
     @Query("DELETE FROM ClienteDirecciones WHERE IDCliente= :idcliente and Provincia= :provincia and Canton= :canton and Distrito= :distrito ")
     void deleteClienteDirecciones(int idcliente, String provincia, String canton, String distrito);
 
+    @Query("SELECT * FROM ClienteDirecciones WHERE IDCliente= :idcliente and Provincia= :provincia and Canton= :canton and Distrito= :distrito")
+    boolean checkDireccion(int idcliente, String provincia, String canton, String distrito);
+
 
     //Cliente Telefono
     @Insert
@@ -114,6 +117,9 @@ public interface DaoProject {
 
     @Query("DELETE FROM ClienteTelefonos WHERE IDCliente= :idcliente and Telefono= :telefono")
     void deleteClienteTelefonos(int idcliente, int telefono);
+
+    @Query("SELECT * FROM ClienteTelefonos WHERE IDCliente= :idcliente and Telefono= :telefono")
+    boolean checkTelefono(int idcliente, int telefono);
 
 
     //Factura

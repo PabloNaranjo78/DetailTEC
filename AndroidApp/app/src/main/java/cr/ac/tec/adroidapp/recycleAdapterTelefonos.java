@@ -3,7 +3,6 @@ package cr.ac.tec.adroidapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cr.ac.tec.adroidapp.gui.GestionCliente;
-
-public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHolder> {
+public class recycleAdapterTelefonos extends RecyclerView.Adapter<recycleAdapterTelefonos.MyViewHolder> {
 
      private List<ClienteTelefonos> clienteTelefonos;
      private DataBase dataBase;
+     private int userID;
 
 
-     public recycleAdapter(List<ClienteTelefonos> clienteTelefonos, DataBase dataBase){
+     public recycleAdapterTelefonos(List<ClienteTelefonos> clienteTelefonos, DataBase dataBase, int userID){
          this.clienteTelefonos = clienteTelefonos;
          this.dataBase = dataBase;
+         this.userID = userID;
      }
 
      public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -33,8 +32,8 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
              view.findViewById(R.id.btn_eliminarTelefonos).setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     dataBase.daoProject().deleteClienteTelefonos(clienteTelefonos.get(getAdapterPosition()).IDCliente,clienteTelefonos.get(getAdapterPosition()).Telefono);
-                     clienteTelefonos =dataBase.daoProject().getClienteTelefonosById(123);
+                     dataBase.daoProject().deleteClienteTelefonos(userID,clienteTelefonos.get(getAdapterPosition()).Telefono);
+                     clienteTelefonos =dataBase.daoProject().getClienteTelefonosById(userID);
                      notifyItemRemoved(getAdapterPosition());
                  }
              });
@@ -43,13 +42,13 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
 
     @NonNull
     @Override
-    public recycleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public recycleAdapterTelefonos.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_itemstelefonos, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull recycleAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull recycleAdapterTelefonos.MyViewHolder holder, int position) {
          int phone = clienteTelefonos.get(position).Telefono;
          holder.infoTelefonosItemsTxt.setText(Integer.toString(phone));
 

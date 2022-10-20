@@ -19,9 +19,8 @@ import java.util.List;
 
 import cr.ac.tec.adroidapp.ClienteTelefonos;
 import cr.ac.tec.adroidapp.DataBase;
-import cr.ac.tec.adroidapp.MainActivity;
 import cr.ac.tec.adroidapp.R;
-import cr.ac.tec.adroidapp.recycleAdapter;
+import cr.ac.tec.adroidapp.recycleAdapterTelefonos;
 
 public class MIsTelefonos extends AppCompatActivity {
     int userID;
@@ -37,7 +36,7 @@ public class MIsTelefonos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_telefonos);
 
-        recyclerView = findViewById(R.id.recycleView);
+        recyclerView = findViewById(R.id.recycleViewTelefonos);
         guardarTelefono = findViewById(R.id.btn_guardarTelefono);
         cancelarTelefono = findViewById(R.id.btn_cancelarTelefono);
         nuevoTelefonoText = findViewById(R.id.pt_nuevoTelefono);
@@ -54,24 +53,19 @@ public class MIsTelefonos extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     int number = Integer.parseInt(nuevoTelefonoText.getText().toString());
-                    dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(userID, number));
-                    telefonos = dataBase.daoProject().getClienteTelefonosById(userID);
-                    setAdapter(dataBase);
+                    if (!dataBase.daoProject().checkTelefono(userID,number)){
+                        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(userID, number));
+                        telefonos = dataBase.daoProject().getClienteTelefonosById(userID);
+                        nuevoTelefonoText.setText(null);
+                        setAdapter(dataBase, userID);
+                    }
+                    else{
+                        phoneDecline();
+                    }
                 }
                 catch (NumberFormatException e){
-                    AlertDialog alertMessage = new AlertDialog.Builder(MIsTelefonos.this).create();
-                    alertMessage.setTitle("Error");
-                    alertMessage.setMessage("Número incorrecto");
-                    alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                }
-                            });
-                    alertMessage.show();
+                    phoneDecline();
                 }
-
             }
         });
 
@@ -86,16 +80,32 @@ public class MIsTelefonos extends AppCompatActivity {
 
 
 
-        setAdapter(dataBase);
+        setAdapter(dataBase, userID);
     }
 
-    public void setAdapter(DataBase dataBase){
+    private void phoneDecline(){
+        AlertDialog alertMessage = new AlertDialog.Builder(MIsTelefonos.this).create();
+        alertMessage.setTitle("Error");
+        alertMessage.setMessage("Número incorrecto");
+        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alertMessage.show();
 
-        recycleAdapter adapter = new recycleAdapter(telefonos,dataBase);
+    }
+
+    public void setAdapter(DataBase dataBase, int userID){
+
+        recycleAdapterTelefonos adapter = new recycleAdapterTelefonos(telefonos,dataBase,userID);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
     }
+
 }

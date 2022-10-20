@@ -62,14 +62,27 @@ public class MainActivity extends AppCompatActivity {
 
         DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
 
+        if (dataBase.daoProject().checkTelefono(123,70397939)){
+            System.out.println("PHONE ALREADY IN ");
+        }
+        else{
+            System.out.println("NEW PHONE IS TYPED");
+        }
+
+
 //        dataBase.daoProject().insertCliente(new Cliente(123, "Monge", "f", "SepaDios", "Fernando", "monge@123", 5));
-        //auxdb.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 50025063) );
+
 
 //        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 89215510));
 //        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 74856932));
 //        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 65241238));
 //        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 12345678));
 //        dataBase.daoProject().insertClienteTelefonos(new ClienteTelefonos(123, 96850312));
+
+//        dataBase.daoProject().insertClienteDirecciones(new ClienteDirecciones(123, "Alajuela", "San Carlos", "Pital"));
+//        dataBase.daoProject().insertClienteDirecciones(new ClienteDirecciones(123, "Alajuela", "Central", "Pital"));
+//        dataBase.daoProject().insertClienteDirecciones(new ClienteDirecciones(123, "Heredia", "San Carlos", "Pital"));
+//        dataBase.daoProject().insertClienteDirecciones(new ClienteDirecciones(123, "Guanacaste", "Liberia", "Santa Cruz"));
 
 
     }
