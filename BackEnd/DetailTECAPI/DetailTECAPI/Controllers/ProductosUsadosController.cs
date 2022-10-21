@@ -27,12 +27,12 @@ namespace DetailTECAPI.Controllers
         }
 
         // GET api/<ClienteTelefonosController>/5
-        [HttpGet("{nombrePro}")]
-        public async Task<ActionResult<List<ProductosUsados>>> Get(string nombrePro)
+        [HttpGet("{nombrePro}/{marcaPro}")]
+        public async Task<ActionResult<List<ProductosUsados>>> Get(string nombrePro, string marcaPro)
         {
             try
             {
-                var entityList = productosUsados.get($"'{nombrePro}'", "NombrePro", "NombrePro,MarcaPro,Lavado", "PRODUCTOS_USADOS");
+                var entityList = productosUsados.get($"'{nombrePro}' AND MarcaPro = '{marcaPro}'", "NombrePro", "NombrePro,MarcaPro,Lavado", "PRODUCTOS_USADOS");
                 return Ok(entityList);
             }
             catch (Exception)
