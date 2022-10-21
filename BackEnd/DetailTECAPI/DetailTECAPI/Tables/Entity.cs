@@ -61,16 +61,16 @@ namespace DetailTECAPI.Tables
         public bool post(string entity, string values)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {entity} VALUES ({values})", connection);
-            try
-            {
+            //try
+            //{
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    return false;
+            //}
         }
 
         /// <summary>
@@ -110,19 +110,19 @@ namespace DetailTECAPI.Tables
             SqlCommand cmd = new SqlCommand($"Delete from {entity} where {condition}", connection);
             List<Cliente> clienteList = new List<Cliente>();
 
-            //try
-            //{
+            try
+            {
                 connection.Open();
                 cmd.ExecuteNonQuery();
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 return true;
-            //}
-            //catch (Exception)
-            //{
-            //    return false;
+            }
+            catch (Exception)
+            {
+                return false;
 
-            //}
+            }
         }
 
         /// <summary>
