@@ -62,12 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
 
-        if (dataBase.daoProject().checkTelefono(123,70397939)){
-            System.out.println("PHONE ALREADY IN ");
-        }
-        else{
-            System.out.println("NEW PHONE IS TYPED");
-        }
+//        dataBase.daoProject().insertSucursal(new Sucursal("Suc 1", "Enero", 77, "Cartago", "Central", "Oriental", 1.5F));
+//        dataBase.daoProject().insertSucursal(new Sucursal("Suc 2", "Diciembre", 88, "Cartago", "El Guarco", "Tobosi", 5.0F));
+//        dataBase.daoProject().insertSucursal(new Sucursal("Suc 3", "Mayo", 66, "Guanacaste", "Liberia", "Nicoya", 11.7F));
 
 
 //        dataBase.daoProject().insertCliente(new Cliente(123, "Monge", "f", "SepaDios", "Fernando", "monge@123", 5));

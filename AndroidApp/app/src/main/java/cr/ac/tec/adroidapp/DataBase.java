@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
                     ClienteDirecciones.class, ClienteTelefonos.class, Factura.class,
                     Lavado.class, SnacksConsumidos.class, Snak.class, Sucursal.class},
         version = 1
+
 )
 public abstract class DataBase extends RoomDatabase {
     public abstract DaoProject daoProject();

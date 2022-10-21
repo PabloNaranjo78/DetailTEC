@@ -189,4 +189,20 @@ public interface DaoProject {
     @Query("DELETE FROM Snak WHERE NombreS= :nombreS")
     void deleteSnak(String nombreS);
 
+    //Sucursal
+    @Insert
+    void insertSucursal(Sucursal...sucursals);
+
+    @Query("SELECT * FROM Sucursal")
+    List<Sucursal> getSucursal();
+
+    @Query("SELECT * FROM Sucursal WHERE NombreSuc= :nombreSuc")
+    Sucursal getSucursalById(String nombreSuc);
+
+    @Query("UPDATE Sucursal SET NombreSuc= :nombreSuc, FechaApert= :fechaApert, Telefono= :telefono, Provincia= :provincia, Canton= :canton, Distrito= :distrito, TiempoDispo= :tiempoDispo WHERE NombreSuc= :nombreSuc")
+    void updateSucursal(String nombreSuc, String fechaApert, int telefono, String provincia, String canton, String distrito, float tiempoDispo);
+
+    @Query("DELETE FROM Sucursal WHERE NombreSuc= :nombreSuc")
+    void deleteSucursal(String nombreSuc);
+
 }
