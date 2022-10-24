@@ -1,10 +1,10 @@
 export interface Trabajador {
     idTrabajador:number,
-    fechaNacimiento:Date,
-    contraseña:string,
+    nacimiento:string,
+    contrasena:string,
     rol:string,
     nombre:string,
     apellidos:string,
-    fechaIngreso:Date,
+    fechaIngreso:string,
     tipoPago:string
 }

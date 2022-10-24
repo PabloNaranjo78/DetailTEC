@@ -7,7 +7,7 @@
         <div class="row my-3">  
           <h2 class = "fw-bold offset-md-1">Información de Cliente</h2>
         </div>
-        <form #form="ngForm" (ngSubmit)="onSubmit()">
+        <form #form="ngForm" (ngSubmit)="onGuardar()">
             <div class="row">
   
               <div class="col text-center">
@@ -36,12 +36,24 @@
               </div>
   
             </div>
-            <div class="row my-5">
-              <div class="col"></div>
-              <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
-              <div class="col text-center"> <a role="button" type="button" href="/gestion-clientes" class="btn can btn-primary"> Cancelar </a></div>
-              <div class="col"></div>
+            <div *ngIf="editMode; else newMode">
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+              <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-clientes" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>                                                                      
             </div>
+            
+            <ng-template #newMode>
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-clientes" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>
+            </ng-template>
           </form>
       </div>
       <div class="col-2">
@@ -69,7 +81,7 @@
               </div></div>
             
             <div class="col">
-              <button class="btn btn-default" (click) = onAddTelefono() style="width: 100%; height: 100%;">Añadir Teléfono</button>
+              <button #closebutton class="btn btn-default" (click) = onAddTelefono() style="width: 100%; height: 100%;">Añadir Teléfono</button>
             </div>
           </div>
           <div class="row my-3">

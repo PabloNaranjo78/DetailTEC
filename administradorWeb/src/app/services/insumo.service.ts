@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Insumo } from '../interfaces/insumo';
 import { ConexionService } from './conexion.service';
@@ -8,11 +9,14 @@ import { ConexionService } from './conexion.service';
   providedIn: 'root'
 })
 export class InsumoService extends ConexionService<Insumo>{
+  getHomePage(): string {
+    return 'gestion-insumos'
+  }
   getResourceURL(): string {
     return "/Insumo"
   }
-  constructor(protected override httpClient: HttpClient){
-    super(httpClient)
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
   }
 
   addProveedor(){

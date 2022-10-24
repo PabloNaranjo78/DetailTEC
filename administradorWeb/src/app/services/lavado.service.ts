@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Lavado } from '../interfaces/lavado';
 import { ConexionService } from './conexion.service';
@@ -11,7 +12,10 @@ export class LavadoService extends ConexionService<Lavado>{
   getResourceURL(): string {
     return "/Lavado"
   }
-  constructor(protected override httpClient: HttpClient){
-    super(httpClient)
+  getHomePage(): string {
+    return 'gestion-lavados'
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
   }
 }

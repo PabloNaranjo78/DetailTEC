@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cita } from '../interfaces/cita';
 import { ConexionService } from './conexion.service';
@@ -11,7 +12,10 @@ export class CitaService extends ConexionService<Cita>{
   getResourceURL(): string {
     return "/Cita"
   }
-  constructor(protected override httpClient: HttpClient){
-    super(httpClient)
+  getHomePage(): string {
+    return 'gestion-citas'
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
   }
 }

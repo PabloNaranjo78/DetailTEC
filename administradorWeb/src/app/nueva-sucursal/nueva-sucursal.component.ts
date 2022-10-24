@@ -34,51 +34,18 @@ export class NuevaSucursalComponent implements OnInit {
   listaTrabajadores:Trabajador[] = [];
 
   constructor(private service:SucursalService, private route:Router, private rou:ActivatedRoute, private trabajadorService:TrabajadorService) { }
+  
 
   onGuardar(): void{
     if (this.editMode){
-      /**Solicitud HTTP para el PUT en el API */
-    this.service.update(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("actualizado", this.objeto.nombreSuc);
-        this.route.navigate(['gestion-sucursales'])},
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        console.log(err);
-        this.service.avisoError(err.error)}
-    })
+      this.service.onActualizar(this.objeto,this.objeto.nombreSuc)
     } else {
-      console.log(this.objeto)
-      /**Solicitud HTTP para el POST en el API */
-    this.service.add(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("añadido", this.objeto.nombreSuc);
-        this.route.navigate(['gestion-sucursales'])  
-      },
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        console.log(err);
-        this.service.avisoError(err.error)}
-    })
-    } 
-    
+      this.service.onNuevo(this.objeto,this.objeto.nombreSuc)
+    }
   }
 
   onEliminar(): void{ 
-    this.service.delete(this.objeto.nombreSuc).subscribe({
-    /*Mensaje emergente de exito*/
-    
-    next: (data) => {
-      this.service.avisoSuccess("eliminado", this.objeto.nombreSuc);
-      this.route.navigate(['gestion-sucursales'])},
-    /*Mensaje emergente de error*/
-    error: (err) =>{
-      this.service.avisoError(err.error)}
-  })
+    this.service.onEliminar(this.objeto.nombreSuc)
     }
 
   ngOnInit(): void {

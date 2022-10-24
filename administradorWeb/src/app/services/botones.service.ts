@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export abstract class BotonesService<T> {
+  
   lista:T[]=[]
 
     /*Crea filas de 5 unidades a partir de índice

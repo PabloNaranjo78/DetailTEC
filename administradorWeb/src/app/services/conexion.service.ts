@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, Observable} from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -10,7 +11,7 @@ export abstract class ConexionService<T> {
 
   /**Ruta a conectarse con el API REST */
  private readonly RUTA_API = "https://127.0.0.1:7035/api" + this.getResourceURL();
- constructor(protected httpClient:HttpClient) {
+ constructor(protected httpClient:HttpClient, protected route:Router) {
  }
 
  getRuta(){
@@ -18,10 +19,13 @@ export abstract class ConexionService<T> {
  }
 
  abstract getResourceURL(): string;
+ abstract getHomePage(id?: string|number, id2?: string|number): string;
+  
+ lista:T[]=[]
   getList(){
-    console.log(this.RUTA_API);
     return this.httpClient.get<T[]>(this.RUTA_API);
   }
+  
 
   get(id: string | number, marca?:string | number){
     if (marca){
@@ -38,11 +42,87 @@ export abstract class ConexionService<T> {
     return this.httpClient.put<T>(this.RUTA_API,resource);
   }
 
-  delete(id: string | number, marca?:string | number){
-    if (marca){
-      return this.httpClient.delete<T[]>(this.RUTA_API+"/"+id+ "/"+ marca);
-    }
+  delete(id: string | number){
     return this.httpClient.delete<T[]>(this.RUTA_API+"/"+id);
+  }
+
+  onEliminar(id:string | number, id2?: string|number){
+    if (id2){
+      id = id + "/" + id2
+    }
+    this.delete(id).subscribe({
+      next:(data)=>{
+        this.avisoSuccess("eliminado", id);
+        this.route.navigate([this.getHomePage()])},
+        error: (err) =>{
+          this.avisoError(err.error)} 
+    })
+  }
+
+  onActualizar(objeto:T, nombre:string){
+    /**Solicitud HTTP para el PUT en el API */
+    this.update(objeto).subscribe({
+      /*Mensaje emergente de exito*/
+      
+      next: (data) => {
+        this.avisoSuccess("actualizado", nombre);
+        this.route.navigate([this.getHomePage()])
+      },
+
+        /*Mensaje emergente de error*/
+      error: (err) =>{
+        this.avisoError(err.error)
+        }
+    })
+  }
+
+  onNuevo(objeto:T, nombre:string){
+    /**Solicitud HTTP para el PUT en el API */
+    this.add(objeto).subscribe({
+      /*Mensaje emergente de exito*/
+      
+      next: (data) => {
+        this.avisoSuccess("añadido", nombre);
+        this.route.navigate([this.getHomePage()])
+      },
+        /*Mensaje emergente de error*/
+      error: (err) =>{
+        this.avisoError(err.error)
+        }
+    })
+  }
+
+  onGet(id:string | number, id2?: string|number){
+    if (id2){
+      id = id + "/" + id2
+    } 
+
+    this.get(id).subscribe({
+      next: (data)=>{
+        return data
+      }, 
+      error: (err) => {
+        this.avisoError(err.error)
+        return []
+      }
+    })
+  }
+
+  onGetAll(){
+    this.getList().subscribe({
+      next:(data) => {
+        this.lista = data;
+      },
+      /*Mensaje emergente de error*/
+      error: (err) =>{
+        this.avisoError(err.error)
+        return [];
+      }}
+    )
+  }
+
+  onCancelar(){
+    this.route.navigate([this.getHomePage()])
   }
 
   avisoError(mensaje:string){
@@ -53,12 +133,43 @@ export abstract class ConexionService<T> {
     })
   }    
 
-  avisoSuccess(tipo:string, id:string){
+  avisoSuccess(tipo:string, id:string | number){
     Swal.fire({
       icon: 'success',
       title: '¡Has ' + tipo + ' a '+ id +' exitosamente!'
     })
-  }    
+  } 
+
+    /*Crea filas de 5 unidades a partir de índice
+  valor:number 
+  return: boolean*/
+  crearFila(valor:number){
+    if (valor%5==0){
+      return true;
+    }
+    return false;
+  }
+  /*Rellena la lista con elementos nulos para conservar el espaciado
+  valor:number
+  return: list*/
+  subLista(valor:number){
+    var sub=[];
+    if(valor+5 > this.lista.length){
+      sub = this.lista.slice(valor)
+    } else {
+      sub = this.lista.slice(valor, valor+5);
+    }
+    return sub;
+  }
+
+  completar(valor:number){
+    var sub=[1,2,3,4,5];
+    if(valor+5 > this.lista.length){
+       return sub.slice(0,valor+5-this.lista.length)
+    } else {
+      return []
+    }
+  }
 }
 
 

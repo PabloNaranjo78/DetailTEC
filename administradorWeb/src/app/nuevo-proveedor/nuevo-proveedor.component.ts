@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Proveedor } from '../interfaces/proveedor';
 import { ProveedorService } from '../services/proveedor.service';
+import { ServicioAPIService } from '../services/servicio-api.service';
 
 @Component({
   selector: 'app-nuevo-proveedor',
@@ -26,49 +27,15 @@ export class NuevoProveedorComponent implements OnInit {
 
   onGuardar(): void{
     if (this.editMode){
-      /**Solicitud HTTP para el PUT en el API */
-    this.service.update(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("actualizado", this.objeto.nombre);
-        this.route.navigate(['gestion-proveedores'])
-      },
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        console.log(err);
-        this.service.avisoError(err.error)}
-    })
+      this.service.onActualizar(this.objeto,this.objeto.nombre)
     } else {
-      /**Solicitud HTTP para el POST en el API */
-    this.service.add(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("añadido", this.objeto.nombre);
-        this.route.navigate(['gestion-proveedores'])  
-      },
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        console.log(err);
-        this.service.avisoError(err.error)}
-    })
+      this.service.onNuevo(this.objeto,this.objeto.nombre)
     }
-    
   }
 
   onEliminar(): void{ 
-    this.service.delete(this.objeto.cedulaJur).subscribe({
-    /*Mensaje emergente de exito*/
-    
-    next: (data) => {
-      this.service.avisoSuccess("eliminado", this.objeto.nombre);
-      this.route.navigate(['gestion-proveedores'])  },
-    /*Mensaje emergente de error*/
-    error: (err) =>{
-      this.service.avisoError(err.error)}
-  })
-    }
+    this.service.onEliminar(this.objeto.nombre)
+  }
 
   ngOnInit(): void {
     if(this.rou.snapshot.params['id']==undefined){

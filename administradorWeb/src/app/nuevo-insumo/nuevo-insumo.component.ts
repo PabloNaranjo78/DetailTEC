@@ -24,35 +24,10 @@ export class NuevoInsumoComponent implements OnInit {
 
   onGuardar(): void{
     if (this.editMode){
-      /**Solicitud HTTP para el PUT en el API */
-    this.service.update(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("actualizado", this.objeto.nombrePro);
-        this.route.navigate(['gestion-insumos'])
-      },
-        
-      
-        /*Mensaje emergente de error*/
-      error: (err) =>{
-        this.service.avisoError(err.error)
-        }
-    })
+      this.service.onActualizar(this.objeto,this.objeto.nombrePro)
     } else {
-      /**Solicitud HTTP para el POST en el API */
-    this.service.add(this.objeto).subscribe({
-      /*Mensaje emergente de exito*/
-      
-      next: (data) => {
-        this.service.avisoSuccess("actualizado", this.objeto.nombrePro)
-        this.route.navigate(['gestion-insumos'])},
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        this.service.avisoError(err.error)}
-    })
+      this.service.onNuevo(this.objeto,this.objeto.nombrePro)
     }
-    
   }
 
   onProveedores(){
@@ -60,17 +35,8 @@ export class NuevoInsumoComponent implements OnInit {
   }
 
   onEliminar(): void{ 
-    this.service.delete(this.objeto.marcaPro,this.objeto.nombrePro).subscribe({
-    /*Mensaje emergente de exito*/
-    
-    next: (data) => {
-      this.service.avisoSuccess("eliminado", this.objeto.nombrePro);
-      this.route.navigate(['gestion-insumos'])},
-    /*Mensaje emergente de error*/
-    error: (err) =>{
-    this.service.avisoSuccess("eliminado", this.objeto.nombrePro);
-    }}
-  )}
+    this.service.onEliminar(this.objeto.marcaPro,this.objeto.nombrePro)
+  }
 
   ngOnInit(): void {
     if(this.rou.snapshot.params['marca']==undefined){

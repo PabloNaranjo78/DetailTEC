@@ -50,7 +50,7 @@ namespace DetailTECAPI.Controllers
 
         // POST api/<LavadoController>
         [HttpPost]
-        public async Task<ActionResult<List<Lavado>>> Post(Lavado lavado)
+        public async Task<ActionResult<Lavado>> Post(Lavado lavado)
         {
             List<Lavado> entityList = new List<Lavado>();
             entityList.Add(lavado);

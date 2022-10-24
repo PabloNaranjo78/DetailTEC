@@ -1,1 +1,89 @@
 <p>nuevo-trabajador works!</p>
+<div class="container-fluid">
+    <div class="row my-3">
+      
+      <div class="col-1">
+      </div>
+      <div class="col"> 
+        <div class="row my-3">  
+          <h2 class = "fw-bold offset-md-1">Información de Trabajador</h2>
+        </div>
+        <form #form="ngForm" (ngSubmit)="onGuardar()">
+            <div class="row">
+
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "nombre" class="form-label">Nombre</label></div>
+                <div class="row mt-4 right"><label for = "apellidos" class="form-label">Apellidos</label></div>
+                <div class="row mt-4 right"><label for = "cedula" class="form-label">Cedula</label></div>
+                <div class="row mt-4 right"><label for = "fechaNac" class="form-label">Fecha de Naciminento </label></div>
+              </div>
+              <div class="col">  
+                <div class="row mt-4"><input type = "text" class="form-control" name = "nombre" [(ngModel)] = "objeto.nombre"></div>
+                <div class="row mt-4"><input type = "text" class="form-control" name = "apellidos" [(ngModel)] = "objeto.apellidos"></div>
+                <div class="row mt-4"><input type = "number" class="form-control" name = "cedula" [(ngModel)] = "objeto.idTrabajador"></div>
+                <div class="row mt-4"><input type = "date" class="form-control" name = "fechaNac" [(ngModel)] = "objeto.nacimiento"></div>
+              </div>
+              <div class="col-1"></div>
+              
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "nombre" class="form-label">Contraseña</label></div>
+                <div class="row mt-4 right"><label for = "apellidos" class="form-label">Fecha de Ingreso</label></div>
+                <div class="row mt-5 right"><label for = "cedula" class="form-label">Rol</label></div>
+                <div class="row mt-5 right"><label for = "fechaNac" class="form-label">Tipo de Pago</label></div>
+              </div>
+              <div class="col">  
+                <div class="row mt-4"><input type = "text" class="form-control" name = "contrasena" [(ngModel)] = "objeto.contrasena"></div>
+                <div class="row mt-4"><input type = "date" class="form-control" name = "apellidos" [(ngModel)] = "objeto.fechaIngreso"></div>
+                <div class="row mt-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Lavador" [(ngModel)] = "objeto.rol">
+                        <label class="form-check-label" for="inlineRadio1">Lavador</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Pulidor" [(ngModel)] = "objeto.rol">
+                        <label class="form-check-label" for="inlineRadio2">Pulidor</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Administrador" [(ngModel)] = "objeto.rol">
+                        <label class="form-check-label" for="inlineRadio1">Administrador</label>
+                      </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Semanal" [(ngModel)] = "objeto.tipoPago">
+                        <label class="form-check-label" for="inlineRadio1">Semanal</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Bisemanal" [(ngModel)] = "objeto.tipoPago">
+                        <label class="form-check-label" for="inlineRadio2">Bisemanal</label>
+                      </div>
+                </div>
+              </div>
+              
+            </div>
+            <div *ngIf="editMode; else newMode">
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+              <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-trabajadores" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>                                                                      
+            </div>
+            
+            <ng-template #newMode>
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+                <div class="col text-center"> <a role="button" type="button" href="/gestion-trabajadores" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>
+            </ng-template>
+            
+          </form>
+      </div>
+      <div class="col-2">
+      </div>
+    </div>
+  </div>
+

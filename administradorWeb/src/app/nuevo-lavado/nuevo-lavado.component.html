@@ -1,1 +1,104 @@
-<p>nuevo-lavado works!</p>
+<div class="container-fluid">
+  <div class="row my-3">
+    
+    <div class="col-1">
+    </div>
+    <div class="col"> 
+      <div class="row my-3">  
+        <h2 class = "fw-bold offset-md-1">Información de Lavado</h2>
+      </div>
+      <form #form="ngForm" (ngSubmit)="onGuardar()">
+          <div class="row">
+
+            <div class="col text-center">
+              <div class="row mt-4 right"><label for = "fullname" class="form-label">Nombre</label></div>
+              <div class="row mt-4 right"><label for = "duracion" class="form-label">Duracion</label></div>
+              <div class="row mt-4 right"><label for = "precio" class="form-label">Precio</label></div>
+              <div class="row mt-4 right"><label for = "costo" class="form-label">Costo</label></div>
+            </div>
+            <div class="col">  
+              <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "objeto.nombreLav" [(ngModel)] = "personalNuevo.lavado" [(ngModel)] = "productoNuevo.lavado"></div>
+              <div class="row mt-4"><input type = "text" class="form-control" name = "duracion" [(ngModel)] = "objeto.duracion"></div>
+              <div class="row mt-4"><input type = "number" class="form-control" name = "precio" [(ngModel)] = "objeto.precio" ></div>
+              <div class="row mt-4"><input type = "text" class="form-control" name = "costo" [(ngModel)] = "objeto.costo"></div>
+            </div>
+            <div class="col-1"></div>
+            
+            <div class="col text-center">
+              <div class="row mt-4 right gy-4"><label for = "otorgar" class="form-label">Puntos a Ortorgar</label></div>
+              <div class="row mt-4 right"><label for = "redimir" class="form-label">Puntos a redimir</label></div>
+              <div class="row mt-4 right"><label for = "productos" class="form-label">Productos Requeridos</label></div>
+              <div class="row mt-4 right"><label for = "personal" class="form-label">Personal Requerido</label></div>
+            </div>
+            <div class="col">
+              <div class="row mt-4 gy-4"><input type = "number"  class="form-control" name = "otorgar" [(ngModel)] = "objeto.puntos"></div>
+              <div class="row mt-4"><input type = "number" class="form-control" name = "redimir" [(ngModel)] = "objeto.puntos"></div>
+              <div class="row mt-4"><a class="btn btn-primary" (click) = onPersonal() style= "width: 100%" data-bs-toggle="modal" data-bs-target="#editarTelefonos">Añadir Teléfono</a></div>
+              <div class="row mt-4"><a class="btn btn-primary" (click) = onProducto() style= "width: 100%"  style= "width: 100%" data-bs-toggle="modal" data-bs-target="#editarDirecciones">Añadir Dirección</a></div>
+            </div>
+
+          </div>
+          <div *ngIf="editMode; else newMode">
+            <div class="row my-5">
+              <div class="col"></div>
+              <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+            <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+              <div class="col text-center"> <a role="button" type="button" href="/gestion-lavados" class="btn can btn-primary"> Cancelar </a></div>
+              <div class="col"></div>
+            </div>                                                                      
+          </div>
+          
+          <ng-template #newMode>
+            <div class="row my-5">
+              <div class="col"></div>
+              <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+              <div class="col text-center"> <a role="button" type="button" href="/gestion-lavados" class="btn can btn-primary"> Cancelar </a></div>
+              <div class="col"></div>
+            </div>
+          </ng-template>
+        </form>
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editarTelefonos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header text-center">
+      <h4 class="modal-title w-100 font-weight-bold">Teléfonos de Usuario</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body mx-3">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="col-3">
+              <label for = "newTelefono" class="form-label">Telefono</label>
+            </div>
+            <div class="col">
+              <input type = "number" class="form-control" name = "newTelefono" [(ngModel)] = "personalNuevo.personal">
+            </div></div>
+          
+          <div class="col">
+            <button class="btn btn-default" (click) = onAddPersonal() style="width: 100%; height: 100%;">Añadir Personal</button>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div *ngFor="let per of listaPersonal let i=index">
+            <div class="row mt-4 style">
+              <div class="col-1 offset-md-2"></div>
+              <div class="col-4">Personal {{i+1}}:</div>
+              <div class="col">{{per.personal}</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

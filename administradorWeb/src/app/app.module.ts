@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { GestionClientesComponent } from './gestion-clientes/gestion-clientes.component';
 import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component';
-import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-cliente.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +26,6 @@ import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.co
     AppComponent,
     GestionClientesComponent,
     NuevoClienteComponent,
-    ActualizarClienteComponent,
     HeaderComponent,
     GestionCitasComponent,
     GestionTrabajadoresComponent,
@@ -62,7 +60,7 @@ import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.co
       {path:"nuevo-insumo", component:NuevoInsumoComponent},
       
       
-      {path:"actualizar-cliente/:id", component:ActualizarClienteComponent},
+      {path:"actualizar-cliente/:id", component:NuevoClienteComponent},
       {path:"actualizar-proveedor/:id", component:NuevoProveedorComponent},
       {path:"actualizar-cita/:id", component:NuevaCitaComponent},
       {path:"actualizar-lavado/:id", component:NuevoLavadoComponent},
