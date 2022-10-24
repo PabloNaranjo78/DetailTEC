@@ -16,11 +16,18 @@ public class recycleAdapterDirecciones extends RecyclerView.Adapter<recycleAdapt
     private DataBase dataBase;
     private int userID;
 
+    /**
+     * RecycleView adapter Direcciones
+     * @param clienteDirecciones Direcciones de un cliente
+     * @param dataBase Base de datos
+     * @param userID ID usuario
+     */
     public recycleAdapterDirecciones(List<ClienteDirecciones> clienteDirecciones, DataBase dataBase, int userID){
         this.clienteDirecciones = clienteDirecciones;
         this.dataBase = dataBase;
         this.userID = userID;
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView infoDireccionesText;

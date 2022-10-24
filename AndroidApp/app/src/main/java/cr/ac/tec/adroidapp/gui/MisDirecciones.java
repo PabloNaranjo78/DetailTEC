@@ -38,6 +38,10 @@ public class MisDirecciones extends AppCompatActivity {
     String distrito;
 
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState Instancia
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,11 @@ public class MisDirecciones extends AppCompatActivity {
         setAdapter(dataBase, userID);
     }
 
+    /**
+     * Asocia un adaptdor a el RecycleView
+     * @param dataBase Base de Datos
+     * @param userID ID usuario
+     */
     public void setAdapter(DataBase dataBase, int userID){
         recycleAdapterDirecciones adapter = new recycleAdapterDirecciones(direcciones,dataBase,userID);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -109,6 +118,13 @@ public class MisDirecciones extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Valida la integridad de una direccio
+     * @param provincia Provincia
+     * @param canton Canton
+     * @param distrito Distrito
+     * @return Integridad de la informacion
+     */
     private boolean directionValidation(String provincia, String canton, String distrito){
         return (provincia != null && !provincia.trim().isEmpty()) &&
                 (canton != null && !canton.trim().isEmpty()) &&

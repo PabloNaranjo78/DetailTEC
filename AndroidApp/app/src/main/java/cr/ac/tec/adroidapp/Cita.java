@@ -18,6 +18,15 @@ public class Cita {
     public String Lavado;
     public int IDCliente;
 
+    /**
+     * Representa la tabla de una cita
+     * @param placa placa de la cita
+     * @param fechaCita fecha de la cita
+     * @param IDEmpleado ID del empleado
+     * @param sucursal sucursal de la cita
+     * @param lavado tipo de lavado
+     * @param IDCliente ID del cliente
+     */
     public Cita(@NonNull String placa, String fechaCita, int IDEmpleado, String sucursal, String lavado, int IDCliente) {
         this.Placa = placa;
         this.FechaCita = fechaCita;
@@ -27,6 +36,9 @@ public class Cita {
         this.IDCliente = IDCliente;
     }
 
+    /**
+     * Constructor
+     */
     public Cita() {
     }
 }

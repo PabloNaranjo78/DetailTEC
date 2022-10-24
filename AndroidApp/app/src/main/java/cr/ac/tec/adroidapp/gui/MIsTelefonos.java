@@ -31,6 +31,10 @@ public class MIsTelefonos extends AppCompatActivity {
     Button cancelarTelefono;
     TextView nuevoTelefonoText;
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState Instancia
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +82,12 @@ public class MIsTelefonos extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
         setAdapter(dataBase, userID);
     }
 
+    /**
+     * Mensaje emergente de mensaje erroneo
+     */
     private void phoneDecline(){
         AlertDialog alertMessage = new AlertDialog.Builder(MIsTelefonos.this).create();
         alertMessage.setTitle("Error");
@@ -96,9 +100,13 @@ public class MIsTelefonos extends AppCompatActivity {
                     }
                 });
         alertMessage.show();
-
     }
 
+    /**+
+     * Asocia un adaptdor a el RecycleView
+     * @param dataBase Base de Datos
+     * @param userID ID usuario
+     */
     public void setAdapter(DataBase dataBase, int userID){
 
         recycleAdapterTelefonos adapter = new recycleAdapterTelefonos(telefonos,dataBase,userID);
@@ -106,7 +114,5 @@ public class MIsTelefonos extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
     }
-
 }

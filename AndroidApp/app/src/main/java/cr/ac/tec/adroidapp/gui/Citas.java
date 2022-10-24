@@ -39,6 +39,10 @@ public class Citas extends AppCompatActivity {
     Button fechaButton;
     DataBase dataBase;
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState instancia
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +153,10 @@ public class Citas extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra las sucursales disponibles
+     * @return sucursales
+     */
     private Vector<String> sucursales(){
         Vector<String> namesSucursales = new Vector<String>();
         List<Sucursal> sucursalList = dataBase.daoProject().getSucursal();
@@ -159,6 +167,10 @@ public class Citas extends AppCompatActivity {
         return namesSucursales;
     }
 
+    /**
+     * Muestra los tipos de lavados
+     * @return tipos de lavados
+     */
     private Vector<String> lavados(){
         Vector<String> namesLavados = new Vector<String>();
         List<Lavado> sucursalList = dataBase.daoProject().getLavado();
@@ -168,6 +180,13 @@ public class Citas extends AppCompatActivity {
         }
         return namesLavados;
     }
+
+    /**
+     * Valida si se puede solicitar una cita o no
+     * @param sucursal Sucursal a solicitar la cita
+     * @param tipo Tipo de lavado solicitado
+     * @return Vialidad de la cita
+     */
     private boolean citaValidation(String sucursal, String tipo){
         if (!nuevaPlaca.getText().toString().trim().isEmpty() && !dataBase.daoProject().checkCita(nuevaPlaca.getText().toString())){
             return dataBase.daoProject().getSucursalById(sucursal).TiempoDispo > dataBase.daoProject().getLavadoyId(tipo).Duracion;
@@ -175,6 +194,13 @@ public class Citas extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Valida la fecha seleccionada
+     * @param day Dia
+     * @param month Mes
+     * @param year Año
+     * @return
+     */
     private boolean dateValidation(int day, int month, int year){
         final Calendar calendar = Calendar.getInstance();
         final int yearAux = calendar.get(Calendar.YEAR);

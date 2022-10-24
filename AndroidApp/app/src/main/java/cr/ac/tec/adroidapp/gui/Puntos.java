@@ -8,6 +8,10 @@ import cr.ac.tec.adroidapp.R;
 
 public class Puntos extends AppCompatActivity {
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState Instancia
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

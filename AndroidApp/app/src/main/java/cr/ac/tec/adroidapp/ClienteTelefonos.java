@@ -12,11 +12,19 @@ public class ClienteTelefonos {
     @NonNull
     public int Telefono;
 
+    /**
+     * Representa la tabla de los telefonos del cliente
+     * @param IDCliente ID cliente
+     * @param telefono Telefono cliente
+     */
     public ClienteTelefonos(@NonNull int IDCliente, @NonNull int telefono) {
         this.IDCliente = IDCliente;
         this.Telefono = telefono;
     }
 
+    /**
+     * Constructor
+     */
     public ClienteTelefonos() {
     }
 }

@@ -14,6 +14,12 @@ public class BebidasConsumidas {
     @NonNull
     public int NombreB;
 
+    /**
+     * Representa la tabla de bebidas consumidas
+     * @param factura factura de la bebida
+     * @param cantidad cantidad de bebidas
+     * @param nombreB nombre de la bebida
+     */
     public BebidasConsumidas(@NonNull int factura, int cantidad, @NonNull int nombreB) {
         this.Factura = factura;
         this.Cantidad = cantidad;

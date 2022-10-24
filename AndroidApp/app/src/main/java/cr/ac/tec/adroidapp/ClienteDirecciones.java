@@ -17,6 +17,13 @@ public class ClienteDirecciones {
     @NonNull
     public String Distrito;
 
+    /**
+     * Representa la tabla direcciones del cliente
+     * @param IDCliente ID cliente
+     * @param provincia Proviencia
+     * @param canton Canton
+     * @param distrito Distrito
+     */
     public ClienteDirecciones(@NonNull int IDCliente,@NonNull String provincia,@NonNull String canton,@NonNull String distrito) {
         this.IDCliente = IDCliente;
         this.Provincia = provincia;
@@ -24,6 +31,9 @@ public class ClienteDirecciones {
         this.Distrito = distrito;
     }
 
+    /**
+     * Constructor
+     */
     public ClienteDirecciones() {
     }
 }

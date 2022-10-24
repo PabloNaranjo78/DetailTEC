@@ -17,6 +17,10 @@ public class Menu extends AppCompatActivity {
     Button citasButton;
     Button puntosButton;
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState Instacia
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

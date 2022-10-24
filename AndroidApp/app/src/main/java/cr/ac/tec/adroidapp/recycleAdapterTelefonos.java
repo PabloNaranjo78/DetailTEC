@@ -16,7 +16,12 @@ public class recycleAdapterTelefonos extends RecyclerView.Adapter<recycleAdapter
      private DataBase dataBase;
      private int userID;
 
-
+    /**
+     * RecycleView adapter telefonos
+     * @param clienteTelefonos Telefonos cliente
+     * @param dataBase Base de datos
+     * @param userID ID usuario
+     */
      public recycleAdapterTelefonos(List<ClienteTelefonos> clienteTelefonos, DataBase dataBase, int userID){
          this.clienteTelefonos = clienteTelefonos;
          this.dataBase = dataBase;
@@ -51,7 +56,6 @@ public class recycleAdapterTelefonos extends RecyclerView.Adapter<recycleAdapter
     public void onBindViewHolder(@NonNull recycleAdapterTelefonos.MyViewHolder holder, int position) {
          int phone = clienteTelefonos.get(position).Telefono;
          holder.infoTelefonosItemsTxt.setText(Integer.toString(phone));
-
     }
 
     @Override

@@ -29,8 +29,13 @@ public class GestionCliente extends AppCompatActivity {
     TextView nuevaInfoText;
     TextView nuevoEmailText;
     TextView infoPuntosText;
+
     public static MIsTelefonos mIsTelefonos = new MIsTelefonos();
 
+    /**
+     * Inicializa la parte grafica
+     * @param savedInstanceState Instancia
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +63,6 @@ public class GestionCliente extends AppCompatActivity {
         infoUsuarioText.setText(cliente.Usuario);
         infoNombreText.setText(cliente.Nombre);
         infoPuntosText.setText(String.valueOf(cliente.PuntosDispo));
-
-
 
         guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +96,6 @@ public class GestionCliente extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Menu.class);
                 intent.putExtra("ID", userID);
                 startActivity(intent);
-
             }
         });
 
@@ -103,7 +105,6 @@ public class GestionCliente extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MisDirecciones.class);
                 intent.putExtra("ID", userID);
                 startActivity(intent);
-
             }
         });
 
@@ -113,19 +114,21 @@ public class GestionCliente extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MIsTelefonos.class);
                 intent.putExtra("ID", userID);
                 startActivity(intent);
-
-
-
             }
         });
     }
 
+    /**
+     * Valida que los datos tengan una estructura valida
+     * @param pass Contraseña
+     * @param info Informacion de contacto
+     * @param email Email
+     * @return Integrida de los datos
+     */
     public boolean paramValidation(String pass, String info, String email){
         if ((pass != null && !pass.isEmpty())&&(info != null && !info.isEmpty())&&(email != null && !email.isEmpty())){
             return true;
         }
         return false;
     }
-
-
 }
