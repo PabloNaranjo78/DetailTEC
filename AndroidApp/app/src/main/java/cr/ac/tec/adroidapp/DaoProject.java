@@ -51,13 +51,16 @@ public interface DaoProject {
     List<Cita> getCita();
 
     @Query("SELECT * FROM Cita WHERE Placa= :placa")
-    Cita getCitaById(int placa);
+    Cita getCitaById(String placa);
 
     @Query("UPDATE Cita SET Placa= :placa, FechaCita= :fecha, IDEmpleado= :idempleado, Sucursal= :sucursal, Lavado= :lavado, IDCliente= :idcliente WHERE Placa= :placa")
-    void updateCita(int placa, String fecha, int idempleado, String sucursal, String lavado, int idcliente);
+    void updateCita(String placa, String fecha, int idempleado, String sucursal, String lavado, int idcliente);
 
     @Query("DELETE FROM Cita WHERE Placa= :placa")
-    void deleteCita(int placa);
+    void deleteCita(String placa);
+
+    @Query("SELECT * FROM Cita WHERE Placa= :placa")
+    boolean checkCita(String placa);
 
 
     //Cliente//
@@ -134,7 +137,7 @@ public interface DaoProject {
 
     @Query("UPDATE Factura SET Placa= :placa, NumFactura= :numfactura, Monto= :monto WHERE NumFactura= :numfactura")
         //ASK OF WHAT IS NEEDED IS RECEIPT OR A SET OF THEM
-    void updateFactura(int placa, int numfactura, int monto);
+    void updateFactura(String placa, int numfactura, int monto);
 
     @Query("DELETE FROM Factura WHERE NumFactura= :numfactura")
     void deleteFactura(int numfactura);
@@ -147,7 +150,7 @@ public interface DaoProject {
     List<Lavado> getLavado();
 
     @Query("SELECT * FROM Lavado WHERE NombreLav= :nombrelav")
-    Lavado getLavadoyId(int nombrelav);
+    Lavado getLavadoyId(String nombrelav);
 
     @Query("UPDATE Lavado SET NombreLav= :nombrelav, Duracion= :duracion, Precio= :precio, Costo= :costo, Puntos= :puntos WHERE NombreLav= :nombrelav")
     void updateLavado(String nombrelav, float duracion, int precio, int costo, int puntos);

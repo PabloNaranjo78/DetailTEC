@@ -19,6 +19,7 @@ import java.util.List;
 
 import cr.ac.tec.adroidapp.ClienteTelefonos;
 import cr.ac.tec.adroidapp.DataBase;
+import cr.ac.tec.adroidapp.MainActivity;
 import cr.ac.tec.adroidapp.R;
 import cr.ac.tec.adroidapp.recycleAdapterTelefonos;
 
@@ -45,7 +46,7 @@ public class MIsTelefonos extends AppCompatActivity {
         Bundle bundle = userIntent.getExtras();
         userID = (int) bundle.get("ID");
 
-        DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
+        DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, MainActivity.dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         telefonos = dataBase.daoProject().getClienteTelefonosById(userID);
 
         guardarTelefono.setOnClickListener(new View.OnClickListener() {

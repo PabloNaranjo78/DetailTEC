@@ -11,14 +11,14 @@ import androidx.room.PrimaryKey;
 public class Cita {
     @PrimaryKey
     @NonNull
-    public int Placa;
+    public String Placa;
     public String FechaCita;
     public int IDEmpleado;
     public String Sucursal;
     public String Lavado;
     public int IDCliente;
 
-    public Cita(@NonNull int placa, String fechaCita, int IDEmpleado, String sucursal, String lavado, int IDCliente) {
+    public Cita(@NonNull String placa, String fechaCita, int IDEmpleado, String sucursal, String lavado, int IDCliente) {
         this.Placa = placa;
         this.FechaCita = fechaCita;
         this.IDEmpleado = IDEmpleado;

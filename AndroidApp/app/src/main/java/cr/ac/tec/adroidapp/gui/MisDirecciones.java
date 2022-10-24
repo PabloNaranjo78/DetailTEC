@@ -19,6 +19,7 @@ import java.util.List;
 
 import cr.ac.tec.adroidapp.ClienteDirecciones;
 import cr.ac.tec.adroidapp.DataBase;
+import cr.ac.tec.adroidapp.MainActivity;
 import cr.ac.tec.adroidapp.R;
 import cr.ac.tec.adroidapp.recycleAdapterDirecciones;
 
@@ -54,7 +55,7 @@ public class MisDirecciones extends AppCompatActivity {
         Bundle bundle = userIntent.getExtras();
         userID = (int) bundle.get("ID");
 
-        dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
+        dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, MainActivity.dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         direcciones = dataBase.daoProject().getClienteDireccionesById(userID);
 
         guardarDireccionButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +86,15 @@ public class MisDirecciones extends AppCompatActivity {
                     alertMessage.show();
                 }
 
+            }
+        });
+
+        cancelarDireccionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), GestionCliente.class);
+                intent.putExtra("ID", userID);
+                startActivity(intent);
             }
         });
 

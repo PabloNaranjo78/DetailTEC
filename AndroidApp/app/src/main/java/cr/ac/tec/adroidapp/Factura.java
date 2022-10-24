@@ -6,13 +6,15 @@ import androidx.room.ForeignKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Cita.class, parentColumns = "Placa", childColumns = "Placa")},
         primaryKeys = { "NumFactura"})
+
+
 public class Factura {
-    public int Placa;
+    public String Placa;
     @NonNull
     public int NumFactura;
     public int Monto;
 
-    public Factura(@NonNull int placa, @NonNull int numFactura, int monto) {
+    public Factura(@NonNull String placa, @NonNull int numFactura, int monto) {
         this.Placa = placa;
         this.NumFactura = numFactura;
         this.Monto = monto;

@@ -40,7 +40,7 @@ public class GestionCliente extends AppCompatActivity {
         Bundle bundle = userIntent.getExtras();
         userID = (int) bundle.get("ID");
 
-        DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, "prueba1").allowMainThreadQueries().build();
+        DataBase dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, MainActivity.dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         Cliente cliente = dataBase.daoProject().getClienteById(userID);
 
         guardarButton = findViewById(R.id.btn_Guardar);
