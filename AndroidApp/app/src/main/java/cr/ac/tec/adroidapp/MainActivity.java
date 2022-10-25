@@ -3,16 +3,25 @@ package cr.ac.tec.adroidapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-import androidx.room.migration.Migration;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView userText;
     TextView passwordText;
     Button loginButton;
+    AppUpdater updater;
 
 
     @Override
@@ -36,29 +46,35 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_Login);
 
         dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        updater = new AppUpdater(dataBase);
+
+        apiTester();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
-                    Intent intent = new Intent(getApplicationContext(), Menu.class);
-                    intent.putExtra("ID", userID);
-                    startActivity(intent);
+                try {
+                    if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
+                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        intent.putExtra("ID", userID);
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
+                        alertMessage.setTitle("Error");
+                        alertMessage.setMessage("Credenciales incorrectas");
+                        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                });
+                        alertMessage.show();
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
                 }
-                else{
-                    AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
-                    alertMessage.setTitle("Error");
-                    alertMessage.setMessage("Credenciales incorrectas");
-                    alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                }
-                            });
-                    alertMessage.show();
-                }
-
             }
         });
 
@@ -92,9 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean userValidation(String user, String pass){
+    public boolean userValidation(String user, String pass) throws NoSuchAlgorithmException {
         List<Cliente> clientList = dataBase.daoProject().getClientes();
+
             for (int i = 0; i < clientList.size(); i++){
+                System.out.println(clientList.get(i).Usuario);
+                System.out.println(clientList.get(i).Contraseña);
                 if (Objects.equals(clientList.get(i).Usuario, user) & Objects.equals(clientList.get(i).Contraseña, pass)){
                     userID = clientList.get(i).IDCliente;
                     return true;
@@ -104,6 +123,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String dbInstance(){
-        return "Test1";
+        return "Test2";
+    }
+
+    public void apiTester(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Cliente";
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
+
+                    updater.updaterClientes(array);
+
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+
     }
 }

@@ -82,6 +82,9 @@ public interface DaoProject {
     @Query("DELETE FROM Cliente WHERE IDCliente= :idcliente" )
     void deleteCliente(int idcliente);
 
+    @Query("SELECT * FROM Cliente WHERE IDCliente= :idcliente")
+    boolean checkClinete(int idcliente);
+
 
     // Cliente Direcciones
     @Insert
@@ -142,6 +145,9 @@ public interface DaoProject {
     @Query("DELETE FROM Factura WHERE NumFactura= :numfactura")
     void deleteFactura(int numfactura);
 
+    @Query("SELECT * FROM Factura WHERE NumFactura= :numfactura")
+    boolean checkFactura(int numfactura);
+
     //Lavado
     @Insert
     void insertLavado(Lavado...lavados);
@@ -157,6 +163,9 @@ public interface DaoProject {
 
     @Query("DELETE FROM Lavado WHERE NombreLav= :nombrelav")
     void deleteLavado(String nombrelav);
+
+    @Query("SELECT * FROM Lavado WHERE NombreLav= :nombrelav")
+    boolean checkLavado(String nombrelav);
 
 
     // SnaksConsumidos
@@ -207,5 +216,8 @@ public interface DaoProject {
 
     @Query("DELETE FROM Sucursal WHERE NombreSuc= :nombreSuc")
     void deleteSucursal(String nombreSuc);
+
+    @Query("SELECT * FROM Sucursal WHERE NombreSuc= :nombreSuc")
+    boolean checkSucursal(String nombreSuc);
 
 }
