@@ -36,6 +36,10 @@ export class NuevoProveedorComponent implements OnInit {
   onEliminar(): void{ 
     this.service.onEliminar(this.objeto.nombre)
   }
+  onCancelar(): void{ 
+    this.service.onCancelar()
+  }
+
 
   ngOnInit(): void {
     if(this.rou.snapshot.params['id']==undefined){

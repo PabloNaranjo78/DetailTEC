@@ -103,6 +103,10 @@ export class NuevoLavadoComponent implements OnInit {
   onEliminar(): void{
     this.service.onEliminar(this.objeto.nombreLav) 
   }
+
+  onCancelar(): void{ 
+    this.service.onCancelar()
+  }
 }
 
 

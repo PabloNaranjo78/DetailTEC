@@ -39,6 +39,10 @@ export class NuevoTrabajadorComponent implements OnInit {
     this.service.onEliminar(this.objeto.nombre)
   }
 
+  onCancelar(): void{ 
+    this.service.onCancelar()
+  }
+
   ngOnInit(): void {
     if(this.rou.snapshot.params['id']==undefined){
       this.editMode = false;

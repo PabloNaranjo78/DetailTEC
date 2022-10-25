@@ -15,6 +15,9 @@ export class TrabajadorService extends ConexionService<Trabajador>{
   getHomePage(): string {
     return 'gestion-trabajadores'
   }
+  getNombre(): string {
+    return "Trabajador"
+  }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
   }

@@ -41,7 +41,7 @@
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
               <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-clientes" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>                                                                      
             </div>
@@ -50,7 +50,7 @@
               <div class="row my-5">
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-clientes" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>
             </ng-template>
@@ -74,7 +74,7 @@
           <div class="row">
             <div class="col">
               <div class="col-3">
-                <label for = "newTelefono" class="form-label">Telefono</label>
+                <label for = "newTelefono" class="form-label h3 fw-bold">Teléfono</label>
               </div>
               <div class="col">
                 <input type = "number" class="form-control" name = "newTelefono" [(ngModel)] = "telefonoNuevo.telefono">
@@ -87,9 +87,11 @@
           <div class="row my-3">
             <div *ngFor="let tel of listaTelefonos; let i=index">
               <div class="row mt-4 style">
-                <div class="col-1 offset-md-2"></div>
-                <div class="col-4">Teléfono {{i+1}}:</div>
-                <div class="col">{{tel.telefono}}</div>
+                <div class="col-2"></div>
+                <div class="col-2"><button type="submit" (click) = onDeleteTelefono(tel) class="btn btn-outline-primary"> D </button></div>
+                <div class="col-4 gy-2" >Teléfono {{i+1}}:</div>
+                <div class="col gy-2">{{tel.telefono}}               </div>
+                <div class="col-2"></div>
               </div>
             </div>
           </div>

@@ -15,6 +15,9 @@ export class LavadoService extends ConexionService<Lavado>{
   getHomePage(): string {
     return 'gestion-lavados'
   }
+  getNombre(): string {
+    return "Lavado"
+  }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
   }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Insumo } from '../interfaces/insumo';
+import { Insumo, ProveidoPor } from '../interfaces/insumo';
 import { ConexionService } from './conexion.service';
 
 @Injectable({
@@ -18,10 +18,26 @@ export class InsumoService extends ConexionService<Insumo>{
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
   }
+  getNombre(): string {
+    return "Insumo"
+  }
+}
 
-  addProveedor(){
-    console.log(this.getRuta() + "/aaa/aaa");
-    return this.httpClient.get<Insumo[]>(this.getRuta() + "/aaa/aaa");
-
+@Injectable({
+  providedIn: 'root'
+})
+export class ProveidoService extends ConexionService<ProveidoPor>{
+  id:string|number="";
+  getResourceURL(): string {
+    return "/ProveidoPor"
+  }
+  getHomePage(): string {
+    return 'actualizar-insumo/' + this.id;
+  }
+  getNombre(): string {
+    return "Proveedor de Insumo"
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
   }
 }

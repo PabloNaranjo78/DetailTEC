@@ -9,6 +9,9 @@ import { ConexionService } from './conexion.service';
   providedIn: 'root'
 })
 export class CitaService extends ConexionService<Cita>{
+  getNombre(): string {
+    return "Cita"
+  }
   getResourceURL(): string {
     return "/Cita"
   }

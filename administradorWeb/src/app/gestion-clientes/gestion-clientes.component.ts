@@ -12,9 +12,9 @@ export class GestionClientesComponent extends BotonesService<Cliente> implements
 
   /*Constructor de la clase, servicio de citas inyectado 
   Consulta todas los clientes disponibles a la base de datos*/
-  constructor(clienteService:ClienteService) {
+  constructor(service:ClienteService) {
     super();
-    clienteService.getList().subscribe((data) =>{
+    service.getList().subscribe((data) =>{
       this.lista = data
     })
   }

@@ -15,6 +15,9 @@ export class ClienteService extends ConexionService<Cliente>{
   getHomePage(): string {
     return 'gestion-clientes'
   }
+  getNombre(): string {
+    return "Cliente"
+  }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
   }
@@ -32,5 +35,10 @@ export class TelefonoService extends ConexionService<Telefono>{
   getHomePage(): string {
     return 'actualizar-cliente/' + this.id;
   }
-
+  getNombre(): string {
+    return "Cita"
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
+  }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Insumo } from '../interfaces/insumo';
-import { InsumoService } from '../services/insumo.service';
+import { Insumo, ProveidoPor } from '../interfaces/insumo';
+import { Proveedor } from '../interfaces/proveedor';
+import { InsumoService, ProveidoService } from '../services/insumo.service';
+import { ProveedorService } from '../services/proveedor.service';
 
 @Component({
   selector: 'app-nuevo-insumo',
@@ -17,10 +19,18 @@ export class NuevoInsumoComponent implements OnInit {
     marcaPro:"",
     costo:0,
   }
+  proveedorNuevo:ProveidoPor={
+    nombrePro:"",
+    marcaPro:"",
+    proveedor:0,
+  }
+
+  listaProveedores: Proveedor[] =[]
+  listaProveidoPor: ProveidoPor[] = []
 
   editMode = true;
 
-  constructor(private service:InsumoService, private route:Router, private rou:ActivatedRoute) { }
+  constructor(private service:InsumoService, private provService:ProveidoService, private proveedorService:ProveedorService, private route:Router, private rou:ActivatedRoute) { }
 
   onGuardar(): void{
     if (this.editMode){
@@ -31,11 +41,29 @@ export class NuevoInsumoComponent implements OnInit {
   }
 
   onProveedores(){
-    this.service.addProveedor().subscribe({next: (data) =>console.log(data) });
+    this.provService.get(this.objeto.nombrePro).subscribe((data) => {this.listaProveidoPor = data;})
+    this.proveedorService.getList().subscribe((data) => {this.listaProveedores = data;})
+    this.provService.id = this.objeto.marcaPro + "/" + this.objeto.nombrePro
+    this.proveedorNuevo.marcaPro = this.objeto.marcaPro
+    this.proveedorNuevo.nombrePro = this.objeto.nombrePro
   }
 
   onEliminar(): void{ 
     this.service.onEliminar(this.objeto.marcaPro,this.objeto.nombrePro)
+  }
+
+  
+  onCancelar(): void{ 
+    this.service.onCancelar()
+  }
+
+  onAddProveedor(){
+    console.log(this.proveedorNuevo);
+    this.provService.onNuevo(this.proveedorNuevo, this.proveedorNuevo.proveedor);
+  }
+
+  onDeleteProveedor(pro: ProveidoPor){
+    this.provService.onEliminar(this.proveedorNuevo.nombrePro, this.proveedorNuevo.marcaPro + "/" + this.proveedorNuevo.proveedor);
   }
 
   ngOnInit(): void {

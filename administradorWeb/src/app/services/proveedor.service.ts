@@ -15,6 +15,9 @@ export class ProveedorService extends ConexionService<Proveedor>{
   getHomePage(): string {
     return 'gestion-proveedores'
   }
+  getNombre(): string {
+    return "Proveedor"
+  }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
   }

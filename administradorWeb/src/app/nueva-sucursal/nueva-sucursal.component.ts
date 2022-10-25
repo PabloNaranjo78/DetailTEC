@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { adminSucursal, Sucursal } from '../interfaces/sucursal';
 import { Trabajador } from '../interfaces/trabajador';
-import { SucursalService } from '../services/sucursal.service';
+import { AdminSucursalService, SucursalService } from '../services/sucursal.service';
 import { TrabajadorService } from '../services/trabajador.service';
 
 @Component({
@@ -26,27 +26,53 @@ export class NuevaSucursalComponent implements OnInit {
 
   admin:adminSucursal={
     sucursal:"",
-    fechaGerente: "",
-    gerente:0,
+    fechaInicio: "",
+    idTrabajador:0,
+  }
+
+  idGerente:adminSucursal={
+    sucursal:"",
+    fechaInicio: "",
+    idTrabajador:0,
   }
 
   editMode = true;
   listaTrabajadores:Trabajador[] = [];
 
-  constructor(private service:SucursalService, private route:Router, private rou:ActivatedRoute, private trabajadorService:TrabajadorService) { }
+  constructor(private service:SucursalService, private adminService:AdminSucursalService, private route:Router, private rou:ActivatedRoute, private trabajadorService:TrabajadorService) { }
   
 
   onGuardar(): void{
     if (this.editMode){
-      this.service.onActualizar(this.objeto,this.objeto.nombreSuc)
+      this.service.onActualizar(this.objeto,this.objeto.nombreSuc);
+      this.adminService.get(this.objeto.nombreSuc).subscribe({
+        next: (data) => {
+        console.log(data);
+        this.idGerente = data[0];
+        console.log(this.idGerente);
+      }, error: (err) => {
+        this.service.avisoError(err.error)
+      }})
+      console.log(this.idGerente);
+      console.log(this.admin.idTrabajador);
+      if (this.idGerente.idTrabajador != this.admin.idTrabajador){
+        this.adminService.onEliminar(this.admin.sucursal, this.idGerente.idTrabajador);
+        this.adminService.onNuevo(this.admin,this.admin.idTrabajador);
+      }
+      
     } else {
-      this.service.onNuevo(this.objeto,this.objeto.nombreSuc)
+      this.service.onNuevo(this.objeto,this.objeto.nombreSuc);
+      this.adminService.onNuevo(this.admin, this.admin.idTrabajador);
     }
   }
 
   onEliminar(): void{ 
     this.service.onEliminar(this.objeto.nombreSuc)
-    }
+  }
+
+  onCancelar(): void{ 
+    this.service.onCancelar()
+  }
 
   ngOnInit(): void {
     this.trabajadorService.getList().subscribe({
@@ -69,6 +95,15 @@ export class NuevaSucursalComponent implements OnInit {
         error: (err) =>{
           this.service.avisoError(err.error)}
       });
+      this.adminService.get(this.objeto.nombreSuc).subscribe({ 
+        /*Mensaje emergente de exito*/
+        next: (data) => {
+          this.admin =  data[0]
+        },
+        /*Mensaje emergente de error*/
+        error: (err) =>{
+          this.service.avisoError(err.error)}
+      })
     }
   }
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NuevaCitaComponent } from './nueva-cita.component';
+import { NuevaCitComponent } from './nueva-cit.component';
 
-describe('NuevaCitaComponent', () => {
-  let component: NuevaCitaComponent;
-  let fixture: ComponentFixture<NuevaCitaComponent>;
+describe('NuevaCitComponent', () => {
+  let component: NuevaCitComponent;
+  let fixture: ComponentFixture<NuevaCitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NuevaCitaComponent ]
+      declarations: [ NuevaCitComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NuevaCitaComponent);
+    fixture = TestBed.createComponent(NuevaCitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

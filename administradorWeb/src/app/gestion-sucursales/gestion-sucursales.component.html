@@ -4,7 +4,7 @@
       <div class="row mt-3">
           <a class="btn btn-primary" style= "width: 100%; font-size:x-large;" href="/nueva-sucursal" role="button">Añadir Nueva Sucursal</a>
       </div>
-        <div *ngFor="let n of listaSucursales; let i=index">
+        <div *ngFor="let n of lista; let i=index">
             <div *ngIf="crearFila(i)">
                 <div class="row mt-4">
                     <ng-template ngFor let-sucursal [ngForOf] = "subLista(i)">

@@ -20,8 +20,12 @@ export abstract class ConexionService<T> {
 
  abstract getResourceURL(): string;
  abstract getHomePage(id?: string|number, id2?: string|number): string;
+ abstract getNombre(): string;
   
  lista:T[]=[]
+ temp:T[]=[]
+ 
+ listaAll:T[]=[]
   getList(){
     return this.httpClient.get<T[]>(this.RUTA_API);
   }
@@ -34,15 +38,15 @@ export abstract class ConexionService<T> {
     return this.httpClient.get<T[]>(this.RUTA_API+"/"+id);
   }
 
-  add(resurce:T): Observable<T>{
+  private add(resurce:T): Observable<T>{
     return this.httpClient.post<T>(this.RUTA_API,resurce);
   }
 
-  update(resource:T): Observable<T> {
+  private update(resource:T): Observable<T> {
     return this.httpClient.put<T>(this.RUTA_API,resource);
   }
 
-  delete(id: string | number){
+  private delete(id: string | number){
     return this.httpClient.delete<T[]>(this.RUTA_API+"/"+id);
   }
 
@@ -50,6 +54,7 @@ export abstract class ConexionService<T> {
     if (id2){
       id = id + "/" + id2
     }
+    console.log(this.RUTA_API+"/"+id)
     this.delete(id).subscribe({
       next:(data)=>{
         this.avisoSuccess("eliminado", id);
@@ -59,7 +64,7 @@ export abstract class ConexionService<T> {
     })
   }
 
-  onActualizar(objeto:T, nombre:string){
+  onActualizar(objeto:T, nombre:string | number){
     /**Solicitud HTTP para el PUT en el API */
     this.update(objeto).subscribe({
       /*Mensaje emergente de exito*/
@@ -76,7 +81,7 @@ export abstract class ConexionService<T> {
     })
   }
 
-  onNuevo(objeto:T, nombre:string){
+  onNuevo(objeto:T, nombre:string | number){
     /**Solicitud HTTP para el PUT en el API */
     this.add(objeto).subscribe({
       /*Mensaje emergente de exito*/
@@ -92,33 +97,22 @@ export abstract class ConexionService<T> {
     })
   }
 
-  onGet(id:string | number, id2?: string|number){
+  onGet(id:string | number, id2?: string|number) : T[]{
+    this.temp = []
     if (id2){
       id = id + "/" + id2
     } 
 
     this.get(id).subscribe({
       next: (data)=>{
-        return data
+        this.temp =  data
       }, 
       error: (err) => {
         this.avisoError(err.error)
-        return []
       }
     })
-  }
 
-  onGetAll(){
-    this.getList().subscribe({
-      next:(data) => {
-        this.lista = data;
-      },
-      /*Mensaje emergente de error*/
-      error: (err) =>{
-        this.avisoError(err.error)
-        return [];
-      }}
-    )
+    return this.temp
   }
 
   onCancelar(){
@@ -136,7 +130,7 @@ export abstract class ConexionService<T> {
   avisoSuccess(tipo:string, id:string | number){
     Swal.fire({
       icon: 'success',
-      title: '¡Has ' + tipo + ' a '+ id +' exitosamente!'
+      title: '¡Has ' + tipo + ' a '+ id +' como ' + this.getNombre() + ' exitosamente!'
     })
   } 
 

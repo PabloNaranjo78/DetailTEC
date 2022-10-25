@@ -1,8 +1,8 @@
 export interface Cita {
     placa:number,
-    fechaCita:Date,
-    IdEmpleado:number,
+    fechaCita:string,
+    idEmpleado:number,
     sucursal:string,
-    lavador:string,
-    IdCliente:number,
+    lavado:string,
+    idCliente:number,
 }

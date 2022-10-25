@@ -34,13 +34,13 @@
                 <div class="row mt-4"><input type = "number" class="form-control" name = "telefono" [(ngModel)] = "objeto.telefono"></div>
                 <div class="row mt-4"><input type = "date" class="form-control" name = "fechaApertura" [(ngModel)] = "objeto.fechaApert"></div>
                 <div class="row mt-4">
-                    <select class="form-select" name = "gerente" [(ngModel)] = "admin.gerente" aria-label="Default select example">
+                    <select class="form-select" name = "gerente" [(ngModel)] = "admin.idTrabajador" aria-label="Default select example">
                       <option selected>Seleccione un Empleado</option>
                     <ng-template ngFor let-trabajador [ngForOf] = "listaTrabajadores"; let-i="index">
                       <option [value] ="trabajador.idTrabajador">{{trabajador.nombre}} ({{trabajador.idTrabajador}})</option>
                     </ng-template>
                   </select></div>
-                <div class="row mt-4"><input type = "date" class="form-control" name = "fechaGerente" [(ngModel)] = "admin.fechaGerente"></div>
+                <div class="row mt-4"><input type = "date" class="form-control" name = "fechaGerente" [(ngModel)] = "admin.fechaInicio"></div>
               </div>
   
             </div>
@@ -49,7 +49,7 @@
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
               <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-sucursales" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>                                                                      
             </div>
@@ -58,7 +58,7 @@
               <div class="row my-5">
                 <div class="col"></div>
                 <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
-                <div class="col text-center"> <a role="button" type="button" href="/gestion-sucursales" class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
                 <div class="col"></div>
               </div>
             </ng-template>

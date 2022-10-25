@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
 import { ClienteService, TelefonoService } from '../services/cliente.service';
 
@@ -8,6 +8,7 @@ import { ClienteService, TelefonoService } from '../services/cliente.service';
   templateUrl: './nuevo-cliente.component.html',
   styleUrls: ['./nuevo-cliente.component.css']
 })
+
 export class NuevoClienteComponent implements OnInit {
   /*Cita temporal que alberga las modificaciones en el formulario
    object: Cliente*/
@@ -44,6 +45,7 @@ export class NuevoClienteComponent implements OnInit {
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
   constructor(private route:Router, private rou:ActivatedRoute, private service:ClienteService, private telService:TelefonoService) {
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     service.getList().subscribe((data) =>{
       this.listaClientes = data
     })
@@ -89,7 +91,10 @@ export class NuevoClienteComponent implements OnInit {
     console.log(this.telefonoNuevo)
     //this.service.avisoSuccess("agregado un numero de teléfono", this.objeto.nombre);
     this.telService.onNuevo(this.telefonoNuevo,this.telefonoNuevo.telefono.toString())
-    
+  }
+
+  onDeleteTelefono(tel:Telefono):void{
+    this.telService.onEliminar(tel.idCliente,tel.telefono)
   }
 
   /*Llamada desde el botón "Añadir Direccion" envía un POST request al server */

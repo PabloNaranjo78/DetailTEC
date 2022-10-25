@@ -18,8 +18,8 @@ import { NuevoProveedorComponent } from './nuevo-proveedor/nuevo-proveedor.compo
 import { NuevaSucursalComponent } from './nueva-sucursal/nueva-sucursal.component';
 import { NuevoInsumoComponent } from './nuevo-insumo/nuevo-insumo.component';
 import { NuevoLavadoComponent } from './nuevo-lavado/nuevo-lavado.component';
-import { NuevaCitaComponent } from './nueva-cita/nueva-cita.component';
 import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.component';
+import { NuevaCitComponent } from './nueva-cit/nueva-cit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.co
     NuevaSucursalComponent,
     NuevoInsumoComponent,
     NuevoLavadoComponent,
-    NuevoTrabajadorComponent
+    NuevoTrabajadorComponent,
+    NuevaCitComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,7 @@ import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.co
 
       {path:"nuevo-cliente", component:NuevoClienteComponent},
       {path:"nuevo-proveedor", component:NuevoProveedorComponent},
-      {path:"nueva-cita", component:NuevaCitaComponent},
+      {path:"nueva-cita", component:NuevaCitComponent},
       {path:"nuevo-lavado", component:NuevoLavadoComponent},
       {path:"nueva-sucursal", component:NuevaSucursalComponent},
       {path:"nuevo-trabajador", component:NuevoTrabajadorComponent},
@@ -62,13 +63,14 @@ import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.co
       
       {path:"actualizar-cliente/:id", component:NuevoClienteComponent},
       {path:"actualizar-proveedor/:id", component:NuevoProveedorComponent},
-      {path:"actualizar-cita/:id", component:NuevaCitaComponent},
+      {path:"actualizar-cita/:id", component:NuevaCitComponent},
       {path:"actualizar-lavado/:id", component:NuevoLavadoComponent},
       {path:"actualizar-sucursal/:id", component:NuevaSucursalComponent},
       {path:"actualizar-trabajador/:id", component:NuevoTrabajadorComponent},
       {path:"actualizar-insumo/:marca/:nombre", component:NuevoInsumoComponent},
       
-    ]),
+    ],
+    {onSameUrlNavigation: 'reload'}),
     FormsModule,
     HttpClientModule
   ],

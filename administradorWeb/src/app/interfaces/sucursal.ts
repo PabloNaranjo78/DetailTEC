@@ -10,6 +10,6 @@ export interface Sucursal {
 
 export interface adminSucursal{
     sucursal:string
-    fechaGerente:string,
-    gerente:number,
+    fechaInicio:string,
+    idTrabajador:number,
 }
