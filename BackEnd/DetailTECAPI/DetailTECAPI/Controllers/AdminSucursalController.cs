@@ -71,11 +71,11 @@ namespace DetailTECAPI.Controllers
         }
 
         // DELETE api/<AdminSucursalController>/5
-        [HttpDelete("{sucursal}/{idTrabajador}")]
-        public async Task<ActionResult<AdminSucursal>> Delete(string sucursal, int idTrabajador)
+        [HttpDelete("{sucursal}")]
+        public async Task<ActionResult<AdminSucursal>> Delete(string sucursal)
         {
             List<AdminSucursal> entityList = new List<AdminSucursal>();
-            var result = adminSucursal.delete("ADMIN_SUCURSAL", $"Sucursal = '{sucursal}' AND IDTrabajador = {idTrabajador}");
+            var result = adminSucursal.delete("ADMIN_SUCURSAL", $"Sucursal = '{sucursal}'");
             return result ? Ok(entityList) : BadRequest($"No se logró eliminar al admin de {sucursal}");
         }
     }
