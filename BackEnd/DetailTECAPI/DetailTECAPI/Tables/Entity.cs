@@ -69,6 +69,7 @@ namespace DetailTECAPI.Tables
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString);
                 return false;
             }
         }
@@ -90,9 +91,9 @@ namespace DetailTECAPI.Tables
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.ToString);
                 return false;
             }
 
@@ -118,8 +119,9 @@ namespace DetailTECAPI.Tables
                 SqlDataReader dr = cmd.ExecuteReader();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.ToString);
                 return false;
 
             }

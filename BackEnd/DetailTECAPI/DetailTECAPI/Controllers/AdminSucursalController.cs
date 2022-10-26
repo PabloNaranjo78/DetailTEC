@@ -35,8 +35,9 @@ namespace DetailTECAPI.Controllers
                 var entityList = adminSucursal.get($"'{sucursal}'", "Sucursal", "IDTrabajador, Sucursal, FechaInicio", "ADMIN_SUCURSAL");
                 return Ok(entityList);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.ToString);
                 return BadRequest("No se encontró");
 
             }
