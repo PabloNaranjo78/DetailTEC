@@ -25,6 +25,7 @@ namespace DetailTECAPI.Tables
 
             SqlDataReader dr = cmd.ExecuteReader();
             entityList = createEntityList(dr);
+            Console.WriteLine(entity);
             return entityList;
 
         }

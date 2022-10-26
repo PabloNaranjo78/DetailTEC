@@ -17,7 +17,7 @@ namespace DetailTECAPI.Tables
             {
                 IDTrabajador = Convert.ToInt32(dr["IDTrabajador"]),
                 Sucursal = dr["Sucursal"].ToString(),
-                FechaInicio = dateFormat(dr,"FechaInicio")
+                FechaInicio = dr["FechaInicio"].ToString()
             };
         }
     }
