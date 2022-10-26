@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export abstract class ConexionService<T> {
 
   /**Ruta a conectarse con el API REST */
- private readonly RUTA_API = "https://127.0.0.1:7035/api" + this.getResourceURL();
+ private readonly RUTA_API = "http://25.55.195.113:4500/api" + this.getResourceURL();
  constructor(protected httpClient:HttpClient, protected route:Router) {
  }
 
@@ -35,6 +35,7 @@ export abstract class ConexionService<T> {
     if (marca){
       return this.httpClient.get<T[]>(this.RUTA_API+"/"+id+ "/"+ marca);
     }
+    console.log(this.RUTA_API+"/"+id)
     return this.httpClient.get<T[]>(this.RUTA_API+"/"+id);
   }
 
@@ -54,7 +55,6 @@ export abstract class ConexionService<T> {
     if (id2){
       id = id + "/" + id2
     }
-    console.log(this.RUTA_API+"/"+id)
     this.delete(id).subscribe({
       next:(data)=>{
         this.avisoSuccess("eliminado", id);

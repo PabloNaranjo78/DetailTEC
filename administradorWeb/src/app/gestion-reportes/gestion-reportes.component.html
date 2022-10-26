@@ -1,0 +1,22 @@
+<div class="row">
+<div class="col-4"></div>
+<div class="col text-center">
+    <div class="row my-3"></div>
+    <div class="row my-5">
+        <h2 class = "fw-bold">Reporte Planilla</h2>
+        <label for = "fullname" class="form-label"></label>
+        
+        <a role="button" type="button" (click) = onPlanilla() class="btn btn-primary" > Descargar Reporte </a></div>
+    <div class="row my-5"><h2 class = "fw-bold ">Tipos Lavado Por Cliente</h2>
+        <select class="form-select" name = "cliente" [(ngModel)] = "idCliente" aria-label="Default select example">
+          <ng-template ngFor let-cliente [ngForOf] = "listaClientes"; let-i="index">
+            <option [value] ="cliente.idCliente">{{cliente.nombre}} ({{cliente.idCliente}})</option>
+          </ng-template>
+        </select>
+        <a role="button" type="button" (click) = onLavadoCliente() class="btn btn-primary" > Descargar Reporte </a></div>
+    <div class="row my-5"><h2 class = "fw-bold ">Redención de Puntos</h2>
+        <a role="button" type="button" (click) = onPuntos() class="btn btn-primary"> Descargar Reporte </a></div>
+
+</div>
+<div class="col-4"></div>
+</div>

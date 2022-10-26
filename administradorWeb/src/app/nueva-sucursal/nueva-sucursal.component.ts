@@ -14,7 +14,7 @@ export class NuevaSucursalComponent implements OnInit {
   /**Sucursal temporal para enviar a ser verificado
    * input: Sucursal Interface
    */
-   objeto:Sucursal={
+  objeto:Sucursal={
     nombreSuc:"",
     fechaApert: "",
     telefono:0,
@@ -30,12 +30,6 @@ export class NuevaSucursalComponent implements OnInit {
     idTrabajador:0,
   }
 
-  idGerente:adminSucursal={
-    sucursal:"",
-    fechaInicio: "",
-    idTrabajador:0,
-  }
-
   editMode = true;
   listaTrabajadores:Trabajador[] = [];
 
@@ -45,20 +39,7 @@ export class NuevaSucursalComponent implements OnInit {
   onGuardar(): void{
     if (this.editMode){
       this.service.onActualizar(this.objeto,this.objeto.nombreSuc);
-      this.adminService.get(this.objeto.nombreSuc).subscribe({
-        next: (data) => {
-        console.log(data);
-        this.idGerente = data[0];
-        console.log(this.idGerente);
-      }, error: (err) => {
-        this.service.avisoError(err.error)
-      }})
-      console.log(this.idGerente);
-      console.log(this.admin.idTrabajador);
-      if (this.idGerente.idTrabajador != this.admin.idTrabajador){
-        this.adminService.onEliminar(this.admin.sucursal, this.idGerente.idTrabajador);
-        this.adminService.onNuevo(this.admin,this.admin.idTrabajador);
-      }
+      this.adminService.onActualizar(this.admin, this.admin.idTrabajador);
       
     } else {
       this.service.onNuevo(this.objeto,this.objeto.nombreSuc);
@@ -86,6 +67,7 @@ export class NuevaSucursalComponent implements OnInit {
     if(this.rou.snapshot.params['id']==undefined){
       this.editMode = false;
     } else {
+      console.log(this.rou.snapshot.params['id'])
       this.service.get(this.rou.snapshot.params['id']).subscribe({
         /*Mensaje emergente de exito*/
         next: (data) => {
@@ -95,7 +77,7 @@ export class NuevaSucursalComponent implements OnInit {
         error: (err) =>{
           this.service.avisoError(err.error)}
       });
-      this.adminService.get(this.objeto.nombreSuc).subscribe({ 
+      this.adminService.get(this.rou.snapshot.params['id']).subscribe({ 
         /*Mensaje emergente de exito*/
         next: (data) => {
           this.admin =  data[0]

@@ -1,5 +1,5 @@
 use DetailTEC;
-select * from Lavado
+select * from ADMIN_SUCURSAL
 
 INSERT INTO LAVADO VALUES('Lavado encerado', 1.1, 7000, 3500, 150)
 
@@ -18,8 +18,6 @@ select * from trabajador
 Select IDcliente,Usuario,Contraseña,InfoContacto,Nombre,email,PuntosDispo from CLIENTE where IDcliente = 1234
 Delete from Cliente where IDcliente = 11111
 Select * from Insumo
-Delete from Cliente
-delete from Lavado
 Select * from Sucursal
 select * from PROVEIDO_POR
 select * from lavado
@@ -69,3 +67,4 @@ AS NumCitas, Costo, Costo*COUNT(FechaCita) AS MontoTotal FROM ((TRABAJADOR INNER
 ON IDTrabajador=IDEmpleado) INNER JOIN LAVADO ON Lavado=NombreLav) GROUP BY IDTrabajador, TipoPago, Nombre, Apellidos, Lavado, Costo ORDER BY IDTrabajador
 
 SELECT    CLIENTE.IDCliente, Nombre, FechaCita, Lavado, Precio FROM (CLIENTE INNER JOIN CITA ON (CLIENTE.IDCliente=CITA.IDCliente AND CLIENTE.IDCliente=1234)) INNER JOIN LAVADO ON Lavado=NombreLav ORDER BY Precio DESC
+
