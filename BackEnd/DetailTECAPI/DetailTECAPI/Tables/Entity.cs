@@ -155,9 +155,8 @@ namespace DetailTECAPI.Tables
 
         protected string dateFormat(SqlDataReader dr, string param)
         {
-            string result = dr[param].ToString().Split(' ')[0];
 
-            return result;
+            return dr[param].ToString();
         }
 
         public string toSha256(string contraseña) {
