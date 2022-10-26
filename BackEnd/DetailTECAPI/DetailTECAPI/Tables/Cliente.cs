@@ -12,8 +12,7 @@ namespace DetailTECAPI.Tables
         public int IDCliente { get; set; }
         [Key]
         public string? Usuario { get; set; }
-        private string? ContraseñaHash { get; set; }
-        public string? Contraseña { get { return ContraseñaHash; } set { ContraseñaHash = toSha256(value); } }
+        public string? Contraseña { get; set; }
         public string? InfoContacto { get; set; }
         public string? Nombre { get; set; }
         public string? email { get; set; }

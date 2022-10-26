@@ -9,6 +9,7 @@ INSERT INTO CLIENTE VALUES (1234,'Jpablo','123456789','Casa','Jose Pablo','pablo
 INSERT INTO CLIENTE VALUES (1235,'FMonge','999999999','Casa','Fernando Monge','fermonge@gmail.com',999);
 Insert into Sucursal Values ('Papa','12-12-1999',99999,'San Jose','Canton','Distrito',9);
 Insert into TRABAJADOR values (99999,'12-12-99','12121ds2','Arr','Jesus','Opol','9-9-2001','Efectivo');
+Insert into CLIENTE_DIRECCIONES values (1234,'San','Tarra','Marcos')
 
 Update CLIENTE set Usuario = 'Juan' where IDcliente = 1234
 
@@ -20,7 +21,13 @@ Select * from Insumo
 Delete from Cliente
 delete from Lavado
 Select * from Sucursal
+select * from PROVEIDO_POR
 select * from lavado
+select * from cita
+select * from BEBIDA_SNACK
+
+select * from ADMIN_SUCURSAL where Sucursal = 'Cartago'
+
 INSERT INTO LAVADO VALUES ('string',0,0,0,0)
 
 INSERT INTO LAVADO VALUES('Lavado y aspirado', 1.4, 10000, 5000, 200)

@@ -21,9 +21,9 @@ namespace DetailTECAPI.Controllers
                     "Lavado,IDCliente", "CITA");
                 return Ok(entityList);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("No se logró conectar con la DB");
+                return BadRequest(e.ToString());
 
             }
         }

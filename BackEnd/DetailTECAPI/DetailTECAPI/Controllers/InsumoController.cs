@@ -26,6 +26,22 @@ namespace DetailTECAPI.Controllers
             }
         }
 
+        // GET: api/<InsumoController>
+        [HttpGet("solo/")]
+        public async Task<ActionResult<Insumo>> GetSolo()
+        {
+            try
+            {
+                var lavadoList = insumo.get("NombrePro,MarcaPro,Costo", "INSUMO");
+                return Ok(lavadoList.First());
+            }
+            catch (Exception)
+            {
+                return BadRequest("No se logró conectar con la DB");
+
+            }
+        }
+
         // GET api/<InsumoController>/5
         [HttpGet("{marca}/{nombre}")]
         public async Task<ActionResult<List<Insumo>>> Get(string marca, string nombre)
