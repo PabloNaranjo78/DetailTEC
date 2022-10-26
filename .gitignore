@@ -557,3 +557,6 @@ obj/
 /wwwroot/node_modules
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore,aspnetcore
+BackEnd/DetailTECAPI/DetailTECAPI/Connection/Connection.cs
+administradorWeb/src/app/services/conexion.service.ts
+administradorWeb/package-lock.json
