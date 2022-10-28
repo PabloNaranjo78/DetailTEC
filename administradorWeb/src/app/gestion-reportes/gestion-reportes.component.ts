@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ITable, PdfMakeWrapper, Table } from 'pdfmake-wrapper';
+import { ITable, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import { Cliente } from '../interfaces/cliente';
 import { ClienteService } from '../services/cliente.service';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { CitaService } from '../services/cita.service';
 PdfMakeWrapper.setFonts(pdfFonts);
 
 
@@ -30,6 +31,20 @@ interface DataResponseLavadoCliente {
 
 type TableRowLavadoCliente = [number, string, string, string, number]
 
+
+
+interface DataResponseRedencionPuntos {
+  idTrabajador:number;
+  tipoPago:string;
+  nombreCompleto:string;
+  lavado:string;
+  numCitas:number;
+  costo:number;
+  montoTotal:number;
+
+}
+
+type TableRowRedencionPuntos = [number, string, string, string, number, number, number]
 
 
 
@@ -74,7 +89,7 @@ export class GestionReportesComponent implements OnInit {
     const pdf = new PdfMakeWrapper();
     const dataPlanilla = await this.fetchDataPlanilla();
     
-    pdf.add('Planilla de empleados\n\n');
+    pdf.add(new Txt('Planilla de empleados\n').alignment('center').fontSize(30).bold().end);
     pdf.add(this.createTablePlanilla(dataPlanilla));
 
     const CurrentDate = new Date();
@@ -106,21 +121,19 @@ export class GestionReportesComponent implements OnInit {
   }
 
   async fetchDataPlanilla():Promise<DataResponsePlanilla[]>{
-    return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
+    return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
+    //return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
   }
 
 
   ///////////////////////////////////////////////////////// Tipo de lavado por cliente ////////////////////////////////////////
-
-
- 
 
   async createPdfLavadoCliente(){
     //console.log('Se está creando un pdf');
     const pdf = new PdfMakeWrapper();
     const data = await this.fetchDataLavadoCliente();
     
-    pdf.add('Tipo de lavado para el cliente con Id: ' + this.idCliente + '\n\n');
+    pdf.add(new Txt('Tipo de lavado para el cliente con Id: ' + this.idCliente + '\n\n').alignment('center').fontSize(30).bold().end);
     pdf.add(this.createTableLavadoCliente(data));
 
     const CurrentDate = new Date();
@@ -154,9 +167,79 @@ export class GestionReportesComponent implements OnInit {
 
 
   async fetchDataLavadoCliente():Promise<DataResponseLavadoCliente[]>{
-    return fetch('http://25.55.195.113:4500/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
+    return fetch('https://localhost:7035/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
+    //return fetch('http://25.55.195.113:4500/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
   }
 
 
+  //////////////////////////////////////// Redención de puntos ///////////////////////////////////////////
+
+  async createRedencionPuntos(){
+    //console.log('Se está creando un pdf');
+    const pdf = new PdfMakeWrapper();
+    const dataRedencionPuntos = await this.fetchDataRedencionPuntos();
+    
+    pdf.add(new Txt('Redención de puntos\n').alignment('center').fontSize(40).bold().end);
+    pdf.add(this.createTableRedencionPuntos(dataRedencionPuntos));
+
+    const CurrentDate = new Date();
+    const date = CurrentDate.getDate().toString() + '/' + CurrentDate.getMonth().toString() + '/' + 
+                  CurrentDate.getFullYear().toString() + '-' + CurrentDate.getHours().toString() + ':' + 
+                  CurrentDate.getMinutes().toString() + ':' + CurrentDate.getSeconds().toString();
+
+    pdf.create().open();
+    pdf.create().download('Redención de puntos - ' + date);
+    }
+
+  createTableRedencionPuntos(data: DataResponseRedencionPuntos[]): ITable{
+    
+    return new Table([
+      ['Id Trabajador', 'Tipo de pago', 'Nombre completo', 'Tipo de lavado', 'Cantidad de citas', 'Costo', 'Monto total'],
+      ...this.extractDataRedencionPuntos(data)
+    ])
+    .widths([60,60,100,50,50,50,50])
+    .layout({
+      fillColor:(rowIndex, node, columnIndex) => {
+        return rowIndex === 0 ? '#CCCCCC' : '';
+     }
+    })
+    .end;
+  }
+
+  extractDataRedencionPuntos(data:DataResponseRedencionPuntos[]):TableRowRedencionPuntos[] {
+    return data.map(row=>[row.idTrabajador, row.tipoPago, row.nombreCompleto, row.lavado, row.numCitas, row.costo,row.montoTotal]);
+  }
+
+  async fetchDataRedencionPuntos():Promise<DataResponseRedencionPuntos[]>{
+    return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
+    //return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
+  }
+
+  ////////////////////////////////////////////// Factura ////////////////////////////////////////////////
+  
+  generarFactura(){
+    const pdf = new PdfMakeWrapper();
+
+    
+    pdf.add(new Txt('DetailTEC\n').alignment('center').fontSize(40).bold().end);
+
+    pdf.add(new Txt('Factura: FACTURA').fontSize(15).end);
+    pdf.add(new Txt('Cliente: NOMBRE').fontSize(15).end);
+    pdf.add(new Txt('Sucursal: SUCURSAL').fontSize(15).end);
+    pdf.add(new Txt('Trabajador a cargo: NOMBRE').fontSize(15).end);
+    pdf.add(new Txt('Fecha: FECHA').fontSize(15).end);
+    pdf.add(new Txt('Placa: PLACA').fontSize(15).end);
+    pdf.add(new Txt('\n').fontSize(15).end);
+
+    pdf.add(new Txt('Insumos\n').fontSize(15).end);
+    pdf.add(new Txt('Bebidas\n').fontSize(15).end);
+    pdf.add(new Txt('Snacks\n').fontSize(15).end);
+    pdf.add(new Txt('Total').fontSize(15).end);
+
+
+
+
+    pdf.create().open();
+  }
 
 }
