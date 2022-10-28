@@ -35,12 +35,11 @@ export abstract class ConexionService<T> {
     if (marca){
       return this.httpClient.get<T[]>(this.RUTA_API+"/"+id+ "/"+ marca);
     }
-    console.log(this.RUTA_API+"/"+id)
     return this.httpClient.get<T[]>(this.RUTA_API+"/"+id);
   }
 
-  private add(resurce:T): Observable<T>{
-    return this.httpClient.post<T>(this.RUTA_API,resurce);
+  private add(resource:T): Observable<T>{
+    return this.httpClient.post<T>(this.RUTA_API,resource);
   }
 
   private update(resource:T): Observable<T> {
@@ -65,6 +64,7 @@ export abstract class ConexionService<T> {
   }
 
   onActualizar(objeto:T, nombre:string | number){
+    console.log(objeto)
     /**Solicitud HTTP para el PUT en el API */
     this.update(objeto).subscribe({
       /*Mensaje emergente de exito*/

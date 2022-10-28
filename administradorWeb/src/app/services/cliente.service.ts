@@ -42,3 +42,24 @@ export class TelefonoService extends ConexionService<Telefono>{
     super(httpClient, route)
   }
 }
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DireccionService extends ConexionService<Direccion>{
+
+  id:string|number="";
+  getResourceURL(): string {
+    return "/ClienteDirecciones"
+  }
+  getHomePage(): string {
+    return 'actualizar-cliente/' + this.id;
+  }
+  getNombre(): string {
+    return "Direccion"
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
+  }
+}

@@ -4,7 +4,7 @@ body, html {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #c0d2d2;
+    background-color: #9abcbc;
     opacity: 1;
     background-image: radial-gradient(circle at center center, #ffffff, #c0d2d2), repeating-radial-gradient(circle at center center, #ffffff, #ffffff, 14px, transparent 28px, transparent 14px);
     background-blend-mode: multiply;
@@ -15,7 +15,7 @@ body, html {
 
 
 
-.btn{
+btn{
   /*border-radius: 0%;*/
   background-color: black;
   border: 2px solid black;
@@ -25,7 +25,7 @@ body, html {
 }
 
 
-.btn:hover{
+btn:hover{
   background-color: #FFFFFF;
   color: black;
   border: 2px solid black;

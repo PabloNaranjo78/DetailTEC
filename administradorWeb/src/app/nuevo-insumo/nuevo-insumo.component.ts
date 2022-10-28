@@ -58,12 +58,11 @@ export class NuevoInsumoComponent implements OnInit {
   }
 
   onAddProveedor(){
-    console.log(this.proveedorNuevo);
     this.provService.onNuevo(this.proveedorNuevo, this.proveedorNuevo.proveedor);
   }
 
   onDeleteProveedor(pro: ProveidoPor){
-    this.provService.onEliminar(this.proveedorNuevo.nombrePro, this.proveedorNuevo.marcaPro + "/" + this.proveedorNuevo.proveedor);
+    this.provService.onEliminar(pro.nombrePro, pro.marcaPro + "/" + pro.proveedor);
   }
 
   ngOnInit(): void {

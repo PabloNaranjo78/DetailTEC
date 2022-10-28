@@ -33,8 +33,8 @@
             <div class="col">
               <div class="row mt-4 gy-4"><input type = "number"  class="form-control" name = "otorgar" [(ngModel)] = "objeto.puntos"></div>
               <div class="row mt-4"><input type = "number" class="form-control" name = "redimir" [(ngModel)] = "objeto.puntos"></div>
-              <div class="row mt-4"><a class="btn btn-primary" (click) = onPersonal() style= "width: 100%" data-bs-toggle="modal" data-bs-target="#editarTelefonos">Añadir Teléfono</a></div>
-              <div class="row mt-4"><a class="btn btn-primary" (click) = onProducto() style= "width: 100%"  style= "width: 100%" data-bs-toggle="modal" data-bs-target="#editarDirecciones">Añadir Dirección</a></div>
+              <div class="row mt-4"><a class="btn btn-primary" (click) = onProducto() style= "width: 100%" data-bs-toggle="modal" data-bs-target="#addProductos">Añadir Productos</a></div>
+              <div class="row mt-4"><a class="btn btn-primary" (click) = onPersonal() style= "width: 100%"  style= "width: 100%" data-bs-toggle="modal" data-bs-target="#addPersonal">Añadir Personal</a></div>
             </div>
 
           </div>
@@ -63,42 +63,93 @@
   </div>
 </div>
 
-
-<div class="modal fade" id="editarTelefonos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header text-center">
-      <h4 class="modal-title w-100 font-weight-bold">Teléfonos de Usuario</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body mx-3">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="col-3">
-              <label for = "newTelefono" class="form-label">Telefono</label>
-            </div>
+<div class="modal fade" id="addProductos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Productos Requeridos</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="container">
+          <div class="row">
             <div class="col">
-              <input type = "number" class="form-control" name = "newTelefono" [(ngModel)] = "personalNuevo.personal">
-            </div></div>
-          
-          <div class="col">
-            <button class="btn btn-default" (click) = onAddPersonal() style="width: 100%; height: 100%;">Añadir Personal</button>
-          </div>
-        </div>
-        <div class="row my-3">
-          <div *ngFor="let per of listaPersonal let i=index">
-            <div class="row mt-4 style">
-              <div class="col-1 offset-md-2"></div>
-              <div class="col-4">Personal {{i+1}}:</div>
-              <div class="col">{{per.personal}</div>
+              <div class="col-3">
+                <label for = "newProducto" class="form-label h4 fw-bold">Insumo</label>
+              </div>
+              <div class="col">
+                <select class="form-select" name = "newProducto" [(ngModel)] = "temp" aria-label="Default select example">
+                  <option selected>Seleccione un Insumo</option>
+                <ng-template ngFor let-insumo [ngForOf] = "listaInsumos"; let-i="index">
+                  <option [value] ="insumo">{{insumo.nombrePro}} ({{insumo.marcaPro}})</option>
+                </ng-template>
+              </select>
+              </div></div>
+            
+            <div class="col">
+              <button #closebutton class="btn btn-default" (click) = onAddProducto() data-bs-dismiss="modal" style="width: 100%; height: 100%;">Añadir Insumo</button>
             </div>
           </div>
+          <div class="row my-3">
+            <div *ngFor="let pro of listaProductos; let i=index">
+              <div class="row mt-4 style">
+                <div class="col-2"></div>
+                <div class="col-2"><button type="submit" (click) = onDeleteProducto(pro) data-bs-dismiss="modal" class="btn btn-outline-primary"> D </button></div>
+                <div class="col-4 gy-2" >Producto {{i+1}}:</div>
+                <div class="col gy-2">{{pro.nombrePro}} ({{pro.marcaPro})</div>
+                <div class="col-2"></div>
+              </div>
+            </div>
+          </div>
+          
         </div>
-        
       </div>
     </div>
   </div>
 </div>
-</div>
 
+
+<div class="modal fade" id="addPersonal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Personal Requeridos</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="col-3">
+                <label for = "newPersonal" class="form-label h4 fw-bold">Trabajador</label>
+              </div>
+              <div class="col">
+                <select class="form-select" name = "newPersonal" [(ngModel)] = "temp" aria-label="Default select example">
+                  <option selected>Seleccione un Insumo</option>
+                <ng-template ngFor let-trab [ngForOf] = "listaTrabajadores"; let-i="index">
+                  <option [value] ="trab.idTrabajador">{{trab.nombre}} ({{trab.idTrabajador}})</option>
+                </ng-template>
+              </select>
+              </div></div>
+            
+            <div class="col">
+              <button #closebutton class="btn btn-default" (click) = onAddPersonal() data-bs-dismiss="modal" style="width: 100%; height: 100%;">Añadir Trabajador</button>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div *ngFor="let per of listaPersonal; let i=index">
+              <div class="row mt-4 style">
+                <div class="col-2"></div>
+                <div class="col-2"><button type="submit" (click) = onDeletePersonal(per) data-bs-dismiss="modal" class="btn btn-outline-primary"> D </button></div>
+                <div class="col-4 gy-2" >Producto {{i+1}}:</div>
+                <div class="col gy-2">{{per.personal}}</div>
+                <div class="col-2"></div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

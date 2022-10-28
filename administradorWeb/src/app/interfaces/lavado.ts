@@ -7,7 +7,7 @@ export interface Lavado {
 }
 
 
-export interface InsumoRequeridos{
+export interface ProductoRequerido{
     lavado:string,
     marcaPro:string,
     nombrePro:string
@@ -16,5 +16,5 @@ export interface InsumoRequeridos{
 
 export interface PersonalRequerido{
     lavado:string,
-    personal:string
+    personal:number
 }

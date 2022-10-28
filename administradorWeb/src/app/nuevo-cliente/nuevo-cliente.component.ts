@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
-import { ClienteService, TelefonoService } from '../services/cliente.service';
+import { ClienteService, DireccionService, TelefonoService } from '../services/cliente.service';
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -44,7 +44,7 @@ export class NuevoClienteComponent implements OnInit {
 
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
-  constructor(private route:Router, private rou:ActivatedRoute, private service:ClienteService, private telService:TelefonoService) {
+  constructor(private route:Router, private rou:ActivatedRoute, private service:ClienteService, private telService:TelefonoService, private dirService:DireccionService) {
     this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     service.getList().subscribe((data) =>{
       this.listaClientes = data
@@ -80,27 +80,31 @@ export class NuevoClienteComponent implements OnInit {
   }
   
   /*Hace un GET request de las direcciones de un cliente especifico con su id*/
-  onDirecciones():void{/*
-    this.clienteService.getDirecciones(this.cliente.idCliente).subscribe((data) =>{
+  onDirecciones():void{
+    this.dirService.get(this.objeto.idCliente).subscribe((data) =>{
       this.listaDirecciones = data;
-    })*/
+    })
+    this.dirService.id = this.objeto.idCliente
   }
 
   /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
   onAddTelefono():void{
-    console.log(this.telefonoNuevo)
-    //this.service.avisoSuccess("agregado un numero de teléfono", this.objeto.nombre);
-    this.telService.onNuevo(this.telefonoNuevo,this.telefonoNuevo.telefono.toString())
+    this.telService.onNuevo(this.telefonoNuevo,this.telefonoNuevo.telefono)
   }
 
   onDeleteTelefono(tel:Telefono):void{
     this.telService.onEliminar(tel.idCliente,tel.telefono)
   }
 
+  onDeleteDireccion(dir:Direccion):void{
+    this.dirService.onEliminar(dir.idCliente,
+      dir.provincia + "/" + dir.canton + "/" + dir.distrito)
+  }
+
   /*Llamada desde el botón "Añadir Direccion" envía un POST request al server */
   onAddDireccion():void{
-    this.service.avisoSuccess("agregado una dirección", this.objeto.nombre);
-    }
+    this.dirService.onNuevo(this.direccionNueva,this.direccionNueva.provincia)
+  }
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
   onGuardar(): void{

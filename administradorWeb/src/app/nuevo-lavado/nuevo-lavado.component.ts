@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InsumoRequeridos, Lavado, PersonalRequerido } from '../interfaces/lavado';
-import { LavadoService } from '../services/lavado.service';
+import { Insumo } from '../interfaces/insumo';
+import { ProductoRequerido, Lavado, PersonalRequerido } from '../interfaces/lavado';
+import { Trabajador } from '../interfaces/trabajador';
+import { InsumoService } from '../services/insumo.service';
+import { LavadoService, PersonalService, ProductosService } from '../services/lavado.service';
+import { TrabajadorService } from '../services/trabajador.service';
 
 @Component({
   selector: 'app-nuevo-lavado',
@@ -22,29 +26,38 @@ export class NuevoLavadoComponent implements OnInit {
   editMode = true;
   /*Telefono temporal que alberga las modificaciones en el formulario
    object: Telefono*/
-  productoNuevo:InsumoRequeridos={
+  productoNuevo:ProductoRequerido={
     lavado:"",
     marcaPro:"",
     nombrePro:""
   }
+
   /*Direccion temporal que alberga las modificaciones en el formulario
    object: Telefono*/
-   personalNuevo:PersonalRequerido={
+  personalNuevo:PersonalRequerido={
     lavado:"",
-    personal:""
+    personal:0
   }
 
   /*Listas contenedoras de la data consultada en la base de datos*/
   listaLavados: Lavado[] = [];
   listaPersonal:PersonalRequerido[] = [];
-  listaInsumos: InsumoRequeridos[] = [];
+  listaProductos: ProductoRequerido[] = [];
+  
+  listaTrabajadores:Trabajador[] = [];
+  listaInsumos: Insumo[] = [];
 
 /*Constructor de Componente, con servicio de consulta de cliente, citas y routering 
   return void()*/
-  constructor(private route:Router, private rou:ActivatedRoute, private service:LavadoService) {
+  constructor(private route:Router, private rou:ActivatedRoute, private service:LavadoService, private serviceIns:InsumoService, private serviceTrab:TrabajadorService, private servicePers:PersonalService, private serviceProd:ProductosService) {
     service.getList().subscribe((data) =>{
       this.listaLavados = data
     })
+  }
+
+  onSelectedProducto(pro:Insumo){
+    this.productoNuevo.marcaPro = pro.marcaPro
+    this.productoNuevo.nombrePro = pro.nombrePro
   }
 
   ngOnInit(): void {
@@ -68,28 +81,46 @@ export class NuevoLavadoComponent implements OnInit {
     
   }
 /*Hace un GET request de los telefonoes de un cliente especifico con su id*/
-  onProducto():void{/*
-    this.clienteService.getTelefonos(this.cliente.idCliente).subscribe((data) =>{
-      this.listaTelefonos = data;
-    })*/
-  }
-  
-  /*Hace un GET request de las direcciones de un cliente especifico con su id*/
-  onPersonal():void{/*
-    this.clienteService.getDirecciones(this.cliente.idCliente).subscribe((data) =>{
-      this.listaDirecciones = data;
-    })*/
+  onProducto():void{
+    this.serviceProd.get(this.objeto.nombreLav).subscribe((data) => {console.log(data); this.listaProductos = data;})
+    this.serviceIns.getList().subscribe((data) => {this.listaInsumos = data;})
+    this.serviceProd.id = this.objeto.nombreLav
+    this.productoNuevo.lavado = this.objeto.nombreLav
   }
 
-  /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
-  onAddPersonal():void{
-    this.service.avisoSuccess("agregado un personal nuevo", this.objeto.nombreLav);
+  temp:Insumo = {
+    nombrePro:"",
+    marcaPro:"",
+    costo:0,
   }
 
   /*Llamada desde el botón "Añadir Direccion" envía un POST request al server */
   onAddProducto():void{
-    this.service.avisoSuccess("agregado un producto nuevo", this.objeto.nombreLav);
-    }
+    console.log(this.temp)
+  }
+  
+  onDeleteProducto(pro:ProductoRequerido){
+    this.serviceProd.onEliminar(pro.nombrePro + "/" + pro.marcaPro, pro.lavado);
+  }
+  
+  /*Hace un GET request de las direcciones de un cliente especifico con su id*/
+  onPersonal():void{
+   this.servicePers.get(this.objeto.nombreLav).subscribe((data) => {console.log(data); this.listaPersonal = data;})
+    this.serviceTrab.getList().subscribe((data) => {this.listaTrabajadores= data;})
+    this.servicePers.id = this.objeto.nombreLav
+    this.personalNuevo.lavado = this.objeto.nombreLav
+  }
+
+  /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
+  onAddPersonal():void{
+    this.servicePers.onNuevo(this.personalNuevo, this.personalNuevo.personal);
+  }
+  
+  /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
+  onDeletePersonal(per:PersonalRequerido):void{
+    this.servicePers.onEliminar(per.personal, per.lavado);
+  }
+  
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */
   
   onGuardar(): void{

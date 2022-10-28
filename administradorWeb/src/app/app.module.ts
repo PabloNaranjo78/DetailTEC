@@ -21,6 +21,7 @@ import { NuevoLavadoComponent } from './nuevo-lavado/nuevo-lavado.component';
 import { NuevoTrabajadorComponent } from './nuevo-trabajador/nuevo-trabajador.component';
 import { NuevaCitComponent } from './nueva-cit/nueva-cit.component';
 import { GestionReportesComponent } from './gestion-reportes/gestion-reportes.component';
+import { FacturarComponent } from './facturar/facturar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GestionReportesComponent } from './gestion-reportes/gestion-reportes.co
     NuevoLavadoComponent,
     NuevoTrabajadorComponent,
     NuevaCitComponent,
-    GestionReportesComponent
+    GestionReportesComponent,
+    FacturarComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,9 @@ import { GestionReportesComponent } from './gestion-reportes/gestion-reportes.co
       {path:"actualizar-sucursal/:id", component:NuevaSucursalComponent},
       {path:"actualizar-trabajador/:id", component:NuevoTrabajadorComponent},
       {path:"actualizar-insumo/:marca/:nombre", component:NuevoInsumoComponent},
+
+      
+      {path:"facturar/:id", component:FacturarComponent},
       
     ],
     {onSameUrlNavigation: 'reload'}),
