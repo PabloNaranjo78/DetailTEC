@@ -15,7 +15,7 @@
               <div class="col text-center">
                 <div class="row mt-4 right"><label for = "cliente" class="form-label">Cliente</label></div>
                 <div class="row mt-4 right"><label for = "sucursal" class="form-label">Sucursal</label></div>
-                <div class="row mt-4 right"><label for = "lavado" class="form-label">Tipo Lavado</label></div>
+                <div class="row mt-4 right"><label for = "lavado" class="form-label">Tipo de lavado</label></div>
                 <div class="row mt-4 right"><label for = "trabajador" class="form-label">Trabajador</label></div>
                 <div class="row mt-4 right"><label for = "placa" class="form-label">Placa</label></div>
                 <div class="row mt-4 right"><label for = "fecha" class="form-label">Fecha</label></div>
@@ -49,8 +49,8 @@
                       <option [value] ="empleado.idTrabajador">{{empleado.nombre}} ({{empleado.idTrabajador}})</option>
                     </ng-template>
                   </select></div>
-                  <div class="row mt-4"><input type = "text" class="form-control" name = "placa" [(ngModel)] = "objeto.placa"></div>
-                  <div class="row mt-4"><input type = "date" class="form-control" name = "fecha" [(ngModel)] = "objeto.fechaCita"></div>
+                  <div class="row mt-4"><input type = "text" class="form-control" name = "placa" [disabled]= editMode [(ngModel)] = "objeto.placa"></div>
+                  <div class="row mt-4"><input type = "date" class="form-control" name = "fecha" [disabled]= editMode [(ngModel)] = "objeto.fechaCita"></div>
                 
               
               </div>

@@ -121,8 +121,8 @@ export class GestionReportesComponent implements OnInit {
   }
 
   async fetchDataPlanilla():Promise<DataResponsePlanilla[]>{
-    return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
-    //return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
+    //return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
+    return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
   }
 
 
@@ -167,8 +167,8 @@ export class GestionReportesComponent implements OnInit {
 
 
   async fetchDataLavadoCliente():Promise<DataResponseLavadoCliente[]>{
-    return fetch('https://localhost:7035/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
-    //return fetch('http://25.55.195.113:4500/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
+    //return fetch('https://localhost:7035/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
+    return fetch('http://25.55.195.113:4500/api/Reportes/tipoLavado/'+this.idCliente).then(response=>response.json())
   }
 
 
@@ -211,8 +211,8 @@ export class GestionReportesComponent implements OnInit {
   }
 
   async fetchDataRedencionPuntos():Promise<DataResponseRedencionPuntos[]>{
-    return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
-    //return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
+    //return fetch('https://localhost:7035/api/Reportes/planilla').then(response=>response.json())
+    return fetch('http://25.55.195.113:4500/api/Reportes/planilla').then(response=>response.json())
   }
 
   ////////////////////////////////////////////// Factura ////////////////////////////////////////////////

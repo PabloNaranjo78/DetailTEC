@@ -17,7 +17,7 @@
               <div class="row mt-4 right"><label for = "costo" class="form-label">Costo</label></div>
             </div>
             <div class="col">  
-              <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [(ngModel)] = "objeto.nombreLav" [(ngModel)] = "personalNuevo.lavado" [(ngModel)] = "productoNuevo.lavado"></div>
+              <div class="row mt-4"><input type = "text" class="form-control" name = "fullname" [disabled]= editMode [(ngModel)] = "objeto.nombreLav" [(ngModel)] = "personalNuevo.lavado" [(ngModel)] = "productoNuevo.lavado"></div>
               <div class="row mt-4"><input type = "text" class="form-control" name = "duracion" [(ngModel)] = "objeto.duracion"></div>
               <div class="row mt-4"><input type = "number" class="form-control" name = "precio" [(ngModel)] = "objeto.precio" ></div>
               <div class="row mt-4"><input type = "text" class="form-control" name = "costo" [(ngModel)] = "objeto.costo"></div>
