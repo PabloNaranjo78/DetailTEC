@@ -17,12 +17,32 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpEntity;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpResponse;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.NameValuePair;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.HttpClient;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.entity.UrlEncodedFormEntity;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.methods.HttpPost;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.impl.client.HttpClients;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.message.BasicNameValuePair;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import cr.ac.tec.adroidapp.gui.Menu;
@@ -48,33 +68,41 @@ public class MainActivity extends AppCompatActivity {
         dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         updater = new AppUpdater(dataBase);
 
-        apiTester();
+//        apiTester();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 try {
-                    if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
-                        Intent intent = new Intent(getApplicationContext(), Menu.class);
-                        intent.putExtra("ID", userID);
-                        startActivity(intent);
-                    }
-                    else{
-                        AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
-                        alertMessage.setTitle("Error");
-                        alertMessage.setMessage("Credenciales incorrectas");
-                        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.dismiss();
-                                    }
-                                });
-                        alertMessage.show();
-                    }
-                } catch (NoSuchAlgorithmException e) {
+                    post2();
+                } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
+
+
+//                try {
+//                    if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
+//                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+//                        intent.putExtra("ID", userID);
+//                        startActivity(intent);
+//                    }
+//                    else{
+//                        AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
+//                        alertMessage.setTitle("Error");
+//                        alertMessage.setMessage("Credenciales incorrectas");
+//                        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        dialogInterface.dismiss();
+//                                    }
+//                                });
+//                        alertMessage.show();
+//                    }
+//                } catch (NoSuchAlgorithmException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 
@@ -139,6 +167,32 @@ public class MainActivity extends AppCompatActivity {
 
                     updater.updaterClientes(array);
 
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+    }
+
+    public void putTester(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Cliente/";
+
+        StringRequest getRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject array = new JSONObject(response);
+                    System.out.println("IT'S WORKING");
+                    System.out.println(array);
+
 
                 } catch (JSONException e) {
                     System.out.println("CHECK 2");
@@ -151,8 +205,68 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("error", error.getMessage());
 
             }
-        });
+        })
+        {
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("\"idCliente\"", String.valueOf(192168));
+                params.put("\"usuario\"", "\"Ppedro\"");
+                params.put("\"infoContacto\"", "\"U\"");
+                params.put("\"nombre\"", "\"Pedro\"");
+                params.put("\"email\"", "\"@onlyFans\"");
+                params.put("\"puntosDispo\"", String.valueOf(500));
+                System.out.println("////////////");
+                System.out.println(params);
+                return params;
+
+            }
+        };
         Volley.newRequestQueue(this).add(getRequest);
 
+    }
+
+    public void postTester() throws IOException {
+        HttpClient httpclient = HttpClients.createDefault();
+        HttpPost httppost = new HttpPost("http://25.55.195.113:4500/api/Cliente");
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+        params.add(new BasicNameValuePair("\"idCliente\"", String.valueOf(192168)));
+        params.add(new BasicNameValuePair("\"usuario\"", "\"Ppedro\""));
+        params.add(new BasicNameValuePair("\"infoContacto\"", "\"U\""));
+        params.add(new BasicNameValuePair("\"nombre\"", "\"Pedro\""));
+        params.add(new BasicNameValuePair("\"email\"", "\"@onlyFans\""));
+        params.add(new BasicNameValuePair("\"puntosDispo\"", String.valueOf(500)));
+        System.out.println(params);
+        httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+
+
+    }
+
+    public void post2() throws MalformedURLException {
+
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Lavado/app/{\"nombreLav\":\"Prueba\",\"duracion\":100,\"precio\":100,\"costo\":100,\"puntos\":100}";
+
+        StringRequest getRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject array = new JSONObject(response);
+                    System.out.println("IT'S WORKING");
+
+                    System.out.println(array);
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
     }
 }
