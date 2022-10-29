@@ -17,8 +17,9 @@ namespace DetailTECAPI.Tables
         public string? Nombre { get; set; }
         public string? email { get; set; }
         public int PuntosDispo { get; set; }
+        public int PuntosRedm { get; set; }
 
-        
+
         public override Cliente createEntity(SqlDataReader dr)
         {
             return new Cliente()
@@ -29,7 +30,8 @@ namespace DetailTECAPI.Tables
                 InfoContacto = dr["InfoContacto"].ToString(),
                 Nombre = dr["Nombre"].ToString(),
                 email = dr["email"].ToString(),
-                PuntosDispo = Convert.ToInt32(dr["PuntosDispo"])
+                PuntosDispo = Convert.ToInt32(dr["PuntosDispo"]),
+                PuntosRedm = Convert.ToInt32(dr["PuntosRedm"])
             }; 
         }
 

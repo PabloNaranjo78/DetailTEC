@@ -1,4 +1,5 @@
 ﻿using DetailTECAPI.Tables;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,7 +21,7 @@ namespace DetailTECAPI.Controllers
         {
             try
             {
-                var lavadoList = lavado.get("NombreLav,Duracion,Precio,Costo,Puntos", "LAVADO");
+                var lavadoList = lavado.get("NombreLav,Duracion,Precio,Costo,Puntos,PuntosOtorgar", "LAVADO");
                 return Ok(lavadoList);
             }
             catch (Exception)
@@ -37,7 +38,7 @@ namespace DetailTECAPI.Controllers
             try
             {
                 var lavadoList = lavado.get($"'{nombreLav}'", "NombreLav", "NombreLav,Duracion," +
-                "Precio,Costo,Puntos", "LAVADO");
+                "Precio,Costo,Puntos,PuntosOtorgar", "LAVADO");
                 return Ok(lavadoList);
             }
             catch (Exception)
@@ -55,8 +56,21 @@ namespace DetailTECAPI.Controllers
             List<Lavado> entityList = new List<Lavado>();
             entityList.Add(lavado);
 
-            var result = lavado.post("LAVADO", $"'{lavado.NombreLav}',{lavado.Duracion},{lavado.Precio}" +
-                $"{lavado.Costo},{lavado.Puntos}");
+            var result = lavado.post("LAVADO", $"'{lavado.NombreLav}', {lavado.Duracion}, {lavado.Precio}, {lavado.Costo}, {lavado.Puntos}, {lavado.PuntosOtorgar}");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {lavado.NombreLav}");
+
+        }
+
+        [HttpPost("app/{lavadoJson}")]
+        public async Task<ActionResult<Lavado>> PostAdroid(string lavadoJson)
+        {
+            Console.WriteLine(lavadoJson);
+            var lavado = JsonConvert.DeserializeObject<Lavado>(lavadoJson);
+            List<Lavado> entityList = new List<Lavado>();
+            entityList.Add(lavado);
+
+            var result = lavado.post("LAVADO", $"'{lavado.NombreLav}', {lavado.Duracion}, {lavado.Precio}, {lavado.Costo}, {lavado.Puntos}, {lavado.PuntosOtorgar}");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {lavado.NombreLav}");
 
@@ -67,6 +81,21 @@ namespace DetailTECAPI.Controllers
         public async Task<ActionResult<Lavado>> Put(Lavado lavado)
         {
 
+            List<Lavado> entityList = new List<Lavado>();
+            entityList.Add(lavado);
+
+            var result = lavado.put("LAVADO", $"Duracion = {lavado.Duracion}" +
+                $"Precio = {lavado.Precio}, Costo = {lavado.Costo}, Puntos = {lavado.Puntos}",
+                $"NombreLav = '{lavado.NombreLav}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {lavado.NombreLav}");
+        }
+
+        // PUT api/<LavadoController>/5
+        [HttpPut("app/{lavadoJson}")]   
+        public async Task<ActionResult<Lavado>> PutAndroid(string lavadoJson)
+        {
+            var lavado = JsonConvert.DeserializeObject<Lavado>(lavadoJson);
             List<Lavado> entityList = new List<Lavado>();
             entityList.Add(lavado);
 

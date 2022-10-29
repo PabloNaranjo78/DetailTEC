@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using DetailTECAPI.Connection;
 using DetailTECAPI.Tables;
 using Microsoft.OpenApi.Extensions;
+using Newtonsoft.Json;
 
 namespace DetailTECAPI.Controllers
 {
@@ -18,7 +19,7 @@ namespace DetailTECAPI.Controllers
             try
             {
                 var entityList = cliente.get("IDcliente,Usuario,Contraseña," +
-                    "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
+                    "InfoContacto,Nombre,email,PuntosDispo,PuntosRedm", "CLIENTE");
                 return Ok(entityList);
             }
             catch (Exception)
@@ -35,7 +36,7 @@ namespace DetailTECAPI.Controllers
             try
             {
                 var clienteList = cliente.get(id.ToString(), "IDcliente", "IDcliente,Usuario,Contraseña," +
-                    "InfoContacto,Nombre,email,PuntosDispo", "CLIENTE");
+                    "InfoContacto,Nombre,email,PuntosDispo,PuntosRedm", "CLIENTE");
                 return Ok(clienteList);
             }
             catch (Exception)
@@ -60,6 +61,22 @@ namespace DetailTECAPI.Controllers
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
         }
 
+        // POST api/<ClienteController>
+        [HttpPost("app/{clienteJson}")]
+        public async Task<ActionResult<List<Cliente>>> PostAndroid(string clienteJson)
+        {
+            var cliente = JsonConvert.DeserializeObject<Cliente>(clienteJson);
+            List<Cliente> entityList = new List<Cliente>();
+            entityList.Add(cliente);
+
+            var result = cliente.post("CLIENTE", $"{cliente.IDCliente},'{cliente.Usuario}'," +
+                $"'{cliente.Contraseña}','{cliente.InfoContacto}','{cliente.Nombre}','{cliente.email}'," +
+                $"{cliente.PuntosDispo}");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {cliente.IDCliente}");
+        }
+
+
         // PUT api/<ClienteController>/5
         [HttpPut]
         public async Task<ActionResult<Cliente>> Put(Cliente cliente)
@@ -67,8 +84,20 @@ namespace DetailTECAPI.Controllers
 
             List<Cliente> entityList = new List<Cliente>();
             entityList.Add(cliente);
-           
+            var result = cliente.put("CLIENTE", $"Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
+                $"InfoContacto = '{cliente.InfoContacto}',Nombre = '{cliente.Nombre}'," +
+                $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo}", $"IDcliente = {cliente.IDCliente}");
 
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {cliente.IDCliente}");
+        }
+
+        // PUT api/<ClienteController>/5
+        [HttpPut("app/{clienteJson}")]
+        public async Task<ActionResult<Cliente>> PutAndroid(string clienteJson)
+        {
+            var cliente = JsonConvert.DeserializeObject<Cliente>(clienteJson);
+            List<Cliente> entityList = new List<Cliente>();
+            entityList.Add(cliente);
             var result = cliente.put("CLIENTE", $"Usuario = '{cliente.Usuario}', Contraseña = '{cliente.Contraseña}'," +
                 $"InfoContacto = '{cliente.InfoContacto}',Nombre = '{cliente.Nombre}'," +
                 $"email = '{cliente.email}', PuntosDispo = {cliente.PuntosDispo}", $"IDcliente = {cliente.IDCliente}");

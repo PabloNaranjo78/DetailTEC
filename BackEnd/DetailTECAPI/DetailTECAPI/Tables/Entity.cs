@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Data.SqlClient;
 
 namespace DetailTECAPI.Tables
 {
@@ -162,18 +159,5 @@ namespace DetailTECAPI.Tables
             return dr[param].ToString();
         }
 
-        public string toSha256(string contraseña) {
-
-            SHA256 sha256Hash = SHA256.Create();
-
-            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
-            StringBuilder stringbuilder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                stringbuilder.Append(bytes[i].ToString("x2"));
-            }
-
-            return stringbuilder.ToString();
-        }
     }
 }

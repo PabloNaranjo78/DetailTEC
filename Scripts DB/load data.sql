@@ -51,6 +51,8 @@ INSERT INTO CITA VALUES('8888888', '2022-11-08', 3, 'Cartago', 'Lavado encerado'
 INSERT INTO CITA VALUES('9999999', '2022-11-09', 3, 'Cartago', 'Lavado premium', 1234)
 INSERT INTO CITA VALUES('0000000', '2022-11-10', 3, 'Cartago', 'Lavado y aspirado', 1235)
 
+INSERT INTO CITA VALUES('199191', 3, 'Cartago', 'Lavado y aspirado', 1235,'2022-11-10')
+
 INSERT INTO CITA VALUES('1111511', '2022-11-01', 2, 'Cartago', 'Lavado premium', 1234)
 INSERT INTO CITA VALUES('2226222', '2022-11-02', 2, 'Cartago', 'Lavado encerado', 1234)
 INSERT INTO CITA VALUES('3337333', '2022-11-03', 2, 'Cartago', 'Lavado premium', 1234)

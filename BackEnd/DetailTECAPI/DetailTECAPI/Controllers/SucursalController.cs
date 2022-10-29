@@ -1,5 +1,6 @@
 ﻿using DetailTECAPI.Tables;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,7 +10,7 @@ namespace DetailTECAPI.Controllers
     [ApiController]
     public class SucursalController : ControllerBase
     {
-        Sucursal sucursal = new Sucursal();
+        Sucursal sucursal = new();
 
         // GET: api/<SucursalController>
         [HttpGet]
@@ -54,8 +55,23 @@ namespace DetailTECAPI.Controllers
             List<Sucursal> entityList = new List<Sucursal>();
             entityList.Add(sucursal);
 
-            var result = sucursal.post("SUCURSAL", $"'{sucursal.NombreSuc}','{sucursal.FechaApert}',{sucursal.Telefono}," +
-                $"'{sucursal.Provincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo}");
+            var result = sucursal.post("SUCURSAL", $"'{sucursal.NombreSuc}',{sucursal.Telefono}," +
+                $"'{sucursal.Provincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo},'{sucursal.FechaApert}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {sucursal.NombreSuc}");
+
+        }
+
+        // POST api/<SucursalController>
+        [HttpPost("app/{json}")]
+        public async Task<ActionResult<List<Sucursal>>> PostAndroid(string json)
+        {
+            var sucursal = JsonConvert.DeserializeObject<Sucursal>(json);
+            List<Sucursal> entityList = new List<Sucursal>();
+            entityList.Add(sucursal);
+
+            var result = sucursal.post("SUCURSAL", $"'{sucursal.NombreSuc}',{sucursal.Telefono}," +
+                $"'{sucursal.Provincia}','{sucursal.Canton}','{sucursal.Distrito}',{sucursal.TiempoDispo},'{sucursal.FechaApert}'");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {sucursal.NombreSuc}");
 
@@ -66,6 +82,21 @@ namespace DetailTECAPI.Controllers
         public async Task<ActionResult<Sucursal>> Put(Sucursal sucursal)
         {
 
+            List<Sucursal> entityList = new List<Sucursal>();
+            entityList.Add(sucursal);
+
+            var result = sucursal.put("SUCURSAL", $"FechaApert = '{sucursal.FechaApert}', Telefono = {sucursal.Telefono}, " +
+                    $"Provincia = '{sucursal.Provincia}', Canton = '{sucursal.Canton}', Distrito = '{sucursal.Distrito}', " +
+                    $"TiempoDispo = {sucursal.TiempoDispo}", $"NombreSuc = '{sucursal.NombreSuc}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {sucursal.NombreSuc}");
+        }
+
+        // PUT api/<SucursalController>/5
+        [HttpPut("app/{json}")]
+        public async Task<ActionResult<Sucursal>> PutAndroid(string json)
+        {
+            var sucursal = JsonConvert.DeserializeObject<Sucursal>(json);
             List<Sucursal> entityList = new List<Sucursal>();
             entityList.Add(sucursal);
 

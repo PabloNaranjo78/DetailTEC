@@ -11,6 +11,7 @@ namespace DetailTECAPI.Tables
         public int Precio { set; get; }
         public int Costo { set; get; }
         public int Puntos { set; get; }
+        public int PuntosOtorgar { set; get; }
 
         public override Lavado createEntity(SqlDataReader dr)
         {
@@ -21,7 +22,7 @@ namespace DetailTECAPI.Tables
                 Precio = Convert.ToInt32(dr["Precio"]),
                 Costo = Convert.ToInt32(dr["Costo"]),
                 Puntos = Convert.ToInt32(dr["Puntos"]),
-
+                PuntosOtorgar = Convert.ToInt32(dr["PuntosOtorgar"])
             }; ;
         }
     }
