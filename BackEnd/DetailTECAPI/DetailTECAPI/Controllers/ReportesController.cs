@@ -15,6 +15,7 @@ namespace DetailTECAPI.Controllers
         private SqlConnection connection = new SqlConnection(Connection.Connection.ConnectionString);
         private ReportePlanilla reportePlanilla = new ReportePlanilla();
         private TipoLavado tipoLavado = new TipoLavado();
+        private PuntosRedem puntosRedem = new();
         // GET: api/<ReportesController>
         [HttpGet]
         [Route("planilla/")]
@@ -60,6 +61,30 @@ namespace DetailTECAPI.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
                 tipoLavadoList = tipoLavado.createEntityList(dr);
                 return Ok(tipoLavadoList);
+            }
+            catch (Exception)
+            {
+                return BadRequest("No se logró conectar con la DB");
+
+            }
+        }
+
+        [HttpGet("puntosRedm/")]
+        public async Task<ActionResult<List<TipoLavado>>> GetRedem()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT Nombre AS NombreCompleto, PuntosRedm " +
+                    $"FROM CLIENTE ORDER BY PuntosRedm", connection);
+
+                var puntosRedemList = new List<PuntosRedem>();
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                puntosRedemList = puntosRedem.createEntityList(dr);
+                return Ok(puntosRedemList);
             }
             catch (Exception)
             {

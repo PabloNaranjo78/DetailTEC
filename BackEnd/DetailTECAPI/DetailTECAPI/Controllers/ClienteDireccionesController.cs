@@ -1,5 +1,6 @@
 ﻿using DetailTECAPI.Tables;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,6 +47,20 @@ namespace DetailTECAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<ClienteDirecciones>>> Post(ClienteDirecciones clienteDirecciones)
         {
+            List<ClienteDirecciones> entityList = new List<ClienteDirecciones>();
+            entityList.Add(clienteDirecciones);
+
+            var result = clienteDirecciones.post("CLIENTE_DIRECCIONES", $"{clienteDirecciones.IDCliente},'{clienteDirecciones.Provincia}'," +
+                $"'{clienteDirecciones.Canton}','{clienteDirecciones.Distrito}'");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar la direccion de {clienteDirecciones.IDCliente}");
+
+        }
+
+        [HttpPost("app/{dirJson}")]
+        public async Task<ActionResult<List<ClienteDirecciones>>> PostAndroid(string dirJson)
+        {
+            var clienteDirecciones = JsonConvert.DeserializeObject<ClienteDirecciones>(dirJson);
             List<ClienteDirecciones> entityList = new List<ClienteDirecciones>();
             entityList.Add(clienteDirecciones);
 

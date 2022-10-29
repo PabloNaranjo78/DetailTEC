@@ -45,6 +45,8 @@ namespace DetailTECAPI.Controllers
 
         }
 
+        
+
 
         // POST api/<BebidasConsumidasController>
         [HttpPost]

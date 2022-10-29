@@ -8,8 +8,7 @@ namespace DetailTECAPI.Tables
         [Key]
         public int IDTrabajador { get; set; }
         public string? Nacimiento { get; set; }
-        private string? ContraseñaHash { get; set; }
-        public string? Contraseña { get { return ContraseñaHash; } set { ContraseñaHash = toSha256(value); } }
+        public string? Contraseña { get; set; }
         public string? Rol { get; set; }
         public string? Nombre { get; set; }
         public string? Apellidos { get; set; }

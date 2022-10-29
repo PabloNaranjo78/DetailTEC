@@ -44,6 +44,23 @@ namespace DetailTECAPI.Controllers
 
         }
 
+        // GET api/<BebidaController>/5
+        [HttpGet("tipo/{tipo}")]
+        public async Task<ActionResult<List<BebidaSnack>>> GetTipo(string tipo)
+        {
+            try
+            {
+                var entityList = bebida.get($"'{tipo}'", "Tipo", "Nombre,Cantidad,Costo,Tipo", "BEBIDA_SNACK");
+                return Ok(entityList);
+            }
+            catch (Exception)
+            {
+                return BadRequest("No se encontró");
+
+            }
+
+        }
+
         // POST api/<BebidaController>
         [HttpPost]
         public async Task<ActionResult<List<BebidaSnack>>> Post(BebidaSnack bebida)

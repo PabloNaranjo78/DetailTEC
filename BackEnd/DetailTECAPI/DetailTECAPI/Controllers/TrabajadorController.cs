@@ -52,8 +52,8 @@ namespace DetailTECAPI.Controllers
             List<Trabajador> entityList = new List<Trabajador>();
             entityList.Add(trabajador);
 
-            var result = trabajador.post("TRABAJADOR", $"{trabajador.IDTrabajador},'{trabajador.Nacimiento}','{trabajador.Contraseña}'," +
-                $"'{trabajador.Rol}','{trabajador.Nombre}','{trabajador.Apellidos}','{trabajador.FechaIngreso}','{trabajador.TipoPago}'");
+            var result = trabajador.post("TRABAJADOR", $"{trabajador.IDTrabajador},'{trabajador.Contraseña}'," +
+                $"'{trabajador.Rol}','{trabajador.Nombre}','{trabajador.Apellidos}','{trabajador.TipoPago}','{trabajador.Nacimiento}','{trabajador.FechaIngreso}'");
 
             return result ? Ok(entityList) : BadRequest($"No se logró agregar a {trabajador.IDTrabajador}");
 

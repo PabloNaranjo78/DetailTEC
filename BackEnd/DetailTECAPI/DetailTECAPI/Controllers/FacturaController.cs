@@ -1,5 +1,6 @@
 ﻿using DetailTECAPI.Tables;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -57,11 +58,39 @@ namespace DetailTECAPI.Controllers
 
         }
 
+        // POST api/<FacturaController>
+        [HttpPost("app/{json}")]
+        public async Task<ActionResult<List<Factura>>> PostAdroid(string json)
+        {
+            var factura = JsonConvert.DeserializeObject<Factura>(json);
+            List<Factura> entityList = new List<Factura>();
+            entityList.Add(factura);
+
+            var result = factura.post("FACTURA", $"{factura.Placa}, {factura.NumFactura},{factura.Monto}");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró agregar a {factura.NumFactura}");
+
+        }
+
         // PUT api/<FacturaController>/5
         [HttpPut]
         public async Task<ActionResult<Factura>> Put(Factura factura)
         {
 
+            List<Factura> entityList = new List<Factura>();
+            entityList.Add(factura);
+
+            var result = factura.put("FACTURA", $"Monto = {factura.Monto}", $"Placa = {factura.Placa} AND NumFactura = {factura.NumFactura}");
+
+            return result ? Ok(entityList) : BadRequest($"No se logró modificar a {factura.NumFactura}");
+        }
+
+        // PUT api/<FacturaController>/5
+        [HttpPut("app/{json}")]
+        public async Task<ActionResult<Factura>> PutAndroid(string json)
+        {
+
+            var factura = JsonConvert.DeserializeObject<Factura>(json);
             List<Factura> entityList = new List<Factura>();
             entityList.Add(factura);
 
