@@ -40,6 +40,7 @@ export abstract class ConexionService<T> {
   }
 
   private add(resource:T): Observable<T>{
+    console.log(resource);
     return this.httpClient.post<T>(this.RUTA_API,resource);
   }
 

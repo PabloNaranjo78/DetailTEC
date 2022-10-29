@@ -55,6 +55,7 @@ export class NuevoClienteComponent implements OnInit {
     if(this.rou.snapshot.params['id']==undefined){
       this.editMode = false;
     } else {
+      this.service.id = this.rou.snapshot.params['id'];
       this.service.get(this.rou.snapshot.params['id']).subscribe({
         /*Mensaje emergente de exito*/
         next: (data) => {

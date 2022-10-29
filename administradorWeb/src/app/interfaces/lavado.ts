@@ -4,6 +4,7 @@ export interface Lavado {
     precio:number,
     costo:number,
     puntos:number
+    puntosOtorgar:number
 }
 
 

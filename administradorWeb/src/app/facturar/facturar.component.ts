@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ITable, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Cita } from '../interfaces/cita';
@@ -24,9 +25,11 @@ export class FacturarComponent implements OnInit {
     idCliente:1234,
   }
 
-  constructor(private service:CitaService) { }
+  constructor(private service:CitaService, private route:Router, private rou:ActivatedRoute) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.get(this.rou.snapshot.params['id']).subscribe((data) => {console.log(data); this.objeto = data[0]})
+  }
 
     ////////////////////////////////////////////// Factura ////////////////////////////////////////////////
   

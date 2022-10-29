@@ -26,11 +26,11 @@ export class GestionCitasComponent extends BotonesService<Cita> implements OnIni
   }
 
   onNuevo(){
-    this.route.navigate([this.user,"nueva-cita"])
+    this.route.navigate(["nueva-cita",this.user])
   }
 
   onActualizar(placa:number){
-    this.route.navigate([this.user,"actualizar-cita",placa])
+    this.route.navigate(["actualizar-cita",this.user,placa])
   }
 
 }

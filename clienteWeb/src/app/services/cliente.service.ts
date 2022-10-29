@@ -9,11 +9,12 @@ import { ConexionService } from './conexion.service';
   providedIn: 'root'
 })
 export class ClienteService extends ConexionService<Cliente>{
+  id:number = 0
   getResourceURL(): string {
     return "/Cliente"
   }
   getHomePage(): string {
-    return 'gestion-clientes'
+    return 'gestion-citas/' + this.id;
   }
   getNombre(): string {
     return "Cliente"

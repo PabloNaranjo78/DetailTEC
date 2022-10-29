@@ -42,6 +42,7 @@ export class NuevaCitComponent implements OnInit {
     if(this.rou.snapshot.params['placa']==undefined){
       this.editMode = false;
     } else {
+      this.service.id = this.rou.snapshot.params['id']
       this.service.get(this.rou.snapshot.params['placa']).subscribe({
         /*Mensaje emergente de exito*/
         next: (data) => {
@@ -70,7 +71,6 @@ export class NuevaCitComponent implements OnInit {
     this.service.onCancelar()
   }
   onGetClientes(){
-    console.log(this.objeto.idCliente)
     this.cliService.get(this.objeto.idCliente).subscribe((data) => this.listaClientes = data);
   }
   onGetSucursales(){

@@ -5,6 +5,8 @@ export interface Cliente {
     infoContacto:string,
     nombre:string,
     email:string
+    puntosRedm:number,
+    puntosDispo:number
 }
 
 export interface Telefono{

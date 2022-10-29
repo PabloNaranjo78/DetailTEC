@@ -18,7 +18,9 @@ export class NuevoClienteComponent implements OnInit {
     contraseña:"1234",
     infoContacto:"",
     nombre:"",
-    email:""
+    email:"",
+    puntosRedm:0,
+    puntosDispo:0
   }
   
   editMode = true;

@@ -9,7 +9,7 @@ import { ConexionService } from './conexion.service';
   providedIn: 'root'
 })
 export class CitaService extends ConexionService<Cita>{
-  id:string|number="";
+  id:number=0;
   getNombre(): string {
     return "Cita"
   }
@@ -17,7 +17,8 @@ export class CitaService extends ConexionService<Cita>{
     return "/Cita";
   }
   getHomePage(): string {
-    return 'gestion-citas'
+    console.log(this.id)
+    return 'gestion-citas/' + this.id
   }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)

@@ -20,7 +20,8 @@ export class NuevoLavadoComponent implements OnInit {
     duracion:0,
     precio:0,
     costo:0,
-    puntos:0
+    puntos:0,
+    puntosOtorgar:0
   }
   
   editMode = true;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CitaService } from '../services/cita.service';
 
 @Component({
   selector: 'app-mis-puntos',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MisPuntosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:CitaService, ) { }
 
   ngOnInit(): void {
   }

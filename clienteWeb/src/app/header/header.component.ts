@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  id:number = 0
+  constructor(private rou:ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    console.log(this.id)
+    this.id = this.rou.snapshot.params['id']
+    console.log(this.id)
+    console.log("funca")
   }
 
 }

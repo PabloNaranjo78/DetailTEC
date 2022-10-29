@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { NuevaCitComponent } from './nueva-cit/nueva-cit.component';
 import { HeaderComponent } from './header/header.component';
 import { MisPuntosComponent } from './mis-puntos/mis-puntos.component';
+import { LoginComponent } from './login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { VigilanteGuard } from './vigilante.guard';
 
 @NgModule({
   declarations: [
@@ -19,21 +22,23 @@ import { MisPuntosComponent } from './mis-puntos/mis-puntos.component';
     GestionCitasComponent,
     NuevoClienteComponent,
     HeaderComponent,
-    MisPuntosComponent
+    MisPuntosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path:":id/gestion-citas", component:GestionCitasComponent},
-      {path:":id/nueva-cita", component:NuevaCitComponent},
-      {path:":id/actualizar-cita/:placa", component:NuevaCitComponent},
-      {path:":id/gestionar-perfil", component:NuevoClienteComponent},
-      {path:":id/mis-puntos", component:MisPuntosComponent},
+      {path:"", component:LoginComponent},
+      {path:"gestion-citas/:id", component:GestionCitasComponent, canActivate: [VigilanteGuard]},
+      {path:"nueva-cita/:id", component:NuevaCitComponent, canActivate: [VigilanteGuard]},
+      {path:"actualizar-cita/:id/:placa", component:NuevaCitComponent, canActivate: [VigilanteGuard]},
+      {path:"gestionar-perfil/:id", component:NuevoClienteComponent, canActivate: [VigilanteGuard]},
+      {path:"mis-puntos/:id", component:MisPuntosComponent, canActivate: [VigilanteGuard]},
     ]),
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
