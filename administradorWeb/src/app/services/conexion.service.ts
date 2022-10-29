@@ -10,11 +10,7 @@ import Swal from 'sweetalert2';
 export abstract class ConexionService<T> {
 
   /**Ruta a conectarse con el API REST */
-<<<<<<< Updated upstream
- // private readonly RUTA_API = "https://localhost:7035/api" + this.getResourceURL();
-=======
  //private readonly RUTA_API = "https://localhost:7035/api" + this.getResourceURL();
->>>>>>> Stashed changes
  private readonly RUTA_API = "http://25.55.195.113:4500/api" + this.getResourceURL();
  constructor(protected httpClient:HttpClient, protected route:Router) {
  }
