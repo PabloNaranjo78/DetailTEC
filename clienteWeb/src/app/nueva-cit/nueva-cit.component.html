@@ -1,0 +1,71 @@
+
+
+  <div class="container-fluid">
+    <div class="row my-3">
+      
+      <div class="col-1">
+      </div>
+      <div class="col"> 
+        <div class="row my-3">  
+          <h2 class = "fw-bold offset-md-1">Información de Cita</h2>
+        </div>
+        <form #form="ngForm" (ngSubmit)="onGuardar()">
+            <div class="row">
+
+              <div class="col text-center">
+                <div class="row mt-4 right"><label for = "sucursal" class="form-label">Sucursal</label></div>
+                <div class="row mt-4 right"><label for = "lavado" class="form-label">Tipo Lavado</label></div>
+                <div class="row mt-4 right"><label for = "placa" class="form-label">Placa</label></div>
+                <div class="row mt-4 right"><label for = "fecha" class="form-label">Fecha</label></div>
+              </div>
+              <div class="col">  
+                  <div class="row mt-4">
+                    <select class="form-select" name = "sucursal" [(ngModel)] = "objeto.sucursal" aria-label="Default select example">
+                      <option selected>Seleccione una sucursal</option>
+                    <ng-template ngFor let-sucursal [ngForOf] = "listaSucursales"; let-i="index">
+                      <option [value] ="sucursal.nombreSuc">{{sucursal.nombreSuc}}</option>
+                    </ng-template>
+                  </select></div>
+                  <div class="row mt-4">
+                    <select class="form-select" name = "lavado" [(ngModel)] = "objeto.lavado" aria-label="Default select example">
+                      <option selected>Seleccione un Lavado</option>
+                    <ng-template ngFor let-lavado [ngForOf] = "listaLavados"; let-i="index">
+                      <option [value] ="lavado.nombreLav">{{lavado.nombreLav}}</option>
+                    </ng-template>
+                  </select></div>   
+                  <div class="row mt-4"><input type = "text" class="form-control" name = "placa" [(ngModel)] = "objeto.placa"></div>
+                  <div class="row mt-4"><input type = "date" class="form-control" name = "fecha" [(ngModel)] = "objeto.fechaCita"></div>
+                
+              
+              </div>
+              <div class="col-1"></div>
+              
+  
+            </div>
+            <div *ngIf="editMode; else newMode">
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Actualizar </button> </div>
+              <div class="col text-center"> <a role="button" type="button" [routerLink]="['/facturar',objeto.placa]" class="btn can btn-primary"> Facturar </a></div>
+              <div class="col text-center"> <a role="button" type="button" (click) = onEliminar() class="btn can btn-primary"> Eliminar </a></div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>                                                                      
+            </div>
+            
+            <ng-template #newMode>
+              <div class="row my-5">
+                <div class="col"></div>
+                <div class="col text-center offset-md-1"> <button type="submit" class="btn btn-outline-primary"> Añadir </button> </div>
+                <div class="col text-center"> <a role="button" type="button" (click) = onCancelar() class="btn can btn-primary"> Cancelar </a></div>
+                <div class="col"></div>
+              </div>
+            </ng-template>
+            
+          </form>
+      </div>
+      <div class="col-2">
+      </div>
+    </div>
+  </div>
+

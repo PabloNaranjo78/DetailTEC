@@ -36,7 +36,7 @@ export class NuevoLavadoComponent implements OnInit {
    object: Telefono*/
   personalNuevo:PersonalRequerido={
     lavado:"",
-    personal:0
+    idTrabajador:0
   }
 
   /*Listas contenedoras de la data consultada en la base de datos*/
@@ -113,12 +113,12 @@ export class NuevoLavadoComponent implements OnInit {
 
   /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
   onAddPersonal():void{
-    this.servicePers.onNuevo(this.personalNuevo, this.personalNuevo.personal);
+    this.servicePers.onNuevo(this.personalNuevo, this.personalNuevo.idTrabajador);
   }
   
   /*Llamada desde el botón "Añadir Telefono" envía un POST request al server */
   onDeletePersonal(per:PersonalRequerido):void{
-    this.servicePers.onEliminar(per.personal, per.lavado);
+    this.servicePers.onEliminar(per.idTrabajador, per.lavado);
   }
   
 /*Llamada desde el botón "Guardar Cliente" envía un POST request al server */

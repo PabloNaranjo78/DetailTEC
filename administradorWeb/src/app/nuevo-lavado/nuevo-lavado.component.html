@@ -124,7 +124,7 @@
                 <label for = "newPersonal" class="form-label h4 fw-bold">Trabajador</label>
               </div>
               <div class="col">
-                <select class="form-select" name = "newPersonal" [(ngModel)] = "temp" aria-label="Default select example">
+                <select class="form-select" name = "newPersonal" [(ngModel)] = "personalNuevo.idTrabajador" aria-label="Default select example">
                   <option selected>Seleccione un Insumo</option>
                 <ng-template ngFor let-trab [ngForOf] = "listaTrabajadores"; let-i="index">
                   <option [value] ="trab.idTrabajador">{{trab.nombre}} ({{trab.idTrabajador}})</option>
@@ -141,8 +141,8 @@
               <div class="row mt-4 style">
                 <div class="col-2"></div>
                 <div class="col-2"><button type="submit" (click) = onDeletePersonal(per) data-bs-dismiss="modal" class="btn btn-outline-primary"> D </button></div>
-                <div class="col-4 gy-2" >Producto {{i+1}}:</div>
-                <div class="col gy-2">{{per.personal}}</div>
+                <div class="col-4 gy-2" >Trabajador {{i+1}}:</div>
+                <div class="col gy-2">{{per.idTrabajador}}</div>
                 <div class="col-2"></div>
               </div>
             </div>

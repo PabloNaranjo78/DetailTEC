@@ -33,7 +33,7 @@ export class ProductosService extends ConexionService<ProductoRequerido>{
     return "/ProductosUsados"
   }
   getHomePage(): string {
-    return 'actualizar-lavado/' + this.id
+    return 'actualizar-lavado' + this.id
   }
   getNombre(): string {
     return "Producto"
@@ -49,10 +49,10 @@ export class ProductosService extends ConexionService<ProductoRequerido>{
 export class PersonalService extends ConexionService<PersonalRequerido>{
   id:string = ""
   getResourceURL(): string {
-    return "/Personal"
+    return "/PersonalRequerido"
   }
   getHomePage(): string {
-    return 'actualizar-lavado/' + this.id
+    return 'actualizar-lavado' + this.id
   }
   getNombre(): string {
     return "Personal Requerido"

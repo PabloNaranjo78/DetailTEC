@@ -16,5 +16,5 @@ export interface ProductoRequerido{
 
 export interface PersonalRequerido{
     lavado:string,
-    idTrabajador:number
+    personal:number
 }

@@ -2,21 +2,41 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Lavado, PersonalRequerido, ProductoRequerido} from '../interfaces/lavado';
+import { Cliente, Direccion, Telefono } from '../interfaces/cliente';
 import { ConexionService } from './conexion.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LavadoService extends ConexionService<Lavado>{
+export class ClienteService extends ConexionService<Cliente>{
   getResourceURL(): string {
-    return "/Lavado"
+    return "/Cliente"
   }
   getHomePage(): string {
-    return 'gestion-lavados'
+    return 'gestion-clientes'
   }
   getNombre(): string {
-    return "Lavado"
+    return "Cliente"
+  }
+  constructor(protected override httpClient: HttpClient, protected override route:Router){
+    super(httpClient, route)
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TelefonoService extends ConexionService<Telefono>{
+
+  id:string|number="";
+  getResourceURL(): string {
+    return "/ClienteTelefonos"
+  }
+  getHomePage(): string {
+    return 'actualizar-cliente/' + this.id;
+  }
+  getNombre(): string {
+    return "Cita"
   }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
@@ -27,35 +47,17 @@ export class LavadoService extends ConexionService<Lavado>{
 @Injectable({
   providedIn: 'root'
 })
-export class ProductosService extends ConexionService<ProductoRequerido>{
-  id:string = ""
-  getResourceURL(): string {
-    return "/ProductosUsados"
-  }
-  getHomePage(): string {
-    return 'actualizar-lavado/' + this.id
-  }
-  getNombre(): string {
-    return "Producto"
-  }
-  constructor(protected override httpClient: HttpClient, protected override route:Router){
-    super(httpClient, route)
-  }
-}
+export class DireccionService extends ConexionService<Direccion>{
 
-@Injectable({
-  providedIn: 'root'
-})
-export class PersonalService extends ConexionService<PersonalRequerido>{
-  id:string = ""
+  id:string|number="";
   getResourceURL(): string {
-    return "/Personal"
+    return "/ClienteDirecciones"
   }
   getHomePage(): string {
-    return 'actualizar-lavado/' + this.id
+    return 'actualizar-cliente/' + this.id;
   }
   getNombre(): string {
-    return "Personal Requerido"
+    return "Direccion"
   }
   constructor(protected override httpClient: HttpClient, protected override route:Router){
     super(httpClient, route)
