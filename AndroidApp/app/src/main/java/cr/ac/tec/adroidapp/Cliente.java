@@ -13,6 +13,7 @@ public class Cliente {
     public String Nombre;
     public String Email;
     public int PuntosDispo;
+    public int PuntosRedm;
 
     /**
      * Representa la tabla de cliente
@@ -24,7 +25,7 @@ public class Cliente {
      * @param Email Email del cliente
      * @param puntosDispo puntos del cliente
      */
-    public Cliente(@NonNull int IDCliente, @NonNull String usuario, String contraseña, String infoContacto, String nombre, String Email, int puntosDispo) {
+    public Cliente(@NonNull int IDCliente, @NonNull String usuario, String contraseña, String infoContacto, String nombre, String Email, int puntosDispo,int puntosRedm) {
         this.IDCliente = IDCliente;
         this.Usuario = usuario;
         this.Contraseña = contraseña;
@@ -32,6 +33,7 @@ public class Cliente {
         this.Nombre = nombre;
         this.Email = Email;
         this.PuntosDispo = puntosDispo;
+        this.PuntosRedm = puntosRedm;
     }
 
     /**

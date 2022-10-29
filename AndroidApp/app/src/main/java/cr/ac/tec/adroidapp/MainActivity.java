@@ -68,41 +68,48 @@ public class MainActivity extends AppCompatActivity {
         dataBase = Room.databaseBuilder(getApplicationContext(), DataBase.class, dbInstance()).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         updater = new AppUpdater(dataBase);
 
-//        apiTester();
+        apiClient();
+        apiFactura();
+        apiCita();
+        apiTelefonos();
+        apiDirecciones();
+        apiSucursal();
+        apiLavado();
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                try {
-                    post2();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-
-
 //                try {
-//                    if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
-//                        Intent intent = new Intent(getApplicationContext(), Menu.class);
-//                        intent.putExtra("ID", userID);
-//                        startActivity(intent);
-//                    }
-//                    else{
-//                        AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
-//                        alertMessage.setTitle("Error");
-//                        alertMessage.setMessage("Credenciales incorrectas");
-//                        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-//                                new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        dialogInterface.dismiss();
-//                                    }
-//                                });
-//                        alertMessage.show();
-//                    }
-//                } catch (NoSuchAlgorithmException e) {
+//                    post2();
+//                } catch (MalformedURLException e) {
 //                    e.printStackTrace();
 //                }
+
+
+                try {
+                    if (userValidation(userText.getText().toString(), passwordText.getText().toString())){
+                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        intent.putExtra("ID", userID);
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog alertMessage = new AlertDialog.Builder(MainActivity.this).create();
+                        alertMessage.setTitle("Error");
+                        alertMessage.setMessage("Credenciales incorrectas");
+                        alertMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                });
+                        alertMessage.show();
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -136,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Valida usuarios
+     * @param user user
+     * @param pass pass
+     * @return usuario valida
+     * @throws NoSuchAlgorithmException
+     */
     public boolean userValidation(String user, String pass) throws NoSuchAlgorithmException {
         List<Cliente> clientList = dataBase.daoProject().getClientes();
 
@@ -151,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String dbInstance(){
-        return "Test2";
+        return "Test4";
     }
 
-    public void apiTester(){
+    public void apiClient(){
         System.out.println("CHECK 1");
         String url = "http://25.55.195.113:4500/api/Cliente";
 
@@ -181,18 +195,18 @@ public class MainActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(getRequest);
     }
 
-    public void putTester(){
+    public void apiCita(){
         System.out.println("CHECK 1");
-        String url = "http://25.55.195.113:4500/api/Cliente/";
+        String url = "http://25.55.195.113:4500/api/Cita";
 
-        StringRequest getRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject array = new JSONObject(response);
+                    JSONArray array = new JSONArray(response);
                     System.out.println("IT'S WORKING");
-                    System.out.println(array);
 
+                    updater.updaterCitas(array);
 
                 } catch (JSONException e) {
                     System.out.println("CHECK 2");
@@ -203,44 +217,146 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("error", error.getMessage());
-
             }
-        })
-        {
-            protected Map<String, String> getParams(){
-                Map<String, String> params = new HashMap<>();
-                params.put("\"idCliente\"", String.valueOf(192168));
-                params.put("\"usuario\"", "\"Ppedro\"");
-                params.put("\"infoContacto\"", "\"U\"");
-                params.put("\"nombre\"", "\"Pedro\"");
-                params.put("\"email\"", "\"@onlyFans\"");
-                params.put("\"puntosDispo\"", String.valueOf(500));
-                System.out.println("////////////");
-                System.out.println(params);
-                return params;
-
-            }
-        };
+        });
         Volley.newRequestQueue(this).add(getRequest);
-
     }
 
-    public void postTester() throws IOException {
-        HttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost("http://25.55.195.113:4500/api/Cliente");
+    public void apiTelefonos(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/ClienteTelefonos";
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-        params.add(new BasicNameValuePair("\"idCliente\"", String.valueOf(192168)));
-        params.add(new BasicNameValuePair("\"usuario\"", "\"Ppedro\""));
-        params.add(new BasicNameValuePair("\"infoContacto\"", "\"U\""));
-        params.add(new BasicNameValuePair("\"nombre\"", "\"Pedro\""));
-        params.add(new BasicNameValuePair("\"email\"", "\"@onlyFans\""));
-        params.add(new BasicNameValuePair("\"puntosDispo\"", String.valueOf(500)));
-        System.out.println(params);
-        httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
 
+                    updater.updaterTelefonos(array);
 
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
     }
+
+    public void apiDirecciones(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/ClienteDirecciones";
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
+
+                    updater.updaterDirecciones(array);
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+    }
+
+    public void apiFactura(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Factura";
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
+
+                    updater.updaterFactura(array);
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+    }
+
+    public void apiLavado(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Lavado";
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
+
+                    updater.updaterLavados(array);
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+    }
+
+    public void apiSucursal(){
+        System.out.println("CHECK 1");
+        String url = "http://25.55.195.113:4500/api/Sucursal";
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    System.out.println("IT'S WORKING");
+
+                    updater.updaterSucursales(array);
+
+                } catch (JSONException e) {
+                    System.out.println("CHECK 2");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(getRequest);
+    }
+
 
     public void post2() throws MalformedURLException {
 

@@ -70,7 +70,7 @@ public class GestionCliente extends AppCompatActivity {
                 if (paramValidation(nuevaPassText.getText().toString(),nuevaInfoText.getText().toString(),nuevoEmailText.getText().toString())){
                     dataBase.daoProject().updateCliente(userID, cliente.Usuario,
                             nuevaPassText.getText().toString(),nuevaInfoText.getText().toString(),
-                            cliente.Nombre, nuevoEmailText.getText().toString(), cliente.PuntosDispo);
+                            cliente.Nombre, nuevoEmailText.getText().toString(), cliente.PuntosDispo, cliente.PuntosRedm);
                     System.out.println("Radio Check well done dude");
                 }
                 else {

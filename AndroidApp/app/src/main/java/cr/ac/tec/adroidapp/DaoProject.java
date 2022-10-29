@@ -74,10 +74,10 @@ public interface DaoProject {
     Cliente getClienteById(int idcliente);
 
     @Query("UPDATE Cliente SET IDCliente= :idcliente, Usuario= :usuario, Contraseña= :contraseña," +
-            " InfoContacto= :infocontacto, Nombre= :nombre, Email= :email, PuntosDispo= :puntosdispo" +
+            " InfoContacto= :infocontacto, Nombre= :nombre, Email= :email, PuntosDispo= :puntosdispo, PuntosRedm= :puntosRedm" +
             " WHERE IDCliente= :idcliente and Usuario= :usuario")
     void updateCliente(int idcliente, String usuario, String contraseña, String infocontacto,
-                       String nombre, String email, int puntosdispo);
+                       String nombre, String email, int puntosdispo, int puntosRedm);
 
     @Query("DELETE FROM Cliente WHERE IDCliente= :idcliente" )
     void deleteCliente(int idcliente);
@@ -158,8 +158,9 @@ public interface DaoProject {
     @Query("SELECT * FROM Lavado WHERE NombreLav= :nombrelav")
     Lavado getLavadoyId(String nombrelav);
 
-    @Query("UPDATE Lavado SET NombreLav= :nombrelav, Duracion= :duracion, Precio= :precio, Costo= :costo, Puntos= :puntos WHERE NombreLav= :nombrelav")
-    void updateLavado(String nombrelav, float duracion, int precio, int costo, int puntos);
+    @Query("UPDATE Lavado SET NombreLav= :nombrelav, Duracion= :duracion, Precio= :precio, " +
+            "Costo= :costo, Puntos= :puntos, PuntosOtorgar= :puntosOtorgar WHERE NombreLav= :nombrelav")
+    void updateLavado(String nombrelav, float duracion, int precio, int costo, int puntos, int puntosOtorgar);
 
     @Query("DELETE FROM Lavado WHERE NombreLav= :nombrelav")
     void deleteLavado(String nombrelav);

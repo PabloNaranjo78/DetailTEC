@@ -28,7 +28,8 @@ public class AppUpdater {
                         arrayClientes.getJSONObject(i).get("infoContacto").toString(),
                         arrayClientes.getJSONObject(i).get("nombre").toString(),
                         arrayClientes.getJSONObject(i).get("email").toString(),
-                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosDispo").toString()));
+                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosDispo").toString()),
+                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosRedm").toString()));
             }
             else{
                 dataBase.daoProject().insertCliente(new Cliente(
@@ -38,7 +39,8 @@ public class AppUpdater {
                         arrayClientes.getJSONObject(i).get("infoContacto").toString(),
                         arrayClientes.getJSONObject(i).get("nombre").toString(),
                         arrayClientes.getJSONObject(i).get("email").toString(),
-                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosDispo").toString())));
+                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosDispo").toString()),
+                        Integer.parseInt(arrayClientes.getJSONObject(i).get("puntosRedm").toString())));
             }
         }
     }
@@ -142,8 +144,9 @@ public class AppUpdater {
                         Float.parseFloat(arrayLavados.getJSONObject(i).get("duracion").toString()),
                         Integer.parseInt(arrayLavados.getJSONObject(i).get("precio").toString()),
                         Integer.parseInt(arrayLavados.getJSONObject(i).get("costo").toString()),
-                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString())
-                );
+                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString()),
+                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString()
+                ));
             }
             else{
                 dataBase.daoProject().insertLavado(new Lavado(
@@ -151,8 +154,9 @@ public class AppUpdater {
                         Float.parseFloat(arrayLavados.getJSONObject(i).get("duracion").toString()),
                         Integer.parseInt(arrayLavados.getJSONObject(i).get("precio").toString()),
                         Integer.parseInt(arrayLavados.getJSONObject(i).get("costo").toString()),
-                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString())
-                ));
+                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString()),
+                        Integer.parseInt(arrayLavados.getJSONObject(i).get("puntos").toString()
+                )));
 
             }
         }
@@ -193,6 +197,11 @@ public class AppUpdater {
         }
 
     }
+
+    public void fullupdater(){
+
+    }
+
 
 
 }
